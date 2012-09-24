@@ -29,6 +29,7 @@ class ApiModule extends CWebModule {
     public function init() {
 //        var_dump($_SERVER["REDIRECT_URL"], $_SERVER["REQUEST_METHOD"]);
 //        var_dump($_POST);
+        die('test');
         $this->setImport(array(
             'api.models.*',
             'api.components.*',
