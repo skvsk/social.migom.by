@@ -10,9 +10,6 @@ class SiteController extends CController {
      * Index action is the default action in a controller.
      */
     public function actionIndex() {
-       $model = new AuthApi();
-       $responce = $model->getLogin('migom');
-       var_dump($responce);
        echo "Front not find";
     }
 
