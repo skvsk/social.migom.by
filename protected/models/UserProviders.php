@@ -41,7 +41,8 @@ class UserProviders extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, provider_id, soc_id', 'required'),
-			array('user_id, provider_id, soc_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, provider_id', 'numerical', 'integerOnly'=>true),
+                        array('soc_id', 'length' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, provider_id, soc_id', 'safe', 'on'=>'search'),
@@ -56,6 +57,7 @@ class UserProviders extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'user' => array(self::BELONGS_TO, 'Users', 'user_id')
 		);
 	}
 
