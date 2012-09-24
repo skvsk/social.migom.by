@@ -10,9 +10,9 @@ class AuthControllerTest extends CTestCase {
      * Test server auth
      * @covers AuthController::actionLogin
      * @covers AuthApi
-     * @dataProvider dataProviderIndex
+     * @dataProvider dataProviderLogin
      */
-    function testIndex($key, $type, $code, $suid) {
+    function testLogin($key, $type, $code, $suid) {
        $model = new AuthApi();
        $responce = $model->getLogin($key, array('type' => $type));
        try {
@@ -29,7 +29,7 @@ class AuthControllerTest extends CTestCase {
      * @covers AuthController::actionLogin
      * @covers AuthApi
      */
-    function testIndexPost() {
+    function testLoginPost() {
        $model = new AuthApi();
        $responce = $model->postLogin(Yii::app()->getParams()->api['key']);
        $this->assertEquals(ApiComponent::STATUS_NOT_FOUND, $responce->code);
@@ -41,7 +41,7 @@ class AuthControllerTest extends CTestCase {
      * @example array('key', 'type', responce_code, 'suid')
      * @return array
      */
-    function dataProviderIndex(){
+    function dataProviderLogin(){
         $suid    = Yii::app()->getParams()->api['suid'];
         $siteKey = Yii::app()->getParams()->api['key'];
         
