@@ -14,7 +14,7 @@ class WebUser extends CWebUser {
     
     public function login($identity)
     {
-        $this->id = $identity->id;
+        $this->_id = $identity->id;
         $user = $this->getModel();
         
         // return role name
