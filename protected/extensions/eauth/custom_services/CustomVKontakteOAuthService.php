@@ -45,7 +45,7 @@ class CustomVKontakteOAuthService extends VKontakteOAuthService {
 
 		$this->attributes['soc_id'] = $info->uid;
 		$this->attributes['full_name'] = $info->first_name.' '.$info->last_name;
-                $this->attributes['login'] = $info->nickname;
+                $this->attributes['login'] = ($info->nickname) ? $info->nickname : $info->first_name;
                 $this->attributes['avatar'] = $info->photo;
                 $this->attributes['sex'] = ($info->sex == 1) ? 2 : 1;
 

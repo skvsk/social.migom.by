@@ -52,14 +52,14 @@ class EAuthUserIdentity extends CUserIdentity {
 		if ($this->service->isAuthenticated) {
 			$this->name = $this->service->getAttribute('name');
 
-//			$this->setState('id', $this->id);
-//			$this->setState('name', $this->name);
+			$this->setState('id', $this->id);
+			$this->setState('name', $this->name);
 //			$this->setState('service', $this->service->serviceName);
 
 			// You can save all given attributes in session.
-//			$this->attributes = $this->service->getAttributes();
-//			$session = Yii::app()->session;
-//			$session['eauth_attributes'][$this->service->serviceName] = $attributes;
+			$this->attributes = $this->service->getAttributes();
+			$session = Yii::app()->session;
+			$session['eauth_attributes'][$this->service->serviceName] = $attributes;
 
 			$this->errorCode = self::ERROR_NONE;
 		}
@@ -69,17 +69,14 @@ class EAuthUserIdentity extends CUserIdentity {
 		}
                 
                 if(!$this->errorCode && $this->service->getAttribute('soc_id')){
-                    $criteria = new CDbCriteria;  
+                    $criteria = new CDbCriteria;
                     $criteria->compare('soc_id', $this->service->getAttribute('soc_id'));
                     $criteria->compare('provider_id', array_search($this->service->serviceName, UserProviders::$providers));
                     $criteria->limit = 1; //TODO реализовать выбор социалки для входа
                     $provider = UserProviders::model()->find($criteria);
-                    if($provider && $user = $provider->user){
+                    if($provider){
                         $user = $provider->user;
                     }
-                    d($user->getAttributes());
-                    die;
-                    $user = Users::model()->find('LOWER(email)=?', array(strtolower($this->service->getAttribute('email'))));
                     if(!$user){
                         $this->errorCode = self::ERROR_USER_NOT_REGISTERED;
                     } else {

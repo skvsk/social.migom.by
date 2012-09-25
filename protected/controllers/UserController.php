@@ -75,14 +75,14 @@ class UserController extends Controller
                 Yii::app()->end();
             }
             
-            if(isset($_POST['Profile']) && $_POST['Profile']){
+            if($_POST['Profile']){
                 $model->profile = setScenario('update');
                 $model->profile->attributes = $_POST['Profile'];
                 if($model->profile->validate() && $model->profile->save())
                     $this->redirect('/user/index');
             }
             
-            if(isset($_POST['Users']) && $_POST['Users']){
+            if($_POST['Users']){
                 $model->setScenario('general_update');
                 $model->attributes = $_POST['Users'];
                 if($model->validate() && $model->save())
