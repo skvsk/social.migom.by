@@ -132,6 +132,8 @@ class Users extends CActiveRecord
                     $this->status = array_search('active', self::$statuses);
                 } elseif($this->scenario == 'simpleRegistration'){
                     $this->status = array_search('noactive', self::$statuses);
+                }
+                if(!$this->login && $this->email){
                     $this->login = $name[0];
                 }
             } else {

@@ -173,12 +173,12 @@ return array(
 //                            'client_secret' => '...',
 //                            'title' => 'Yandex (OAuth)',
 //                        ),
-//                        'facebook' => array(
-//                            // register your app here: https://developers.facebook.com/apps/
-//                            'class' => 'FacebookOAuthService',
-//                            'client_id' => '...',
-//                            'client_secret' => '...',
-//                        ),
+                        'facebook' => array(
+                            // register your app here: https://developers.facebook.com/apps/
+                            'class' => 'CustomFacebookOAuthService',
+                            'client_id' => '376588799076610',
+                            'client_secret' => 'e48917e90c261a4ec630b20abddbe8e0',
+                        ),
 //                        'linkedin' => array(
 //                            // register your app here: https://www.linkedin.com/secure/developer
 //                            'class' => 'LinkedinOAuthService',

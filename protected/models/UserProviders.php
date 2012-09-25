@@ -12,7 +12,7 @@
 class UserProviders extends CActiveRecord
 {
     
-        public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte');
+        public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte', 3 => 'facebook');
     
 	/**
 	 * Returns the static model of the specified AR class.
