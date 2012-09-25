@@ -76,8 +76,6 @@ class RegistrationForm extends CFormModel
                     $profile->save();
                     $userProviders->save();
                 } else {
-                    dd($user->getErrors());
-                    die;
                     return $user;
                 }
             } else {
