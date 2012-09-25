@@ -197,12 +197,12 @@ return array(
 //                            'client_id' => '...',
 //                            'client_secret' => '...',
 //                        ),
-//                        'vkontakte' => array(
-//                            // register your app here: https://vk.com/editapp?act=create&site=1
-//                            'class' => 'VKontakteOAuthService',
-//                            'client_id' => '...',
-//                            'client_secret' => '...',
-//                        ),
+                        'vkontakte' => array(
+                            // register your app here: https://vk.com/editapp?act=create&site=1
+                            'class' => 'CustomVKontakteOAuthService',
+                            'client_id' => '3142907',
+                            'client_secret' => '9b1FoGkG8u2Rtyi9mFC6',
+                        ),
 //                        'mailru' => array(
 //                            // register your app here: http://api.mail.ru/sites/my/add
 //                            'class' => 'MailruOAuthService',
