@@ -14,6 +14,9 @@ class WebUser extends CWebUser {
     
     public function login($identity)
     {
+        dd($identity);
+        dd($identity->id);
+        die;
         $this->id = $identity->id;
         $user = $this->getModel();
         
