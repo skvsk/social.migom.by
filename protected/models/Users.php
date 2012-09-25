@@ -54,7 +54,7 @@ class Users extends CActiveRecord
                         array('email', 'email'),
 			array('status, date_add, date_edit', 'numerical', 'integerOnly'=>true),
 			array('login, email', 'length', 'max'=>255),
-			array('password', 'length', 'max'=>32),
+			array('password', 'length', 'max'=>32, 'min' => 6),
                         array('repassword', 'compare', 'compareAttribute'=>'password', 'on'=>'general_update', 'message' => Yii::t('Site', 'Write right pass')),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

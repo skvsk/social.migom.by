@@ -42,7 +42,7 @@ class UserProviders extends CActiveRecord
 		return array(
 			array('user_id, provider_id, soc_id', 'required'),
 			array('user_id, provider_id', 'numerical', 'integerOnly'=>true),
-                        array('soc_id', 'length' => 255),
+                        array('soc_id', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, provider_id, soc_id', 'safe', 'on'=>'search'),
