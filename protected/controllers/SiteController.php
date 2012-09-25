@@ -187,7 +187,9 @@ class SiteController extends Controller {
         if (isset($_POST['RegistrationForm'])) {
             $model->attributes = $_POST['RegistrationForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->registration()){
+            if ($model->validate()){
+                $identity = $model->registration();
+                Yii::app()->user->login($identity);
                 $this->redirect('/user/index');
             }
         }
