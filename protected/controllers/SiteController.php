@@ -113,7 +113,7 @@ class SiteController extends Controller {
                         $reg = new RegistrationForm();
                         $identity = $reg->registration($identity, $service);
                         if($identity instanceof Users){
-                            $authIdentity->cancel($this->createAbsoluteUrl('site/login', array('error' => 'email')));
+                            $authIdentity->cancel($this->createAbsoluteUrl('site/login', array('mailError' => 'taken')));
                         }
                         Yii::app()->user->login($identity);
                     } elseif(Yii::app()->request->getParam('user') == 'haveALogin'){
@@ -139,9 +139,10 @@ class SiteController extends Controller {
         }
         
         $model = $this->_preLogin();
+        $getErrors = (isset($_GET['mailError'])) ? $_GET['mailError'] : '';
 
         $regModel = new RegistrationForm();
-        $this->render('login', array('model' => $model, 'regModel' => $regModel));
+        $this->render('login', array('model' => $model, 'regModel' => $regModel, 'getErrors' => $getErrors));
     }
     
     protected function _preLogin($redirect = true){

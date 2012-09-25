@@ -10,7 +10,7 @@
 		
 		<h2>Войти из сети</h2>
 		<div class="social">
-                        <?php if($_GET['error'] == 'email'): ?>
+                        <?php if($getErrors == 'taken'): ?>
                             <?= Yii::t('Site', 'This email was taken'); ?>
                         <?php endif; ?>
 			<?php
