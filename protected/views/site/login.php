@@ -10,9 +10,6 @@
 		
 		<h2>Войти из сети</h2>
 		<div class="social">
-                        <?php if($getErrors == 'taken'): ?>
-                            <?= Yii::t('Site', 'This email was taken'); ?>
-                        <?php endif; ?>
 			<?php
 				$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
 			?>

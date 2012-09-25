@@ -113,7 +113,7 @@ class SiteController extends Controller {
                         $reg = new RegistrationForm();
                         $identity = $reg->registration($identity, $service);
                         if($identity instanceof Users){
-                            $authIdentity->cancel($this->createAbsoluteUrl('site/login', array('mailError' => 'taken')));
+                            throw new CHttpException('400', Yii::t('Site', 'This email was taken'));
                         }
                         Yii::app()->user->login($identity);
                     } elseif(Yii::app()->request->getParam('user') == 'haveALogin'){
