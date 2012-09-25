@@ -69,6 +69,7 @@ class EAuthUserIdentity extends CUserIdentity {
 		}
                 
                 if(!$this->errorCode && $this->service->getAttribute('soc_id')){
+                    $user = false;
                     $criteria = new CDbCriteria;
                     $criteria->compare('soc_id', $this->service->getAttribute('soc_id'));
                     $criteria->compare('provider_id', array_search($this->service->serviceName, UserProviders::$providers));
