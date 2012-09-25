@@ -12,7 +12,7 @@
 class UserProviders extends CActiveRecord
 {
     
-        public static $providers = array(1 => 'google_oauth');
+        public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte');
     
 	/**
 	 * Returns the static model of the specified AR class.
@@ -94,4 +94,14 @@ class UserProviders extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function addSocialToUser($identity, $user_id){
+            $userProviders = new UserProviders();
+            $userProviders->soc_id          = $identity->getAttribute('soc_id');
+            $userProviders->provider_id     = array_search($identity->getProviderName(), self::$providers);
+            $userProviders->user_id         = $user_id;
+            if($userProviders->validate()){
+                $userProviders->save();
+            }
+        }
 }

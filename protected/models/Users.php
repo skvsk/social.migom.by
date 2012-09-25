@@ -48,10 +48,11 @@ class Users extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('login, password, email, status, date_add, date_edit, role', 'required', 'except' => array('regByApi', 'simpleRegistration')),
-                        array('login, email', 'required', 'on' => array('regByApi')),
+                        array('login', 'required', 'on' => array('regByApi')),
                         array('email', 'required', 'on' => array('simpleRegistration')),
                         array('password', 'required', 'on' => array('general_update')),
                         array('email', 'email'),
+                        array('email', 'unique'),
 			array('status, date_add, date_edit', 'numerical', 'integerOnly'=>true),
 			array('login, email', 'length', 'max'=>255),
 			array('password', 'length', 'max'=>32, 'min' => 6),
