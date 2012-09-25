@@ -1,7 +1,7 @@
 <?php
 class WebUser extends CWebUser {
     private $_model = null;
-    private $_id = null;
+    private $id = null;
 
     private function getModel()
     {
@@ -14,7 +14,7 @@ class WebUser extends CWebUser {
     
     public function login($identity)
     {
-        $this->_id = $identity->id;
+        $this->id = $identity->id;
         $user = $this->getModel();
         
         // return role name
