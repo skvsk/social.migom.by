@@ -112,6 +112,9 @@ class SiteController extends Controller {
                     } elseif(Yii::app()->request->getParam('user') == 'new'){
                         $reg = new RegistrationForm();
                         $identity = $reg->registration($identity, $service);
+                        if($identity instanceof Users){
+                            $authIdentity->cancel($this->createAbsoluteUrl('site/login', array('error' => 'email')));
+                        }
                         Yii::app()->user->login($identity);
                     } elseif(Yii::app()->request->getParam('user') == 'haveALogin'){
                         if(!isset($_POST['LoginForm'])){
