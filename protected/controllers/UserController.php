@@ -76,7 +76,7 @@ class UserController extends Controller
             }
             
             if(isset($_POST['Profile'])){
-                $model->profile = setScenario('update');
+                $model->profile->setScenario('update');
                 $model->profile->attributes = $_POST['Profile'];
                 if($model->profile->validate() && $model->profile->save())
                     $this->redirect('/user/index');
