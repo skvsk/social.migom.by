@@ -1,7 +1,7 @@
 <?php
 class WebUser extends CWebUser {
     private $_model = null;
-    private $id = null;
+    private $_id = null;
 
     private function getModel()
     {
