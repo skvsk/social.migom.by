@@ -57,9 +57,9 @@ class EAuthUserIdentity extends CUserIdentity {
 //			$this->setState('service', $this->service->serviceName);
 
 			// You can save all given attributes in session.
-			$this->attributes = $this->service->getAttributes();
-			$session = Yii::app()->session;
-			$session['eauth_attributes'][$this->service->serviceName] = $attributes;
+//			$this->attributes = $this->service->getAttributes();
+//			$session = Yii::app()->session;
+//			$session['eauth_attributes'][$this->service->serviceName] = $attributes;
 
 			$this->errorCode = self::ERROR_NONE;
 		}
