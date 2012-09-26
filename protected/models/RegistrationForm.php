@@ -66,7 +66,7 @@ class RegistrationForm extends CFormModel
                         // upload avatar to self server
                         $profile->avatar = UserService::uploadAvatarFromService($user->id, $identity->getAttribute('avatar'));
                     }
-                    $profile->sex = array_search($identity->getAttribute('sex'), $profile->sexs);
+                    $profile->sex = $identity->getAttribute('sex');
                     $profile->user_id = $user->id;
                     $userProviders = new UserProviders();
                     $userProviders->attributes = $identity->getAttributes();
@@ -93,7 +93,6 @@ class RegistrationForm extends CFormModel
                     $identity->authenticate();
                 }
             }
-            Yii::app()->user->login($identity);
-            return true;
+            return $identity;
         }
 }

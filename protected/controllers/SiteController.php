@@ -105,9 +105,27 @@ class SiteController extends Controller {
                     // special redirect with closing popup window
                     $authIdentity->redirect();
                 } elseif ($identity->errorCode == EAuthUserIdentity::ERROR_USER_NOT_REGISTERED) {
-                    $reg = new RegistrationForm();
-                    $reg->registration($identity, $service);
-                    
+                    if(!Yii::app()->request->getParam('reg_ask')){
+                        $this->layout = 'popup';
+                        $this->render('login/new_user_ask', array('service' => $service));
+                        Yii::app()->end();
+                    } elseif(Yii::app()->request->getParam('user') == 'new'){
+                        $reg = new RegistrationForm();
+                        $identity = $reg->registration($identity, $service);
+                        if($identity instanceof Users){
+                            throw new CHttpException('400', Yii::t('Site', 'This email was taken'));
+                        }
+                        Yii::app()->user->login($identity);
+                    } elseif(Yii::app()->request->getParam('user') == 'haveALogin'){
+                        if(!isset($_POST['LoginForm'])){
+                            $this->layout = 'popup';
+                            $this->render('login/popup');
+                            Yii::app()->end();
+                        }
+                        $user = $this->_preLogin(false);
+                        UserProviders::addSocialToUser($identity, Yii::app()->user->getId());
+                    }
+
                     // special redirect with closing popup window
                     $authIdentity->redirect();
                 } else {
@@ -119,7 +137,15 @@ class SiteController extends Controller {
             // Something went wrong, redirect to login page
             $this->redirect(array('/site/login'));
         }
+        
+        $model = $this->_preLogin();
+        $getErrors = (isset($_GET['mailError'])) ? $_GET['mailError'] : '';
 
+        $regModel = new RegistrationForm();
+        $this->render('login', array('model' => $model, 'regModel' => $regModel, 'getErrors' => $getErrors));
+    }
+    
+    protected function _preLogin($redirect = true){
         $model = new LoginForm;
 
         // if it is ajax validation request
@@ -132,20 +158,12 @@ class SiteController extends Controller {
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login())
+            if ($model->validate() && $model->login() && $redirect)
 //                            $this->redirect(Yii::app()->user->returnUrl);
                 $this->redirect('/user/index');
+                
         }
-//            d(Yii::app()->getRequest()->getPost());
-        // display the login form
-        
-        $regModel = new RegistrationForm();
-        $this->render('login', array('model' => $model, 'regModel' => $regModel));
-    }
-    
-    protected function vkLogin(){
-        $this->layout = 'popup';
-        $this->render('login/auth');
+        return $model;
     }
 
     /**
@@ -169,7 +187,9 @@ class SiteController extends Controller {
         if (isset($_POST['RegistrationForm'])) {
             $model->attributes = $_POST['RegistrationForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->registration()){
+            if ($model->validate()){
+                $identity = $model->registration();
+                Yii::app()->user->login($identity);
                 $this->redirect('/user/index');
             }
         }

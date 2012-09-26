@@ -23,6 +23,6 @@ class CustomGoogleAuthService extends GoogleOAuthService {
                 $this->attributes['email'] = $info['email'];
                 $this->attributes['login'] = $info['given_name'];
                 $this->attributes['avatar'] = $info['picture'];
-                $this->attributes['sex'] = $info['gender'];
+                $this->attributes['sex'] = ($info['gender'] == 'male') ? 1 : 2;
 	}
 }

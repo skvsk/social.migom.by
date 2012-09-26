@@ -123,21 +123,21 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
-//		'log' => array(
-//                        'class' => 'CLogRouter',
-//                        'routes' => array(
-//                                array(
-//                                        'class' => 'CFileLogRoute',
-//                                        'levels' => 'error, warning, info'
-//                                ),				
-//                                array( // configuration for the toolbar
-//                                        'class' => 'XWebDebugRouter',
-//                                        'config' => 'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
-//                                        'levels' => 'trace, info, profile, error, warning',
-//                                        'allowedIPs' => array('86.57.245.247','::1'),
-//                                ),
-//                        ),
-//                ),
+		'log' => array(
+                        'class' => 'CLogRouter',
+                        'routes' => array(
+                                array(
+                                        'class' => 'CFileLogRoute',
+                                        'levels' => 'error, warning, info'
+                                ),				
+                                array( // configuration for the toolbar
+                                        'class' => 'XWebDebugRouter',
+                                        'config' => 'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
+                                        'levels' => 'trace, info, profile, error, warning',
+                                        'allowedIPs' => array('86.57.245.247','::1'),
+                                ),
+                        ),
+                ),
                 'loid' => array(
 			'class' => 'ext.lightopenid.loid',
 		),
@@ -173,12 +173,12 @@ return array(
 //                            'client_secret' => '...',
 //                            'title' => 'Yandex (OAuth)',
 //                        ),
-//                        'facebook' => array(
-//                            // register your app here: https://developers.facebook.com/apps/
-//                            'class' => 'FacebookOAuthService',
-//                            'client_id' => '...',
-//                            'client_secret' => '...',
-//                        ),
+                        'facebook' => array(
+                            // register your app here: https://developers.facebook.com/apps/
+                            'class' => 'CustomFacebookOAuthService',
+                            'client_id' => '376588799076610',
+                            'client_secret' => 'e48917e90c261a4ec630b20abddbe8e0',
+                        ),
 //                        'linkedin' => array(
 //                            // register your app here: https://www.linkedin.com/secure/developer
 //                            'class' => 'LinkedinOAuthService',
@@ -197,12 +197,12 @@ return array(
 //                            'client_id' => '...',
 //                            'client_secret' => '...',
 //                        ),
-//                        'vkontakte' => array(
-//                            // register your app here: https://vk.com/editapp?act=create&site=1
-//                            'class' => 'VKontakteOAuthService',
-//                            'client_id' => '...',
-//                            'client_secret' => '...',
-//                        ),
+                        'vkontakte' => array(
+                            // register your app here: https://vk.com/editapp?act=create&site=1
+                            'class' => 'CustomVKontakteOAuthService',
+                            'client_id' => '3142907',
+                            'client_secret' => '9b1FoGkG8u2Rtyi9mFC6',
+                        ),
 //                        'mailru' => array(
 //                            // register your app here: http://api.mail.ru/sites/my/add
 //                            'class' => 'MailruOAuthService',

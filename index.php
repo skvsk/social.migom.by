@@ -12,7 +12,7 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 // specify how many levels of call stack should be shown in each log message
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
-if(YII_DEBUG === true){
+if(YII_DEBUG === true ){
     include_once 'functions.php';
 }
 require_once($yii);

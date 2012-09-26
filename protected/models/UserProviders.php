@@ -12,7 +12,7 @@
 class UserProviders extends CActiveRecord
 {
     
-        public static $providers = array(1 => 'google_oauth');
+        public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte', 3 => 'facebook');
     
 	/**
 	 * Returns the static model of the specified AR class.
@@ -42,7 +42,7 @@ class UserProviders extends CActiveRecord
 		return array(
 			array('user_id, provider_id, soc_id', 'required'),
 			array('user_id, provider_id', 'numerical', 'integerOnly'=>true),
-                        array('soc_id', 'length' => 255),
+                        array('soc_id', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, provider_id, soc_id', 'safe', 'on'=>'search'),
@@ -94,4 +94,14 @@ class UserProviders extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function addSocialToUser($identity, $user_id){
+            $userProviders = new UserProviders();
+            $userProviders->soc_id          = $identity->getAttribute('soc_id');
+            $userProviders->provider_id     = array_search($identity->getProviderName(), self::$providers);
+            $userProviders->user_id         = $user_id;
+            if($userProviders->validate()){
+                $userProviders->save();
+            }
+        }
 }
