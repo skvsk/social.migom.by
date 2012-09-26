@@ -134,7 +134,7 @@ return array(
                                         'class' => 'XWebDebugRouter',
                                         'config' => 'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
                                         'levels' => 'trace, info, profile, error, warning',
-                                        'allowedIPs' => array('86.57.245.247','::1'),
+//                                        'allowedIPs' => array('86.57.245.247','::1'),
                                 ),
                         ),
                 ),
