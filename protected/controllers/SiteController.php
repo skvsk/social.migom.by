@@ -189,7 +189,7 @@ class SiteController extends Controller {
             // validate user input and redirect to the previous page if valid
             if ($model->validate()){
                 $identity = $model->registration();
-                Yii::app()->user->login($identity);
+                Yii::app()->user->login($identity, 3600*24*30);
                 $this->redirect('/user/index');
             }
         }
