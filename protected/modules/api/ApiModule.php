@@ -52,8 +52,8 @@ class ApiModule extends CWebModule {
                 return false;
             }
         }
-        var_dump($className);
-        var_dump($action);
+//        var_dump($className);
+//        var_dump($action);
 //        die('------');
         if (parent::beforeControllerAction($controller, $action)) {
             // this method is called before any module controller action is performed
