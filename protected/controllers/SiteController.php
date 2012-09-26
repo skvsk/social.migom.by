@@ -56,6 +56,7 @@ class SiteController extends Controller {
     }
 
     public function actionTest() {
+        
         $criteria = new CDbCriteria;
         $criteria->compare('soc_id', '105844357378365018543');
         $criteria->limit = 1;
@@ -99,7 +100,7 @@ class SiteController extends Controller {
 
                 // successful authentication
                 if ($identity->authenticate()) {
-                    Yii::app()->user->login($identity);
+                    Yii::app()->user->login($identity, 3600*24*30);
 
                     // special redirect with closing popup window
                     $authIdentity->redirect();
@@ -114,7 +115,7 @@ class SiteController extends Controller {
                         if($identity instanceof Users){
                             throw new CHttpException('400', Yii::t('Site', 'This email was taken'));
                         }
-                        Yii::app()->user->login($identity);
+                        Yii::app()->user->login($identity, 3600*24*30);
                     } elseif(Yii::app()->request->getParam('user') == 'haveALogin'){
                         if(!isset($_POST['LoginForm'])){
                             $this->layout = 'popup';
@@ -188,7 +189,7 @@ class SiteController extends Controller {
             // validate user input and redirect to the previous page if valid
             if ($model->validate()){
                 $identity = $model->registration();
-                Yii::app()->user->login($identity);
+                Yii::app()->user->login($identity, 3600*24*30);
                 $this->redirect('/user/index');
             }
         }

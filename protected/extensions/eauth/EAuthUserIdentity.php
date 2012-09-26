@@ -74,7 +74,7 @@ class EAuthUserIdentity extends CUserIdentity {
                     $criteria->compare('soc_id', $this->service->getAttribute('soc_id'));
                     $criteria->limit = 1; //TODO реализовать выбор социалки для входа
                     $provider = UserProviders::model($this->service->serviceName);
-                    $provider->find($criteria);
+                    $provider = $provider->find($criteria);
                     if($provider){
                         $user = $provider->user;
                     }
