@@ -13,7 +13,8 @@ class UserProviders extends CActiveRecord
 {
     
         public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte', 3 => 'facebook');
-    
+        public $provider_id;
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -21,15 +22,11 @@ class UserProviders extends CActiveRecord
 	 */
 	public static function model($className=__CLASS__)
 	{
+                if($className != __CLASS__){
+                    $className = str_replace('_', '', $className);
+                    $className = __CLASS__.$className;
+                }
 		return parent::model($className);
-	}
-
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'user_providers';
 	}
 
 	/**
@@ -40,8 +37,8 @@ class UserProviders extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, provider_id, soc_id', 'required'),
-			array('user_id, provider_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, soc_id', 'required'),
+			array('user_id', 'numerical', 'integerOnly'=>true),
                         array('soc_id', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -69,7 +66,6 @@ class UserProviders extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'provider_id' => 'Provider',
 			'soc_id' => 'Soc',
 		);
 	}
@@ -82,26 +78,32 @@ class UserProviders extends CActiveRecord
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('provider_id',$this->provider_id);
 		$criteria->compare('soc_id',$this->soc_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+
+        public function beforeSave() {
+            parent::beforeSave();
+            if($this->provider_id){
+                $this->getTableSchema()->rawName = '`user_providers_' . self::$providers[$this->provider_id] . '`';
+            }
+            return true;
+        }
         
         public function addSocialToUser($identity, $user_id){
-            $userProviders = new UserProviders();
+            $userProviders = UserProviders::model($identity->getProviderName());
             $userProviders->soc_id          = $identity->getAttribute('soc_id');
-            $userProviders->provider_id     = array_search($identity->getProviderName(), self::$providers);
             $userProviders->user_id         = $user_id;
             if($userProviders->validate()){
                 $userProviders->save();
+                Profile::updateByProvider($userProviders->user, $identity);
             }
         }
 }

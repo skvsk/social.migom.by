@@ -56,14 +56,12 @@ class SiteController extends Controller {
     }
 
     public function actionTest() {
-        echo 'p0st';
-        d($_POST);
-        echo 'get';
-        d($_GET);
-        echo 'delete';
-        d($_DELETE);
-        echo 'put';
-        d($_PUT);
+        $criteria = new CDbCriteria;
+        $criteria->compare('soc_id', '105844357378365018543');
+        $criteria->limit = 1;
+        $provider = UserProviders::model('google_oauth');
+        d($provider->find($criteria)->user->email);
+        
     }
 
     /**
@@ -85,6 +83,7 @@ class SiteController extends Controller {
         if (!Yii::app()->user->getIsGuest()) {
             $this->redirect(array('/user/index'));
         }
+        
         $this->layout = 'login';
 
         $service = Yii::app()->request->getQuery('service');

@@ -101,16 +101,13 @@ class Profile extends CActiveRecord
 		));
 	}
         
-        public static function updateByProvider($user, $identity){
-            foreach($user->providers as $userProviders){
-                if(UserProviders::$providers[$userProviders->provider_id])
-                    return;
+        public static function updateByProvider(Users $user, EAuthUserIdentity $identity){
+            if(!$user->{$identity->getProviderName()}){
+                $userProviders = new UserProviders($identity->getProviderName());
+                $userProviders->user_id = $user->id;
+                $userProviders->soc_id = $identity->getAttribute('soc_id');
+                $userProviders->save();
             }
-            $userProviders = new UserProviders();
-            $userProviders->user_id = $user->id;
-            $userProviders->soc_id = $identity->getAttribute('soc_id');
-            $userProviders->provider_id = array_search($identity->getProviderName(), UserProviders::$providers);
-            $userProviders->save();
 
             foreach($user->profile->getAttributes() as $key => $val){
                 if(!$val && $identity->getAttribute($key)){
@@ -119,7 +116,7 @@ class Profile extends CActiveRecord
             }
             return $user->profile->save();
         }
-        
+
         public function beforeSave() {
             parent::beforeSave();
             if(strpos($this->avatar, 'http') === 0){

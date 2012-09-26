@@ -72,9 +72,9 @@ class EAuthUserIdentity extends CUserIdentity {
                     $user = false;
                     $criteria = new CDbCriteria;
                     $criteria->compare('soc_id', $this->service->getAttribute('soc_id'));
-                    $criteria->compare('provider_id', array_search($this->service->serviceName, UserProviders::$providers));
                     $criteria->limit = 1; //TODO реализовать выбор социалки для входа
-                    $provider = UserProviders::model()->find($criteria);
+                    $provider = UserProviders::model($this->service->serviceName);
+                    $provider->find($criteria);
                     if($provider){
                         $user = $provider->user;
                     }
@@ -88,7 +88,6 @@ class EAuthUserIdentity extends CUserIdentity {
                         // Используется как Yii::app()->user->name.
                         $this->username = $user->login;
                         $this->errorCode = self::ERROR_NONE;
-                        Profile::updateByProvider($user, $this);
                     }
                 }
                 
