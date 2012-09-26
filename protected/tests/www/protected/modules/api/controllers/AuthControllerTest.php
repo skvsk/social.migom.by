@@ -46,7 +46,7 @@ class AuthControllerTest extends CTestCase {
         $siteKey = Yii::app()->getParams()->api['key'];
         
         return array(
-            'bad request'            => array(null,       null,         ApiComponent::STATUS_BAD_REQUEST, null),
+            'bad request'            => array(null,       null,         ApiComponent::STATUS_NOT_FOUND, null),
             'fail auth key'          => array('fail_key', null,         ApiComponent::STATUS_BAD_REQUEST, null),
             'ok auth'                => array($siteKey,   null,         ApiComponent::STATUS_OK,          $suid),
             'ok auth with json type' => array($siteKey,   'json',       ApiComponent::STATUS_OK,          $suid),
