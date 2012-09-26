@@ -57,20 +57,11 @@ class SiteController extends Controller {
 
     public function actionTest() {
         
-        $userProviders = new UserProviders();
-        $userProviders->soc_id          = '6542';
-        $userProviders->user_id         = '1';
-        $userProviders->provider_id = array_search('vkontakte', UserProviders::$providers);
-        dd($userProviders->validate());
-        dd($userProviders->save());
-//        die;
-//        
-//        
-//        $criteria = new CDbCriteria;
-//        $criteria->compare('soc_id', '105844357378365018543');
-//        $criteria->limit = 1;
-//        $provider = UserProviders::model('google_oauth');
-//        d($provider->find($criteria)->user);
+        $criteria = new CDbCriteria;
+        $criteria->compare('soc_id', '105844357378365018543');
+        $criteria->limit = 1;
+        $provider = UserProviders::model('google_oauth');
+        d($provider->find($criteria)->user->email);
         
     }
 
