@@ -15,6 +15,11 @@ class UserProviders extends CActiveRecord
         private static $providersModel = array('google_oauth' => 'UserProvidersGoogleOauth', 'vkontakte' => 'UserProvidersVkontakte', 'facebook' => 'UserProvidersFacebook');
         public $provider_id;
         
+        public function tableName()
+	{
+		return 'user_providers';
+	}
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -41,7 +46,7 @@ class UserProviders extends CActiveRecord
                         array('soc_id', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user_id, provider_id, soc_id', 'safe', 'on'=>'search'),
+			array('id, user_id, soc_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,16 +96,18 @@ class UserProviders extends CActiveRecord
         public function beforeSave() {
             parent::beforeSave();
             if($this->provider_id){
-                $className = self::$providersModel[self::$providers[$this->provider_id]];
-                $this->getTableSchema()->rawName = '`' . $className . '`';
+                $this->getTableSchema()->rawName = '`user_providers_' . self::$providers[$this->provider_id] . '`';
+                unset($this->provider_id);
             }
+            
             return true;
         }
         
         public function addSocialToUser($identity, $user_id){
-            $userProviders = UserProviders::model($identity->getProviderName());
+            $userProviders = new UserProviders();
             $userProviders->soc_id          = $identity->getAttribute('soc_id');
             $userProviders->user_id         = $user_id;
+            $userProviders->provider_id = array_search($identity->getProviderName(), UserProviders::$providers);
             if($userProviders->validate()){
                 $userProviders->save();
                 Profile::updateByProvider($userProviders->user, $identity);
