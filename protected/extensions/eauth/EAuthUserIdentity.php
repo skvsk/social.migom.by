@@ -81,6 +81,7 @@ class EAuthUserIdentity extends CUserIdentity {
                     if(!$user){
                         $this->errorCode = self::ERROR_USER_NOT_REGISTERED;
                     } else {
+                        d($user->id);
                         // В качестве идентификатора будем использовать id, а не username,
                         // как это определено по умолчанию. Обязательно нужно переопределить
                         // метод getId(см. ниже).
