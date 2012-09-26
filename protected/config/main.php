@@ -20,6 +20,7 @@ return array(
 		'application.extensions.RESTClient.*',
 		'application.extensions.yiidebugtb.*',
 		'application.services.*',
+                'application.modules.api.components.*',
 		'ext.eoauth.*',
 		'ext.eoauth.lib.*',
 		'ext.lightopenid.*',
