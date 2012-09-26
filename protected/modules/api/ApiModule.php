@@ -36,7 +36,7 @@ class ApiModule extends CWebModule {
 //            'api.models.*',
             'api.components.*',
         ));
-        Yii::app()->log->routes->enabled=false;
+        Yii::app()->log->enabled=false;
         $this->setComponents(array(
                                 'render'=>array('class'=>'Render'),
             ), true);
