@@ -84,15 +84,15 @@ class SiteController extends Controller {
         if (!Yii::app()->user->getIsGuest()) {
             $this->redirect(array('/user/index'));
         }
-        
+
         $this->layout = 'login';
 
         $service = Yii::app()->request->getQuery('service');
         if (isset($service)) {
 
             $authIdentity = Yii::app()->eauth->getIdentity($service);
-//            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
-            $authIdentity->redirectUrl = $this->createUrl('/user/index');
+            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
+//            $authIdentity->redirectUrl = $this->createUrl('/user/index');
             $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/login');
 
             if ($authIdentity->authenticate()) {

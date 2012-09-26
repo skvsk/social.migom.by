@@ -118,13 +118,4 @@ class EAuthUserIdentity extends CUserIdentity {
         public function setId($id) {
 		return $this->id = $id;
 	}
-
-	/**
-	 * Returns the display name for the identity.
-	 * This method is required by {@link IUserIdentity}.
-	 * @return string the display name for the identity.
-	 */
-	public function getName() {
-		return $this->name;
-	}
 }
