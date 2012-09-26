@@ -3,7 +3,7 @@ class WebUser extends CWebUser {
     private $_model = null;
     private $_id = null;
 
-    private function getModel()
+    private function _getModel()
     {
         if (!$this->isGuest && $this->_model === null && $this->id)
         {
@@ -15,7 +15,7 @@ class WebUser extends CWebUser {
     public function login($identity, $duration)
     {
         $this->id = $identity->getId();
-        $user = $this->getModel();
+        $user = $this->_getModel();
         
         // return role name
         $this->setState('name', $user->login);
