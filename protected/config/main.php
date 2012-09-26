@@ -123,21 +123,21 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
-		'log' => array(
-                        'class' => 'CLogRouter',
-                        'routes' => array(
-                                array(
-                                        'class' => 'CFileLogRoute',
-                                        'levels' => 'error, warning, info'
-                                ),				
-                                array( // configuration for the toolbar
-                                        'class' => 'XWebDebugRouter',
-                                        'config' => 'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
-                                        'levels' => 'trace, info, profile, error, warning',
-                                        'allowedIPs' => array('86.57.245.247','::1'),
-                                ),
-                        ),
-                ),
+//		'log' => array(
+//                        'class' => 'CLogRouter',
+//                        'routes' => array(
+//                                array(
+//                                        'class' => 'CFileLogRoute',
+//                                        'levels' => 'error, warning, info'
+//                                ),				
+//                                array( // configuration for the toolbar
+//                                        'class' => 'XWebDebugRouter',
+//                                        'config' => 'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
+//                                        'levels' => 'trace, info, profile, error, warning',
+//                                        'allowedIPs' => array('86.57.245.247','::1'),
+//                                ),
+//                        ),
+//                ),
                 'loid' => array(
 			'class' => 'ext.lightopenid.loid',
 		),

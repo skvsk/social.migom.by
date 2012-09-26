@@ -36,7 +36,6 @@ class ApiModule extends CWebModule {
 //            'api.models.*',
             'api.components.*',
         ));
-        $this->showProfile();
         $this->setComponents(array(
                                 'render'=>array('class'=>'Render'),
             ), true);
@@ -77,12 +76,6 @@ class ApiModule extends CWebModule {
         }
         Yii::app()->controller->module->render->setContentType($cache['type']);
         return true;
-    }
-    
-    private function showProfile($param=false){
-        for ($i=0;$i<Yii::app()->getComponent('log')->routes->getCount();$i++)
-        if ('CProfileLogRoute'== get_class(Yii::app()->getComponent('log')->routes->remove($i)))
-        Yii::app()->getComponent('log')->routes->remove($i)->enabled=$param;
     }
 
 }
