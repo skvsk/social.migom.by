@@ -12,14 +12,15 @@ class WebUser extends CWebUser {
         return $this->_model;
     }
     
-    public function login($identity)
+    public function login($identity, $duration)
     {
         $this->id = $identity->getId();
         $user = $this->getModel();
         
         // return role name
         $this->setState('role', Users::$roles[$user->role]);
+        dd($user->login);
         $this->setState('name', $user->login);
-        parent::login($identity);
+        parent::login($identity, $duration);
     }
 }
