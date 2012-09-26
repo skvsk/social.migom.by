@@ -11,8 +11,8 @@
  */
 class UserProviders extends CActiveRecord
 {
-    
         public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte', 3 => 'facebook');
+        private $providersModel = array('google_oauth' => 'UserProvidersGoogleOauth', 'vkontakte' => 'UserProvidersVkontakte', 'facebook' => 'UserProvidersFacebook');
         public $provider_id;
         
 	/**
@@ -23,8 +23,7 @@ class UserProviders extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
                 if($className != __CLASS__){
-                    $className = str_replace('_', '', $className);
-                    $className = __CLASS__.$className;
+                    $className = $this->providersModel[$className];
                 }
 		return parent::model($className);
 	}
