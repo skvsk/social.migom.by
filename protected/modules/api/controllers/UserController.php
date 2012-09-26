@@ -1,13 +1,16 @@
 <?php
-
+/**
+ * Work with user
+ * @package api
+ */
 class UserController extends ApiController {
 
     /**
      * Check Login
      * @todo Реализовать проверку авторозованности
-     * @param type $puid
+     * @param string $puid
      */
-    public function actionAuth() {
+    public function actionGetAuth() {
         $puid = $_GET['puid'];
         $user = Yii::app()->cache->get('user_' . $puid);
         if($user){
@@ -53,10 +56,6 @@ class UserController extends ApiController {
             $content = array(ApiComponent::CONTENT_MESSAGE => Yii::t('Api', 'User is not auth'));
         }
         $this->render()->sendResponse($content);
-    }
-
-    public function actionList($id = null) {
-        $this->render()->sendResponse(array('list'));
     }
 
 }

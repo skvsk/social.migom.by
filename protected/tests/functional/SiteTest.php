@@ -2,17 +2,7 @@
 
 class SiteTest extends WebTestCase
 {
-//	public function testIndex()
-//	{
-//            $this->open('');
-//            $this->assertTextPresent('Guest');
-//	}
         
-    /**
-     * @todo Расставить id для ключевых элементов
-     * кнопка регистрации
-     * кнопка перехода на страницу редактирования профиля
-     */
         public function testRegistration()
 	{
             $pass = 111111;
@@ -57,6 +47,5 @@ class SiteTest extends WebTestCase
             $this->clickAndWait("//input[@src='/images/login_btn.gif']");
             
 	}
-        
 
 }
