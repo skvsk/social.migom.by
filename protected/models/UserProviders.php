@@ -91,7 +91,8 @@ class UserProviders extends CActiveRecord
         public function beforeSave() {
             parent::beforeSave();
             if($this->provider_id){
-                $this->getTableSchema()->rawName = '`user_providers_' . self::$providers[$this->provider_id] . '`';
+                $className = self::$providersModel[self::$providers[$this->provider_id]];
+                $this->getTableSchema()->rawName = '`' . $className . '`';
             }
             return true;
         }

@@ -9,10 +9,10 @@
  * @property integer $provider_id
  * @property integer $soc_id
  */
-class UserProvidersGoogleOauth extends UserProviders
+class UserProvidersFacebook extends UserProviders
 {
 	public function tableName()
 	{
-		return 'user_providers_google_oauth';
+		return 'user_providers_facebook';
 	}
 }
