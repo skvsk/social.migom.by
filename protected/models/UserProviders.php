@@ -99,7 +99,6 @@ class UserProviders extends CActiveRecord
                 $this->getTableSchema()->rawName = '`user_providers_' . self::$providers[$this->provider_id] . '`';
                 unset($this->provider_id);
             }
-            
             return true;
         }
         
