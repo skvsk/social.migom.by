@@ -48,12 +48,35 @@ abstract class API extends CModel {
 
     public function query($controller, $function = '', $id = null, $method = 'get', $params = array()) {
         $this->_rest->initialize($this->getApiTitle());
+        $suid = $this->_getSuid();
         $uri = $this->_createUri($controller, $function, $id);
         Yii::trace(get_class($this) . '.query()', 'RESTClient');
         $responce = $this->_rest->{$method}($uri, $params, 'json');
 
 //        $this->_rest->debug();
         return $responce;
+    }
+    
+    private function _getSuid(){
+        $suid = yii::app()->cache->get('suid');
+        if(!$suid){
+            $servers = $this->_rest->servers[$this->getApiTitle()];
+            $key = $servers['key'];
+            $params = null;
+            $type = ApiComponent::TYPE_JSON;
+            if(isset($servers['type']) && $servers['type']){
+                $type =  $servers['type'];
+                $params = array('type' => $type);
+            }
+            $responce = $this->_rest->get('Auth/login/'.$key, $params, $type);
+            if(!isset($responce->content->suid)){
+                echo CJSON::encode($responce);
+                Yii::app()->end();
+            }
+            $suid = $responce->content->suid;
+            yii::app()->cache->set('suid', $suid);
+        }
+        return $suid;
     }
 
     protected function _createUri($controller, $function = '', $id = null) {
