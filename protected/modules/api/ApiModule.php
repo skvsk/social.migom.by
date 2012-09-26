@@ -11,7 +11,7 @@ class ApiModule extends CWebModule {
             'api/<controller:\w+>/<_a:(list)>' => 'api/<controller>/<_a>',
         ),
         'POST' => array(
-            'api/<controller:\w+>/<action:\w+>/<key:\w+>' => 'api/<controller>/post<action>',
+            'api/<controller:\w+>/<action:\w+>' => 'api/<controller>/post<action>',
         ),
         'PUT' => array(
             'api/<controller:\w+>/<_a:(update)>/<key:\w+>' => 'api/<controller>/put<_a>',
