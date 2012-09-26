@@ -30,8 +30,8 @@ class ApiModule extends CWebModule {
      *  import the module-level models and components
      */
     public function init() {
-        var_dump($_SERVER["REDIRECT_URL"], $_SERVER["REQUEST_METHOD"]);
-        var_dump($_POST);
+     //   var_dump($_SERVER["REDIRECT_URL"], $_SERVER["REQUEST_METHOD"]);
+     //   var_dump($_POST);
         $this->setImport(array(
 //            'api.models.*',
             'api.components.*',
@@ -52,8 +52,8 @@ class ApiModule extends CWebModule {
                 return false;
             }
         }
-//        var_dump($className);
-//        var_dump($action);
+        var_dump($className);
+        var_dump($action);
 //        die('------');
         if (parent::beforeControllerAction($controller, $action)) {
             // this method is called before any module controller action is performed
