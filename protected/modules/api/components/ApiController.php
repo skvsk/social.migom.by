@@ -1,10 +1,17 @@
 <?php
 
 /**
- * @todo оприделение метода запроса
+ * Parent class for all controllers
+ * @package api
+ * @ignore
  */
 class ApiController extends CController {
 
+    /**
+     * @ignore
+     * @param string $id
+     * @param type $module
+     */
     public function __construct($id = null, $module = null) {
         if (!$id) {
             $id = 'api';
@@ -17,7 +24,7 @@ class ApiController extends CController {
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
      */
 
-    Const APPLICATION_ID = 'ASCCPE';
+    const APPLICATION_ID = 'ASCCPE';
 
     /**
      * Default response format

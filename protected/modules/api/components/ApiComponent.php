@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @package component
+ */
 class ApiComponent extends CComponent {
 
     const TYPE_JSON = 'json';

@@ -1,14 +1,17 @@
 <?php
 
+/**
+ * @ignore
+ */
 class ApiModule extends CWebModule {
 
     public $keys;
     private $urlManager = array(
         'GET' => array(
             'api' => 'default/index',
-            'api/<controller:\w+>/<action:\w+>/<id:\d+>' => 'api/<controller>/<action>',
-            'api/<controller:\w+>/<action:\w+>/<key:\w+>' => 'api/<controller>/<action>',
-            'api/<controller:\w+>/<_a:(list)>' => 'api/<controller>/<_a>',
+            'api/<controller:\w+>/<action:\w+>/<id:\d+>' => 'api/<controller>/get<action>',
+            'api/<controller:\w+>/<action:\w+>/<key:\w+>' => 'api/<controller>/get<action>',
+            'api/<controller:\w+>/<_a:(list)>' => 'api/<controller>/get<_a>',
         ),
         'POST' => array(
             'api/<controller:\w+>/<action:\w+>/<key:\w+>' => 'api/<controller>/post<action>',
@@ -30,7 +33,7 @@ class ApiModule extends CWebModule {
 //        var_dump($_SERVER["REDIRECT_URL"], $_SERVER["REQUEST_METHOD"]);
 //        var_dump($_POST);
         $this->setImport(array(
-            'api.models.*',
+//            'api.models.*',
             'api.components.*',
         ));
         $this->setComponents(array(

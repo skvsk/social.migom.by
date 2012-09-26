@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @ignore
+ */
 class Render extends ApiComponent {
 
     private $status = self::STATUS_OK;
@@ -92,7 +95,7 @@ class Render extends ApiComponent {
             'version' => $this->version,
         );
         $method = 'send' . $this->content_type;
-        
+
         $this->$method($body);
         Yii::app()->end();
     }

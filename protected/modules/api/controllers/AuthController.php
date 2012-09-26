@@ -1,21 +1,26 @@
 <?php
-
+/**
+ * Cross-server authentication
+ * @package api
+ */
 class AuthController extends ApiController {
 
     private $salt = 'al&hhGFFDYbeHappy';
 
     /**
      * Auth method
-     * @method POST
-     * @param string $key
-     * @param string $type
+     * @param string $key - Sicret key for auth
+     * @param string $type - Return content format. For example 'json'.
+     * @uses Auth::getLogin()
+     * @tutorial 
+     * $model = new AuthApi();
+     * $responce = $model->getLogin('Sicret_key', array('type' => 'json'));
+     * @return suid
+     * @example json {'method':'GET','status':'OK','code':200,'content':{'suid':'3da7b280eda538c15f2bff38afd11dcd'},'format':'json','timestamp':1348645528,'version':'1.0'};
+     * @expectedExceptionMessage Not auth
      */
-    public function actionLogin($key, $type = Render::TYPE_JSON) {
+    public function actionGetLogin($key, $type = Render::TYPE_JSON) {
         $keys = $this->module->keys;
-//        var_dump($keys);
-//        var_dump($key);
-//        dd(Yii::app()->request->userHostAddress);
-//        die;
         $render = $this->render();
         $type = strtolower($type);
         if (!$render->isValidType($type)) {
