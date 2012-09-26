@@ -75,13 +75,13 @@ class EAuthUserIdentity extends CUserIdentity {
                     $criteria->limit = 1; //TODO реализовать выбор социалки для входа
                     $provider = UserProviders::model($this->service->serviceName);
                     $provider->find($criteria);
+                    d($provider);
                     if($provider){
                         $user = $provider->user;
                     }
                     if(!$user){
                         $this->errorCode = self::ERROR_USER_NOT_REGISTERED;
                     } else {
-                        d($user->id);
                         // В качестве идентификатора будем использовать id, а не username,
                         // как это определено по умолчанию. Обязательно нужно переопределить
                         // метод getId(см. ниже).
