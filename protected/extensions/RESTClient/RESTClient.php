@@ -91,7 +91,7 @@ class RESTClient extends CComponent {
         isset($config['http_user']) && $this->http_user = $config['http_user'];
         isset($config['http_pass']) && $this->http_pass = $config['http_pass'];
     }
-
+    
     public function get($uri, $params = array(), $format = NULL) {
         if ($params) {
             $uri .= '?' . (is_array($params) ? http_build_query($params) : $params);
