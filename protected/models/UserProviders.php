@@ -17,7 +17,7 @@ class UserProviders extends CActiveRecord
         
         public function tableName()
 	{
-		return 'user_providers_google_oauth';
+		return 'user_providers_google_oauth'; // default table
 	}
         
 	/**
