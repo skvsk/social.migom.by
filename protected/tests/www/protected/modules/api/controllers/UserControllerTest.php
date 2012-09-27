@@ -27,33 +27,32 @@ class UserControllerTest extends CTestCase {
     public function testActionAuth() {
         $id     = Yii::app()->getParams()->api['user_id'];
         $puid   = Yii::app()->getParams()->api['user_puid'];
-        $suid   = Yii::app()->getParams()->api['suid'];
         $model  = new UserApi();
         
         //логаут для чистоты эксперимента
-        $responce = $model->deleteAuth($puid, array('key' => $suid));
+        $responce = $model->deleteAuth($puid);
         $this->assertTrue($responce->content->success);
         
         //проверка на авторизованность
-        $this->assertTrue(!$this->checkAuth($puid, $suid)->auth);
+        $this->assertTrue(!$this->checkAuth($puid)->auth);
         
         //логин
-        $this->assertEquals($puid, $model->postAuth($suid, array('login' => 'login', 'paswd' => 'paswd'))->content->puid);
+        $this->assertEquals($puid, $model->postAuth(array('login' => 'login', 'paswd' => 'paswd'))->content->puid);
         
         //проверка на авторизованность
-        $this->assertEquals($id, $this->checkAuth($puid, $suid)->id, 'Return not actual id.');
+        $this->assertEquals($id, $this->checkAuth($puid)->id, 'Return not actual id.');
         
         //логаут
-        $responce = $model->deleteAuth($puid, array('key' => $suid));
+        $responce = $model->deleteAuth($puid);
         $this->assertTrue($responce->content->success);
         
         //проверка на авторизованность
-        $this->assertTrue(!$this->checkAuth($puid, $suid)->auth);
+        $this->assertTrue(!$this->checkAuth($puid)->auth);
     }
     
-    private function checkAuth($puid, $suid){
+    private function checkAuth($puid){
         $model = new UserApi();
-        $responce = $model->getAuth($suid, array('puid' => $puid));
+        $responce = $model->getAuth(array('puid' => $puid));
         return $responce->content;
     }
 
