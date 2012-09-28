@@ -32,7 +32,7 @@ class CommentsController extends ApiController {
 //            $comments[] = $value;
 //        }
         
-        dd($res);
+        dd(CJSON::encode($res));
         $content = array('comments' => $res, 'count' => count($res));
         $this->render()->sendResponse($content);
     }
