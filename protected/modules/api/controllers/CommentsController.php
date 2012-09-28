@@ -14,7 +14,7 @@ class CommentsController extends ApiController {
         $criteria = new CDbCriteria;
         $criteria->condition = 'entity_id = :entity_id and published = :published';
         $criteria->params = array(':entity_id' => $id, 
-                                  ':published' => CommentApi::STATUS_PUBLISHED);
+                                  ':published' => Comments::STATUS_PUBLISHED);
 
         if ($limit) {
             $criteria->limit = $limit;
