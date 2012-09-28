@@ -23,7 +23,7 @@ class CommentsController extends ApiController {
         if ($start) {
             $criteria->offset = $start;
         }
-        $rawData = $class::model()->with(array('users'=>array('together'=>true)))->findAll($criteria);
+        $rawData = $class::model()->with(array('users, profile'))->findAll($criteria);
         
         //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
@@ -35,6 +35,10 @@ class CommentsController extends ApiController {
             foreach ($value->users as $key => $attr) {
                 $row['users'][$key] = $attr;
             }
+            foreach ($value->users->profile as $key => $attr) {
+                $row['users']['profile'][$key] = $attr;
+            }
+            
             $res[] = $row;
         }
         
