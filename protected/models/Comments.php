@@ -16,7 +16,7 @@
  * @property integer $created_at
  * @property integer $updated_at
  */
-abstract class Comments extends CActiveRecord {
+class Comments extends CActiveRecord {
 
     const STATUS_UNMODERATED = 0;
     const STATUS_PUBLISHED = 1;
@@ -35,11 +35,7 @@ abstract class Comments extends CActiveRecord {
         return parent::model($className);
     }
 
-    /**
-     * @return string the associated database table name
-     */
-    abstract public function tableName();
-
+    
     /**
      * @return array validation rules for model attributes.
      */
