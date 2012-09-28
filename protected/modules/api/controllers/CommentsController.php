@@ -23,7 +23,8 @@ class CommentsController extends ApiController {
         if ($start) {
             $criteria->offset = $start;
         }
-        $content = array('comments' => $class::model()->with('users')->findAll($criteria));
+        $res = $class::model()->with('users')->findAll($criteria);
+        $content = array('comments' => $res, 'count' => count($res));
         $this->render()->sendResponse($content);
     }
     
