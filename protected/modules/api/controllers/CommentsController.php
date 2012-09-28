@@ -10,7 +10,7 @@ class CommentsController extends ApiController {
     public function actionGetUserList($id, $limit, $start = null) {}
     public function actionGetEntityList($entity, $id, $limit = null, $start = null) {
         $res = array();
-        $class = $entity . 'Comments';
+        $class = ucfirst($entity) . 'Comments';
        
         $criteria = new CDbCriteria;
         $criteria->condition = 'entity_id = :entity_id and published = :published';
