@@ -11,7 +11,7 @@ class ApiModule extends CWebModule {
             'api' => 'default/index',
             'api/<controller:\w+>/<action:\w+>/<entity:\w+>/<id:\d+>' => 'api/<controller>/get<action>',
             'api/<controller:\w+>/<action:\w+>/<id:\d+>' => 'api/<controller>/get<action>',
-            'api/<controller:\w+>/<action:\w+>/<key:\w+>' => 'api/<controller>/get<action>',
+            //'api/<controller:\w+>/<action:\w+>/<key:\w+>' => 'api/<controller>/get<action>',
             'api/<controller:\w+>/<_a:(list)>' => 'api/<controller>/get<_a>',
         ),
         'POST' => array(
@@ -72,7 +72,7 @@ class ApiModule extends CWebModule {
         }
         $cache = Yii::app()->cache->get($key);
         if ($cache === false) {
-            new ApiException(Yii::t('Api', 'Auth error with {key}', array('{key}'=>$key)));
+            new ApiException(Yii::t('Api', 'Auth error with key "{key}"', array('{key}'=>$key)));
             return false;
         }
         die('test');
