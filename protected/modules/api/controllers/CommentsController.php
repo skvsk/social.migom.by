@@ -24,15 +24,16 @@ class CommentsController extends ApiController {
             $criteria->offset = $start;
         }
         $rawData = $class::model()->with('users')->findAll($criteria);
-        $dataProvider=new CArrayDataProvider($rawData, array('users' => 'users'));
+        $dataProvider=new CArrayDataProvider($rawData);
         $res = $dataProvider->getData();
 //        $comments = array();
 //        foreach ($res as $value) {
 //            
 //            $comments[] = $value;
 //        }
-        
+       
         dd(CJSON::encode($res));
+         dd($res);
         $content = array('comments' => $res, 'count' => count($res));
         $this->render()->sendResponse($content);
     }
