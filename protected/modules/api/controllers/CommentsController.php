@@ -20,8 +20,8 @@ class CommentsController extends ApiController {
             $criteria->limit = $limit;
         }
 
-        if ($order) {
-            $criteria->offset = $order;
+        if ($start) {
+            $criteria->offset = $start;
         }
         $content = array('comments' => $class::model()->with('users')->findAll($criteria));
         $this->render()->sendResponse($content);
