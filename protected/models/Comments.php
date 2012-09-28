@@ -59,6 +59,7 @@ class Comments extends CActiveRecord {
     public function relations() {
         return array(
             'users' => array(self::BELONGS_TO, 'Users', 'user_id'),
+            'profile'=>array(self::HAS_ONE,'Profile',array('id'=>'user_id'),'through'=>'users'),
         );
     }
 
