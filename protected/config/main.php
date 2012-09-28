@@ -94,7 +94,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=test4migomby',
 			'emulatePrepare' => true,
 			'username' => 'test4migomby',
-			'password' => 'j7F2ZjxLTCOH',
+			'password' => 'ET7jS8zcoAKT',
 			'charset' => 'utf8',
 		),
                 'db2' => array(
