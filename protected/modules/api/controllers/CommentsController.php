@@ -24,7 +24,8 @@ class CommentsController extends ApiController {
             $criteria->offset = $start;
         }
         $rawData = $class::model()->with(array('users'=>array('together'=>true)))->findAll($criteria);
-        dd($rawData->getAttributes());
+        
+        //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
             $row = array();
             foreach ($value as $key => $attr) {
@@ -36,8 +37,6 @@ class CommentsController extends ApiController {
             }
             $res[] = $row;
         }
-        
-        
         
         $content = array('comments' => $res, 'count' => count($res));
         $this->render()->sendResponse($content);
