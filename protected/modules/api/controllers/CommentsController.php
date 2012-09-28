@@ -23,21 +23,21 @@ class CommentsController extends ApiController {
         if ($start) {
             $criteria->offset = $start;
         }
-        $rawData = $class::model()->with('users')->findAll($criteria);
-        $dataProvider=new CArrayDataProvider($rawData);
-        $res = $dataProvider->getData();
-        foreach ($res as $value) {
-            $value->user =  $value->users;
-        }
-//        $comments = array();
+        $rawData = $class::model()->with(array('users'=>array('together'=>true)))->findAll($criteria);
+//        $dataProvider=new CArrayDataProvider($rawData);
+//        $res = $dataProvider->getData();
 //        foreach ($res as $value) {
-//            
-//            $comments[] = $value;
+//            $value->user =  $value->users;
 //        }
-       
-        dd(CJSON::encode($res));
-         dd($res);
-        $content = array('comments' => $res, 'count' => count($res));
+////        $comments = array();
+////        foreach ($res as $value) {
+////            
+////            $comments[] = $value;
+////        }
+//       
+//        dd(CJSON::encode($rawData));
+//         dd($rawData);
+        $content = array('comments' => $rawData, 'count' => count($rawData));
         $this->render()->sendResponse($content);
     }
     
