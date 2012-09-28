@@ -83,21 +83,16 @@ class Comments extends CActiveRecord {
     }
 
     protected function beforeSave() {
-//        if ($this->getIsNewRecord()) {
-//            if ($this->hasAttribute('created_at')) {
-//                $this->created_at = new CDbExpression('NOW()');
-//            }
-//
-//            if ($this->hasAttribute('user_id')) {
-//                if (!(Yii::app()->user->isGuest)) {
-//                    $this->user_id = Yii::app()->user->id;
-//                }
-//            }
-//        } else {
-//            if ($this->hasAttribute('updated_at')) {
-//                $this->updated_at = new CDbExpression('NOW()');
-//            }
-//        }
+        if ($this->getIsNewRecord()) {
+            if ($this->hasAttribute('created_at')) {
+                $this->created_at = time();
+            }
+
+        } else {
+            if ($this->hasAttribute('updated_at')) {
+                $this->updated_at = time();
+            }
+        }
 
         return parent::beforeSave();
     }
