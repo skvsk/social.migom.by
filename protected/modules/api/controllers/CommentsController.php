@@ -47,7 +47,7 @@ class CommentsController extends ApiController {
 //       
 //        dd(CJSON::encode($rawData));
 //         dd($rawData);
-        $content = array('comments' => $rawData, 'count' => count($rawData));
+        $content = array('comments' => $res, 'count' => count($res));
         $this->render()->sendResponse($content);
     }
     
