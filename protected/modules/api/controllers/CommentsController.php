@@ -8,9 +8,12 @@ class CommentsController extends ApiController {
 
     public function actionGetComment($id) {}
     public function actionGetUserList($id, $limit, $start = null) {}
-    public function actionGetEntityList($entity,$id, $limit = null, $start = null) {
+    public function actionGetEntityList($entity, $id, $limit = null, $start = null) {
         $res = array();
         $class = $entity . 'Comments';
+        dd($entity);
+        dd($id);
+        
         die('test');
         $criteria = new CDbCriteria;
         $criteria->condition = 'entity_id = :entity_id and published = :published';
