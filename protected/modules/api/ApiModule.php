@@ -9,10 +9,11 @@ class ApiModule extends CWebModule {
     private $urlManager = array(
         'GET' => array(
             'api' => 'default/index',
+            'api/auth/login/<key:\w+>' => 'api/auth/getLogin',
+            
             'api/<controller:\w+>/<action:\w+>/<entity:\w+>/<id:\d+>' => 'api/<controller>/get<action>',
             'api/<controller:\w+>/<action:\w+>/<entity:\w+>' => 'api/<controller>/get<action>',
             'api/<controller:\w+>/<action:\w+>/<id:\d+>' => 'api/<controller>/get<action>',
-            'api/auth/login/<key:\w+>' => 'api/auth/getLogin',
             'api/<controller:\w+>/<_a:(list)>' => 'api/<controller>/get<_a>',
         ),
         'POST' => array(
