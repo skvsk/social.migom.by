@@ -75,6 +75,7 @@ class ApiModule extends CWebModule {
             new ApiException(Yii::t('Api', 'Auth error'));
             return false;
         }
+        die('test');
         Yii::app()->controller->module->render->setContentType($cache['type']);
         return true;
     }
