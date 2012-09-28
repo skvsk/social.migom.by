@@ -72,7 +72,7 @@ class ApiModule extends CWebModule {
         }
         $cache = Yii::app()->cache->get($key);
         if ($cache === false) {
-            new ApiException(Yii::t('Api', 'Auth error'));
+            new ApiException(Yii::t('Api', 'Auth error with {key}', array('{key}'=>$key)));
             return false;
         }
         die('test');
