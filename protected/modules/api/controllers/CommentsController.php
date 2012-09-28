@@ -24,10 +24,15 @@ class CommentsController extends ApiController {
             $criteria->offset = $start;
         }
         $rawData = $class::model()->with(array('users'=>array('together'=>true)))->findAll($criteria);
+        
         foreach ($rawData as $value) {
-            foreach ($value as $attr) {
-                dd($attr);
+            $row = array();
+            foreach ($value as $key => $attr) {
+                $row[$key] = $attr;
+                
             }
+            dd($value->users);
+            $res[] = $row;
         }
 //        $dataProvider=new CArrayDataProvider($rawData);
 //        $res = $dataProvider->getData();
