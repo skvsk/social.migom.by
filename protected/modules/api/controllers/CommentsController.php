@@ -24,7 +24,7 @@ class CommentsController extends ApiController {
             $criteria->offset = $start;
         }
         $rawData = $class::model()->with(array('users'=>array('together'=>true)))->findAll($criteria);
-        
+        dd($rawData->getAttributes());
         foreach ($rawData as $value) {
             $row = array();
             foreach ($value as $key => $attr) {
@@ -34,22 +34,11 @@ class CommentsController extends ApiController {
             foreach ($value->users as $key => $attr) {
                 $row['users'][$key] = $attr;
             }
-//            dd($value->users);
             $res[] = $row;
         }
-//        $dataProvider=new CArrayDataProvider($rawData);
-//        $res = $dataProvider->getData();
-//        foreach ($res as $value) {
-//            $value->user =  $value->users;
-//        }
-////        $comments = array();
-////        foreach ($res as $value) {
-////            
-////            $comments[] = $value;
-////        }
-//       
-//        dd(CJSON::encode($rawData));
-//         dd($rawData);
+        
+        
+        
         $content = array('comments' => $res, 'count' => count($res));
         $this->render()->sendResponse($content);
     }
