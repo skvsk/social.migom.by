@@ -23,7 +23,7 @@ class CommentsController extends ApiController {
         if ($order) {
             $criteria->offset = $order;
         }
-        
+        dd($class);
         $content = array('comments' => $class::model()->with('users')->findAll($criteria));
         $this->render()->sendResponse($content);
     }

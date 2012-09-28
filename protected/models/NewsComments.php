@@ -1,5 +1,5 @@
 <?php
-class NewsComments extends Comment
+class NewsComments extends Comments
 {	
     public static function model($className=__CLASS__)
     {
