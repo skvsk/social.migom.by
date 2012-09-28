@@ -35,7 +35,7 @@ class CommentsController extends ApiController {
             foreach ($value->users as $key => $attr) {
                 $row['users'][$key] = $attr;
             }
-            foreach ($value->users->profile as $key => $attr) {
+            foreach ($value->profile as $key => $attr) {
                 $row['users']['profile'][$key] = $attr;
             }
             
