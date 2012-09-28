@@ -24,7 +24,7 @@ class CommentsController extends ApiController {
             $criteria->offset = $start;
         }
         $rawData = $class::model()->with('users')->findAll($criteria);
-        $dataProvider=new CArrayDataProvider($rawData);
+        $dataProvider=new CArrayDataProvider($rawData, array('users' => 'users'));
         $res = $dataProvider->getData();
 //        $comments = array();
 //        foreach ($res as $value) {
