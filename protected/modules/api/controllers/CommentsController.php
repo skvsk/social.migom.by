@@ -27,7 +27,7 @@ class CommentsController extends ApiController {
         $dataProvider=new CArrayDataProvider($rawData);
         $res = $dataProvider->getData();
         foreach ($array as $value) {
-            $value['user'] =  $value->getRelated('users');
+            $value->user =  $value->users;
         }
 //        $comments = array();
 //        foreach ($res as $value) {
