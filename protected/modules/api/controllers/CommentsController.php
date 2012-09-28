@@ -11,10 +11,6 @@ class CommentsController extends ApiController {
     public function actionGetEntityList($entity, $id, $limit = null, $start = null) {
         $res = array();
         $class = $entity . 'Comments';
-        dd($entity);
-        dd($id);
-        
-        die('test');
         $criteria = new CDbCriteria;
         $criteria->condition = 'entity_id = :entity_id and published = :published';
         $criteria->params = array(':entity_id' => $id, 
@@ -28,7 +24,8 @@ class CommentsController extends ApiController {
             $criteria->offset = $order;
         }
         
-        return $class::model()->with('users')->findAll($criteria);
+        $content = array('comments' => $class::model()->with('users')->findAll($criteria));
+        $this->render()->sendResponse($content);
     }
     
     public function actionPostComment($value, $user_id, $entity, $parent = 0) {}
