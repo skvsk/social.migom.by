@@ -31,7 +31,10 @@ class CommentsController extends ApiController {
                 $row[$key] = $attr;
                 
             }
-            dd($value->users);
+            foreach ($value->users as $key => $attr) {
+                $row['users'][$key] = $attr;
+            }
+//            dd($value->users);
             $res[] = $row;
         }
 //        $dataProvider=new CArrayDataProvider($rawData);
