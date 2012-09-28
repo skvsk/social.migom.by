@@ -57,7 +57,7 @@ class CommentsController extends ApiController {
         $comment = $this->_getModel($entity);
         $comment->entity_id = $_POST['entity_id'];
         $comment->text      = $_POST['text'];
-        $comment->parent_id = $_POST['parent_id'];
+        $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0)? $_POST['parent_id'] : 0;
         $comment->user_id   = $_POST['user_id'];
         
         $comment->save();
