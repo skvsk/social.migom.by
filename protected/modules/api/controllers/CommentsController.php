@@ -16,7 +16,6 @@ class CommentsController extends ApiController {
         $criteria->condition = 'entity_id = :entity_id and published = :published';
         $criteria->params = array(':entity_id' => $id, 
                                   ':published' => Comments::STATUS_PUBLISHED);
-        die('test');
         if ($limit) {
             $criteria->limit = $limit;
         }
@@ -24,8 +23,6 @@ class CommentsController extends ApiController {
         if ($order) {
             $criteria->offset = $order;
         }
-        dd($class);
-        die;
         $content = array('comments' => $class::model()->with('users')->findAll($criteria));
         $this->render()->sendResponse($content);
     }
