@@ -20,7 +20,7 @@ class Comments extends CActiveRecord {
 
     const STATUS_UNMODERATED = 0;
     const STATUS_PUBLISHED = 1;
-    const STATUS_UNPUBLISHET = 2;
+    const STATUS_UNPUBLISHED = 2;
     const STATUS_DELETED = 3;
     
     public $owner_id = 0;
