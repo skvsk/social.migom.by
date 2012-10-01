@@ -20,6 +20,6 @@ class UserService {
     public static function uploadAvatarFromEmail($user_id, $email = null){
         $gravatarHash = (!empty($email))? $email:  rand(0, 99999999);
         return UserService::uploadAvatarFromService($user_id, 
-                                'http://www.gravatar.com/avatar/'. md5($gravatarHash) .'?f=y&d=identicon');
+                                'http://www.gravatar.com/avatar/'. md5($gravatarHash . ' ') .'?f=y&d=identicon');
     }
 }
