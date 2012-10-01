@@ -11,7 +11,7 @@ class CommentsController extends ApiController {
     
     private function _getModel($entity){
         $class = ucfirst($entity) . 'Comments';
-        return $class::model();
+        return new $class();
     }
 
     public function actionGetComment($id) {}
@@ -57,7 +57,7 @@ class CommentsController extends ApiController {
     }
     
     public function actionPostEntity($entity) {
-//        $class = ucfirst($entity) . 'Comments';
+        $class = ucfirst($entity) . 'Comments';
         $comment = $this->_getModel($entity); //$this->_getModel($entity);
         $comment->attributes = $_POST;
         $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0)? $_POST['parent_id'] : 0;
