@@ -58,6 +58,7 @@ class CommentsController extends ApiController {
     
     public function actionPostEntity($entity) {
         $class = ucfirst($entity) . 'Comments';
+        var_dump($class);
         $comment = new $class(); //$this->_getModel($entity);
         $comment->entity_id = $_POST['entity_id'];
         $comment->text      = $_POST['text'];
