@@ -53,7 +53,7 @@ abstract class API extends CModel {
         Yii::trace(get_class($this) . '.query()', 'RESTClient');
         $responce = $this->_rest->{$method}($uri, $params, 'json');
 
-        //$this->_rest->debug();
+//        $this->_rest->debug();
         return $responce;
     }
     
