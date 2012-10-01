@@ -60,13 +60,11 @@ class CommentsController extends ApiController {
         $class = ucfirst($entity) . 'Comments';
         
         $comment = new $class(); //$this->_getModel($entity);
-        $comment->entity_id = $_POST['entity_id'];
-        $comment->text      = $_POST['text'];
+        $comment->attributes = $_POST;
         $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0)? $_POST['parent_id'] : 0;
-        $comment->user_id   = $_POST['user_id'];
-        
         $comment->save();
-        print_r($comment->id);
+        dd($_POST);
+        dd($comment->validate()->getErrors());
         $content = array(self::CONTENT_COMMENT => $comment->attributes);
         $this->render()->sendResponse($content);
     }
