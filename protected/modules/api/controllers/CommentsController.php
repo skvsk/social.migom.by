@@ -6,6 +6,11 @@
  */
 class CommentsController extends ApiController {
 
+    const CONTENT_COMMENTS = 'comments';
+    const CONTENT_COMMENT = 'comment';
+    
+
+
     private function _getModel($entity){
         $class = ucfirst($entity) . 'Comments';
         return $class::model();
@@ -47,7 +52,7 @@ class CommentsController extends ApiController {
             $res[] = $row;
         }
         
-        $content = array('comments' => $res, 'count' => count($res));
+        $content = array( self::CONTENT_COMMENTS => $res, ApiComponent::CONTENT_COUNT => count($res));
         $this->render()->sendResponse($content);
     }
     
@@ -61,7 +66,7 @@ class CommentsController extends ApiController {
         
         $comment->save();
         
-        $content = array('comment' => $comment->attributes);
+        $content = array(self::CONTENT_COMMENT => $comment->attributes);
         $this->render()->sendResponse($content);
     }
     
