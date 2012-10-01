@@ -22,6 +22,6 @@ class UserService {
         $gravatarHash = md5( strtolower( trim( $gravatarHash ) ) );
 
         return UserService::uploadAvatarFromService($user_id, 
-                                'http://www.gravatar.com/avatar/'. $gravatarHash .'?f=y&d=identicon');
+                                'http://www.gravatar.com/avatar/'. $gravatarHash .'?d=identicon');
     }
 }
