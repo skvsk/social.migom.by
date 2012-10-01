@@ -53,7 +53,7 @@ abstract class API extends CModel {
         Yii::trace(get_class($this) . '.query()', 'RESTClient');
         $responce = $this->_rest->{$method}($uri, $params, 'json');
 
-//        $this->_rest->debug();
+        //$this->_rest->debug();
         return $responce;
     }
     
@@ -68,7 +68,7 @@ abstract class API extends CModel {
                 $type =  $servers['type'];
                 $params = array('type' => $type);
             }
-            $responce = $this->_rest->get('Auth/login/'.$key, $params, $type);
+            $responce = $this->_rest->get('auth/login/'.$key, $params, $type);
             if(!isset($responce->content->suid)){
                 echo CJSON::encode($responce);
                 Yii::app()->end();
