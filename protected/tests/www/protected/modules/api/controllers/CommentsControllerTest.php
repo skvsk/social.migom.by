@@ -22,10 +22,9 @@ class CommentsControllerTest extends CTestCase {
      * @covers CommentsController::actionPostEntity
      * @covers CommentsController::actionGetEntityList
      * @covers CommentsApi
+     * @todo Сделать тестирование лимита и старта
      */
     public function testActionAuth() {
-        $id     = Yii::app()->getParams()->api['user_id'];
-        $puid   = Yii::app()->getParams()->api['user_puid'];
         $model  = new CommentsApi();
         
         $entity = 'news';
@@ -33,8 +32,8 @@ class CommentsControllerTest extends CTestCase {
         $text = 'test text';
         $parent_id = 0;
         $user = 1;
-        $limit = null;
-        $start = null;
+//        $limit = null;
+//        $start = null;
         
         
         $params = array(
