@@ -12,6 +12,8 @@ return array(
 	// preloading 'log' component
 	'preload'=>array('log'),
         'defaultController' => 'site',
+        'sourceLanguage'    =>'ru_RU',
+        'language'          =>'ru_RU',
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -42,6 +44,9 @@ return array(
 //                                    'test' => '127.0.0.1'
                                     )
                 ),
+                'ads'=>array(
+			'ipFilters'=>array('86.57.245.247','::1', '127.0.0.1'),
+		),
 	),
 
 	// application components
@@ -81,9 +86,10 @@ return array(
                         'showScriptName' => false,
 			'rules'=>array(
                                 'api' => 'api/default/index',
+                                'ads' => 'ads/default/index',
                                 'user/<id:\d+>'=>'user/index',
                                 'user'=>'user/index',
-                                '<action:\w+>'=>'site/<action>',
+//                                '<action:\w+>'=>'site/<action>',
                                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

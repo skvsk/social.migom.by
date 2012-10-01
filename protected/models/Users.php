@@ -112,6 +112,7 @@ class Users extends CActiveRecord
 		$criteria->compare('login',$this->login,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
+                $criteria->compare('role',$this->role);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('date_add',$this->date_add);
 		$criteria->compare('date_edit',$this->date_edit);
@@ -139,11 +140,13 @@ class Users extends CActiveRecord
                     $this->login = $name[0];
                 }
             } else {
-                if($this->password){
+                if($this->scenario == 'general_update'){
                     $this->password = md5($this->password);
                 }
             }
             $this->email = strtolower($this->email);
+            
+            $this->date_edit = time();
             return true;
         }
 }
