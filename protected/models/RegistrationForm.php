@@ -65,6 +65,10 @@ class RegistrationForm extends CFormModel
                     if($identity->getAttribute('avatar')){
                         // upload avatar to self server
                         $profile->avatar = UserService::uploadAvatarFromService($user->id, $identity->getAttribute('avatar'));
+                    }else{
+                        $gravatarHash = ($user->email)? $user->email:  rand(0, 99999999);
+                        $profile->avatar = UserService::uploadAvatarFromService($user->id, 
+                                'http://www.gravatar.com/avatar/'. md5($gravatarHash) .'?f=y&d=identicon');
                     }
                     $profile->sex = $identity->getAttribute('sex');
                     $profile->user_id = $user->id;
