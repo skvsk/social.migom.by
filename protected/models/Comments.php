@@ -9,8 +9,8 @@
  * @property integer $entity_id
  * @property integer $user_id
  * @property string $text
- * @property integer $like
- * @property integer $dislike
+ * @property integer $likes
+ * @property integer $dislikes
  * @property integer $status
  * @property integer $level
  * @property integer $created_at
@@ -44,7 +44,7 @@ class Comments extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('entity_id, user_id', 'required'),
-            array('parent_id, entity_id, user_id, like, dislike, status, level, created_at, updated_at', 'numerical', 'integerOnly' => true),
+            array('parent_id, entity_id, user_id, likes, dislikes, status, level, created_at, updated_at', 'numerical', 'integerOnly' => true),
             array('text', 'safe'),
             array('text', 'filter', 'filter' => array(new CHtmlPurifier(), 'purify')),
             // The following rule is used by search().
@@ -73,8 +73,8 @@ class Comments extends CActiveRecord {
             'entity_id' => Yii::t('Site', 'Entity'),
             'user_id' => Yii::t('Site', 'User'),
             'text' => Yii::t('Site', 'Text'),
-            'like' => Yii::t('Site', 'Likes'),
-            'dislike' => Yii::t('Site', 'Dislikes'),
+            'likes' => Yii::t('Site', 'Likes'),
+            'dislikes' => Yii::t('Site', 'Dislikes'),
             'status' => Yii::t('Site', 'Status'),
             'level' => Yii::t('Site', 'Level'),
             'created_at' => Yii::t('Site', 'Created At'),
