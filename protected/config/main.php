@@ -89,7 +89,7 @@ return array(
                                 'ads' => 'ads/default/index',
                                 'user/<id:\d+>'=>'user/index',
                                 'user'=>'user/index',
-//                                '<action:\w+>'=>'site/<action>',
+                                '<action:(login|logout)>'=>'site/<action>',
                                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
