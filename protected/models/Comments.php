@@ -49,7 +49,7 @@ class Comments extends CActiveRecord {
             array('text', 'filter', 'filter' => array(new CHtmlPurifier(), 'purify')),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, parent_id, entity_id, user_id, text, like, dislike, status, level, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, parent_id, entity_id, user_id, text, likes, dislikes, status, level, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
