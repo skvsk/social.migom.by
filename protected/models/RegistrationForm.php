@@ -65,12 +65,9 @@ class RegistrationForm extends CFormModel
                     if($identity->getAttribute('avatar')){
                         // upload avatar to self server
                         $profile->avatar = UserService::uploadAvatarFromService($user->id, $identity->getAttribute('avatar'));
-                        die('dddddddddddddd');
                     }else{
                         $gravatarHash = ($user->email)? $user->email:  rand(0, 99999999);
-                        $profile->avatar = UserService::uploadAvatarFromService($user->id, 
-                                'http://www.gravatar.com/avatar/'. md5($gravatarHash) .'?f=y&d=identicon');
-                        die($profile->avatar);
+                        $profile->avatar = UserService::uploadAvatarFromEmail($user->id, $user->email);
                     }
                     $profile->sex = $identity->getAttribute('sex');
                     $profile->user_id = $user->id;
@@ -93,6 +90,7 @@ class RegistrationForm extends CFormModel
                 $profile = new Profile();
                 $profile->user_id = $user->id;
                 $profile->full_name = $user->login;
+                $profile->avatar = UserService::uploadAvatarFromEmail($user->id, $user->email);
                 $profile->save();
                 if(!$identity){
                     $identity = new UserIdentity($user->email, $user->password);
