@@ -28,7 +28,7 @@ class CommentsController extends ApiController {
         if ($start) {
             $criteria->offset = $start;
         }
-        $rawData = $this->_getModel($entity)->with(array('users', 'profile'))->findAll($criteria);
+        $rawData = $this->_getModel($entity)->with('users')->findAll($criteria);
         
         //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
@@ -40,9 +40,9 @@ class CommentsController extends ApiController {
             foreach ($value->users as $key => $attr) {
                 $row['users'][$key] = $attr;
             }
-            foreach ($value->profile as $key => $attr) {
-                $row['users']['profile'][$key] = $attr;
-            }
+//            foreach ($value->profile as $key => $attr) {
+//                $row['users']['profile'][$key] = $attr;
+//            }
             
             $res[] = $row;
         }
