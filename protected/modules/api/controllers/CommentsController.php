@@ -66,7 +66,7 @@ class CommentsController extends ApiController {
         $comment->user_id   = $_POST['user_id'];
         
         $comment->save();
-        print_r($comment->attributes);
+        print_r($comment->id);
         $content = array(self::CONTENT_COMMENT => $comment->attributes);
         $this->render()->sendResponse($content);
     }
