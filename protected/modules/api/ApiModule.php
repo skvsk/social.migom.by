@@ -9,7 +9,7 @@ class ApiModule extends CWebModule {
     private $urlManager = array(
         'GET' => array(
             'api' => 'default/index',
-            'api/auth/login/<key:\w+>' => 'api/auth/getLogin',
+            'api/<_c:(A|a)uth>/login/<key:\w+>' => 'api/auth/getLogin',
             
             'api/<controller:\w+>/<action:\w+>/<entity:\w+>/<id:\d+>' => 'api/<controller>/get<action>',
             'api/<controller:\w+>/<action:\w+>/<entity:\w+>' => 'api/<controller>/get<action>',
