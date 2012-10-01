@@ -83,7 +83,12 @@ class Render extends ApiComponent {
 
             $content = array(
                 "message" => $message,
+                ApiComponent::CONTENT_SUCCESS => false,
             );
+        }else{
+            if(!isset($content[ApiComponent::CONTENT_SUCCESS])){
+                $content[ApiComponent::CONTENT_SUCCESS] = true;
+            }
         }
         $body = array(
             'method' => $_SERVER['REQUEST_METHOD'],
