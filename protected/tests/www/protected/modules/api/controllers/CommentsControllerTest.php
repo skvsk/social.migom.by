@@ -18,11 +18,10 @@ class CommentsControllerTest extends CTestCase {
     }
 
     /**
-     * Api login and logaut
-     * @covers UserController::actionAuth
-     * @covers UserController::actionDeleteAuth
-     * @covers UserController::actionPostAuth
-     * @covers UserApi
+     * Api comments get List and add
+     * @covers CommentsController::actionPostEntity
+     * @covers CommentsController::actionGetEntityList
+     * @covers CommentsApi
      */
     public function testActionAuth() {
         $id     = Yii::app()->getParams()->api['user_id'];
@@ -56,12 +55,13 @@ class CommentsControllerTest extends CTestCase {
         $comments = $model->getEntityList($entity, $getParams);
         
         $this->assertTrue(isset($comments->content->count));
-        $count = $comments->content->count;
+        $count = $comments->content->count++;
+        
         $responce = $model->postEntity($entity, $params);
         $this->assertTrue($responce->content->success);
-        $comments = $model->getEntityList($entity, $getParams);
         
-        $this->assertEquals($count+1, $comments->content->count);
+        $comments = $model->getEntityList($entity, $getParams);
+        $this->assertEquals($count, $comments->content->count);
         
     }
    
