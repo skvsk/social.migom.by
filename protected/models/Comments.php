@@ -104,6 +104,7 @@ class Comments extends CActiveRecord
 		$criteria->compare('level',$this->level);
 		$criteria->compare('created_at',$this->created_at);
 		$criteria->compare('updated_at',$this->updated_at);
+                $criteria->order = 'created_at DESC';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
