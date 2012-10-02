@@ -45,6 +45,7 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         dd(Yii::app()->cache->get('Yii.CCacheHttpSession.'.'5eeba6e3b06e5b398aa4bb6b0c64729d'));
+        dd(Yii::app()->session->readSession('5eeba6e3b06e5b398aa4bb6b0c64729d'));
         d(yii::app()->cache);
         dd(Yii::app()->cache->get('ddddddd'));
         echo 'User Name: <b>' . Yii::app()->user->name . '</b>';
