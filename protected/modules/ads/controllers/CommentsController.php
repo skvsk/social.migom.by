@@ -23,6 +23,7 @@ class CommentsController extends Controller
         $model = $model->findByPk($id);
         if($model->status == Comments::STATUS_UNMODERATED){
             $model->status = Comments::STATUS_UNPUBLISHED;
+            $model->moderate_id = Yii::app()->user->id;
             $model->save();
         }
         
@@ -34,6 +35,8 @@ class CommentsController extends Controller
         $model= Comments::model($modelTitle);
         $model = $model->findByPk($id);
         $model->status = Comments::STATUS_PUBLISHED;
+        $model->attributes = $_POST[get_class($model)];
+        $model->moderate_id = Yii::app()->user->id;
         $model->save();
     }
     
@@ -42,6 +45,7 @@ class CommentsController extends Controller
         $model= Comments::model($modelTitle);
         $model = $model->findByPk($id);
         $model->attributes = $_POST[get_class($model)];
+        $model->moderate_id = Yii::app()->user->id;
         $model->save();
     }
     
@@ -50,6 +54,7 @@ class CommentsController extends Controller
         $model= Comments::model($modelTitle);
         $model = $model->findByPk($id);
         $model->status = Comments::STATUS_DELETED;
+        $model->moderate_id = Yii::app()->user->id;
         $model->save();
     }
 }
