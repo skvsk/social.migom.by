@@ -16,6 +16,7 @@ return array(
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
+                'application.models.API.*',
 		'application.components.*',
 		'application.extensions.RESTClient.*',
 		'application.extensions.yiidebugtb.*',
@@ -111,6 +112,7 @@ return array(
 //                    'useCustomStorage' => true,
 //                    'keyPrefix' => 'miasdnb45'
 //                    'useCustomStorage' => true,
+                    'cookieParams'           => array('domain' => '.migom.by'),
                 ),
                 'cache'=>array(
                     'class'=>'system.caching.CMemCache',
