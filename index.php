@@ -15,5 +15,13 @@ defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 if(YII_DEBUG === true ){
     include_once 'functions.php';
 }
+function autoload($className){
+    $className = ucfirst($className);
+    return YiiBase::autoload($className);
+}
+
 require_once($yii);
-Yii::createWebApplication($config)->run();
+$yii = Yii::createWebApplication($config);
+spl_autoload_unregister(array('YiiBase','autoload'));
+spl_autoload_register('autoload');
+$yii->run();
