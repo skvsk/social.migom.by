@@ -3,8 +3,11 @@
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
 return array(
+            'import'=>array(
+		'application.models.*',
+            ),
             'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-            'name'=>'My Console Application',
+            'name'=>'Social Migom By Console',
             'components'=>array(
                 'db'=>array(
                     'connectionString' => 'mysql:host=localhost;dbname=test4migomby',
@@ -13,5 +16,15 @@ return array(
                     'password' => '',
                     'charset' => 'utf8',
                 ),  
+                'mailer' => array(
+                    'class'         => 'application.extensions.mailer.EMailer',
+                    'pathViews'     => 'application.views.email',
+                    'pathLayouts'   => 'application.views.email.layouts',
+                    'Host'          => 'SMTP HOST',
+                    'SMTPAuth'      => true,
+                    'Username'      => 'yourname@163.com',
+                    'Password'      => 'yourpassword',
+                    'From'          => 'support@migom.by',
+                ),
             ),
 );

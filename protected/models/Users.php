@@ -128,15 +128,14 @@ class Users extends CActiveRecord
                 $this->role = array_search('user', self::$roles);
                 $this->date_add = time();
                 $this->date_edit = $this->date_add;
-                $name = explode('@', $this->email);
-                $pass = substr(md5($name[0] . time() . 'intwall was heare'), 8); // send to email
-                $this->password = md5($pass);
+                $this->password = md5($this->password);
                 if($this->scenario == 'regByApi'){
                     $this->status = array_search('active', self::$statuses);
                 } elseif($this->scenario == 'simpleRegistration'){
                     $this->status = array_search('noactive', self::$statuses);
                 }
                 if(!$this->login && $this->email){
+                    $name = explode('@', $this->email);
                     $this->login = $name[0];
                 }
             } else {
