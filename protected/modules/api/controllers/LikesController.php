@@ -85,7 +85,7 @@ class LikesController extends ApiController {
         $user->id = $userId;
         $user->weight = $weight;
 
-        $likes->users[$userId] = $user;
+        $likes->users[] = $user;
         $likes->setWeightInc($weight);
         $likes->save();
         return true;
