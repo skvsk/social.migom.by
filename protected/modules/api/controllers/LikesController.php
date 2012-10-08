@@ -98,7 +98,7 @@ class LikesController extends ApiController {
      */
     private function _getModelName($entity){
         $keys = array_flip($this->module->keys);
-        $cache = Yii::app()->cache->get($key);
+        $cache = Yii::app()->cache->get($_REQUEST['key']);
         dd($cache);
         dd($keys);
         if(!isset($keys[$_REQUEST['key']])){
