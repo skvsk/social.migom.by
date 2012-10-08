@@ -100,11 +100,11 @@ class LikesController extends ApiController {
         $connection = Yii::app()->cache->get($this->key);
 
         $class =  ucfirst($this->getId()) . ucfirst($connection['name']) . ucfirst($entity);
-        if (!class_exists($class, false)) {
-            trigger_error("Unable to load class: $class", E_USER_WARNING);
+        try {
+            Yii::import('application.models.mongo.' . $class, true);
+        } catch (Exception $exc) {
             throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
         }
-          
         return $class;
     }
     
