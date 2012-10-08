@@ -97,16 +97,13 @@ class LikesController extends ApiController {
      * @return string
      */
     private function _getModelName($entity){
-        $keys = array_flip($this->module->keys);
-        $cache = Yii::app()->cache->get($_REQUEST['key']);
-        dd($cache);
-        dd($keys);
-        if(!isset($keys[$_REQUEST['key']])){
+        $connection = Yii::app()->cache->get($this->key);
+
+        $class = $this->getId() . ucfirst($connection['name']) . ucfirst($entity);
+        if(!class_exists($class)){
             throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
         }
-        $clientLabel = $keys[$_REQUEST['key']];
-
-        return $class = $this->getId() . ucfirst($clientLabel) . ucfirst($entity);
+        return $class;
     }
     
 }
