@@ -9,9 +9,8 @@ class CommentsController extends ApiController {
     const CONTENT_COMMENTS = 'comments';
     const CONTENT_COMMENT = 'comment';
     
-    private function _getModel($entity){
-        $class = ucfirst($entity) . $this->getId();
-        return $class::model();
+    private function _getModelName($entity){
+        return $this->getId() . '_'. ucfirst($entity);
     }
 
     public function actionGetComment($id) {}
@@ -20,7 +19,7 @@ class CommentsController extends ApiController {
     
     public function actionGetEntityList($entity, $id, $limit = null, $start = null) {
         $res = array();
-        $class = ucfirst($entity) . $this->getId();
+        $class = $this->_getModelName($entity);
        
         $criteria = new CDbCriteria;
         $criteria->condition = '`t`.`entity_id` = :entity_id and `t`.`status` = :status';
@@ -33,7 +32,7 @@ class CommentsController extends ApiController {
         if ($start) {
             $criteria->offset = $start;
         }
-        $rawData = $this->_getModel($entity)->with('users')->findAll($criteria);
+        $rawData = $class::model()->with('users')->findAll($criteria);
         
         //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
@@ -57,7 +56,7 @@ class CommentsController extends ApiController {
     }
     
     public function actionPostEntity($entity) {
-        $class = ucfirst($entity) . $this->getId();
+        $class = $this->_getModelName($entity);
         $comment = new $class();
         $comment->attributes = $_POST;
         $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0)? $_POST['parent_id'] : 0;
