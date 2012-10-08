@@ -92,7 +92,7 @@ class LikesController extends ApiController {
     }
     
     /**
-     * 
+     * Create model name above inner rule
      * @param type $entity
      * @return string
      */
@@ -104,8 +104,6 @@ class LikesController extends ApiController {
         $clientLabel = $keys[$_REQUEST['key']];
 
         return $class = $this->getId() . ucfirst($clientLabel) . ucfirst($entity);
-
-        
     }
     
 }
