@@ -39,12 +39,54 @@ class SiteController extends Controller {
         );
     }
 
+    
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
+        $weight = 1;
+        $id = 111145667;
+        $entity = 'news';
+        $userId = 1234567;
         
+        $model = 'LikesMigomComments';
+        
+//        $users = new LikesUsers();
+//        $users->id = $userId;
+//        $users->weight = $weight;
+        
+        
+        $c = new EMongoCriteria;
+        $c->entity_id('==', $id);
+        
+        
+        /* @var $likes Likes*/
+        if($likes = $model::model()->find(array('entity_id' => $id ))){
+           die('ddd');
+           dd($likes->users);
+            
+            
+            foreach ($likes->users as $user) {
+                if($user->id == $userId) return;
+            }
+        }else{
+            $likes = new $model();
+            $likes->entity_id = $id;
+        }
+        
+        $user =  new LikesUsers();
+        $user->id = $userId;
+        $user->weight = $weight;
+
+        $likes->users[$userId] = $user;
+        $likes->setWeightInc($weight);
+        dd($likes);
+        $likes->save();
+         
+        //$likes->save();
+        
+        die;
 //        $sss =$_GET['sss'];
 //        dd(Yii::app()->session->readSession($sss));
         dd($_SESSION);

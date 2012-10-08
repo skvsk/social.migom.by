@@ -17,6 +17,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
                 'application.models.API.*',
+                'application.models.mongo.*',
 		'application.components.*',
 		'application.extensions.RESTClient.*',
 		'application.extensions.yiidebugtb.*',
@@ -27,6 +28,8 @@ return array(
 		'ext.lightopenid.*',
 		'ext.eauth.*',
 		'ext.eauth.custom_services.*',
+                'ext.YiiMongoDbSuite.*',
+                'ext.YiiMongoDbSuite.extra.*',
 	),
 
 	'modules'=>array(
@@ -40,7 +43,7 @@ return array(
                 'api' => array(
                     'keys' => array('devel'=>'86.57.245.247',
                                     'test3migomby' => '178.172.181.139',
-//                                    'test' => '127.0.0.1'
+                                    'test' => '127.0.0.1'
                                     )
                 ),
 	),
@@ -106,6 +109,16 @@ return array(
                     'charset' => 'utf8',
                     'tablePrefix' => 'test.tbl_',
                 ),
+ 
+                'mongodb' => array(
+                    'class'            => 'EMongoDB',
+                    'connectionString' => 'mongodb://localhost',
+                    'dbName'           => 'smigom',
+                    'fsyncFlag'        => false,
+                    'safeFlag'         => false,
+                    'useCursor'        => false              
+                ),
+            
                 'session' => array(
                     'class' => 'CCacheHttpSession',
                     'cacheID' => 'cache',

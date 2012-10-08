@@ -10,7 +10,7 @@ class CommentsController extends ApiController {
     const CONTENT_COMMENT = 'comment';
     
     private function _getModel($entity){
-        $class = ucfirst($entity) . 'Comments';
+        $class = ucfirst($entity) . $this->getId();
         return $class::model();
     }
 
@@ -20,7 +20,7 @@ class CommentsController extends ApiController {
     
     public function actionGetEntityList($entity, $id, $limit = null, $start = null) {
         $res = array();
-        $class = ucfirst($entity) . 'Comments';
+        $class = ucfirst($entity) . $this->getId();
        
         $criteria = new CDbCriteria;
         $criteria->condition = '`t`.`entity_id` = :entity_id and `t`.`status` = :status';
@@ -57,7 +57,7 @@ class CommentsController extends ApiController {
     }
     
     public function actionPostEntity($entity) {
-        $class = ucfirst($entity) . 'Comments';
+        $class = ucfirst($entity) . $this->getId();
         $comment = new $class();
         $comment->attributes = $_POST;
         $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0)? $_POST['parent_id'] : 0;

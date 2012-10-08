@@ -21,5 +21,7 @@ class ApiComponent extends CComponent {
     const CONTENT_ID = 'id';
     const CONTENT_SUCCESS = 'success';
     const CONTENT_COUNT = 'count';
+    const CONTENT_ITEMS = 'items';
+    const CONTENT_ITEM = 'item';
     
 }

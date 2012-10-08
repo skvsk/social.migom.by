@@ -25,6 +25,7 @@ class ApiController extends CController {
      */
 
     const APPLICATION_ID = 'ASCCPE';
+    const DEFAULT_LIST_LIMIT = 10;
 
     /**
      * Default response format
