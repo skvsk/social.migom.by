@@ -1,6 +1,6 @@
 <?php
 
-class LikesTestComments extends Likes {
+class LikesDevelComments extends Likes {
 
     /**
      * This method have to be defined in every Model
