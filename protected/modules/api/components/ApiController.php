@@ -7,6 +7,8 @@
  */
 class ApiController extends CController {
 
+    protected $key;
+    
     /**
      * @ignore
      * @param string $id
@@ -19,6 +21,13 @@ class ApiController extends CController {
         parent::__construct($id, $module);
     }
 
+    public function init() {
+        parent::init();
+        if(isset($_REQUEST['key'])){
+            $this->key = $_REQUEST['key'];
+        }
+    }
+    
     // Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
