@@ -16,20 +16,20 @@ return array(
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
-                'application.models.API.*',
-                'application.models.mongo.*',
+        'application.models.Api.*',
+        'application.models.Mongo.*',
 		'application.components.*',
 		'application.extensions.RESTClient.*',
 		'application.extensions.yiidebugtb.*',
 		'application.services.*',
-                'application.modules.api.components.*',
+        'application.modules.api.components.*',
 		'ext.eoauth.*',
 		'ext.eoauth.lib.*',
 		'ext.lightopenid.*',
 		'ext.eauth.*',
 		'ext.eauth.custom_services.*',
-                'ext.YiiMongoDbSuite.*',
-                'ext.YiiMongoDbSuite.extra.*',
+        'ext.YiiMongoDbSuite.*',
+        'ext.YiiMongoDbSuite.extra.*',
 	),
 
 	'modules'=>array(
