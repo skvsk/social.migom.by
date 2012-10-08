@@ -27,12 +27,15 @@ class AuthController extends ApiController {
             $render->setStatus(render::STATUS_BAD_REQUEST)->sendResponse(array('message' => Yii::t('Api', 'Invalid type ' . $type)));
         }
         $render->setContentType($type);
-        
-        if (array_key_exists($key, $keys) && $keys[$key] == CHttpRequest::getUserHostAddress()) {
-            $suid = md5($key . $this->salt . $keys[$key] . $type);
-            Yii::app()->cache->set($suid, array('type' => $type));
-            $render->sendResponse(array('suid' => $suid));
-            return true;
+        $ip = CHttpRequest::getUserHostAddress();
+        if (array_key_exists($key, $keys)) {
+            $ips = $keys[$key];
+            if((is_array($ips) && in_array($ip, $ips)) || $ips == $ip){
+                $suid = md5($key . $this->salt . $keys[$key] . $type);
+                Yii::app()->cache->set($suid, array('type' => $type, 'name' => $key));
+                $render->sendResponse(array('suid' => $suid));
+                return true;
+            }
         } else {
             $render->setStatus(render::STATUS_BAD_REQUEST)->sendResponse(array('message' => Yii::t('Api', 'Not auth')));
         }
