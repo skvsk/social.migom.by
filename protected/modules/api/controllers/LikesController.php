@@ -4,8 +4,9 @@
  * Entity like
  * @package api
  */
-class LikesController extends ApiController {
-    
+class LikesController extends ApiController
+{
+
     const CONTENT_IS_UPDATE = 'update';
 
     /**
@@ -13,41 +14,44 @@ class LikesController extends ApiController {
      * @param string $entity
      * @param array $id array of int array(1,23,34)
      */
-    public function actionGetEntityList($entity){
+    public function actionGetEntityList($entity)
+    {
         $model = $this->_getModelName($entity);
         array_map('intval', $_GET['id']);
         $criteria = new EMongoCriteria();
         $criteria->entity_id('in', $_GET['id']);
-        
-        /* @var $res Likes*/
+
+        /* @var $res Likes */
         $res = $model::model()->findAll($criteria);
-        
-        $content = array( ApiComponent::CONTENT_ITEMS => $res, ApiComponent::CONTENT_COUNT => count($res));
-        $this->render()->sendResponse($content);
-    }
-    
-    public function actionGetEntity($entity, $id){
-        $model = $this->_getModelName($entity);
-        
-        /* @var $res Likes*/
-        $res = $model::model()->findAll(array('entity_id' => $id));
-        
-        $content = array( ApiComponent::CONTENT_ITEM => $res);
+
+        $content = array(ApiComponent::CONTENT_ITEMS => $res, ApiComponent::CONTENT_COUNT => count($res));
         $this->render()->sendResponse($content);
     }
 
-        /**
+    public function actionGetEntity($entity, $id)
+    {
+        $model = $this->_getModelName($entity);
+
+        /* @var $res Likes */
+        $res = $model::model()->findAll(array('entity_id' => $id));
+
+        $content = array(ApiComponent::CONTENT_ITEM => $res);
+        $this->render()->sendResponse($content);
+    }
+
+    /**
      * Like entity
      * @param string $entity
      * @param int $id
      * @param int $user_id
      * @access (is_int($id))
      */
-    public function actionPostLike($entity, $id) {
+    public function actionPostLike($entity, $id)
+    {
         $res = $this->_likeUpdate($id, $entity, 1);
         $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
     }
-    
+
     /**
      * Like disentity
      * @param string $entity
@@ -55,33 +59,35 @@ class LikesController extends ApiController {
      * @param int $user_id
      * @access (is_int($id))
      */
-    public function actionPostDislike($entity, $id) {
+    public function actionPostDislike($entity, $id)
+    {
         $res = $this->_likeUpdate($id, $entity, -1);
         $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
     }
-    
-    private function _likeUpdate($entity_id, $entity, $weight) {
+
+    private function _likeUpdate($entity_id, $entity, $weight)
+    {
         assert(is_int($entity_id));
-        
-        $userId = (int)$_POST['user_id'];
+
+        $userId = (int) $_POST['user_id'];
         $model = $this->_getModelName($entity);
-        
+
         $criteria = new EMongoCriteria();
         $criteria->entity_id('==', $entity_id);
-        
-        /* @var $likes Likes*/
-        if($likes = $model::model()->find($criteria)){
+
+        /* @var $likes Likes */
+        if ($likes = $model::model()->find($criteria)) {
             foreach ($likes->users as $user) {
-                if($user->id == $userId) {
+                if ($user->id == $userId) {
                     return false;
                 }
             }
-        }else{
+        } else {
             $likes = new $model();
             $likes->entity_id = $entity_id;
         }
-        
-        $user =  new LikesUsers();
+
+        $user = new LikesUsers();
         $user->id = $userId;
         $user->weight = $weight;
 
@@ -90,21 +96,22 @@ class LikesController extends ApiController {
         $likes->save();
         return true;
     }
-    
+
     /**
      * Create model name above inner rule
      * @param type $entity
      * @return string
      */
-    private function _getModelName($entity){
+    private function _getModelName($entity)
+    {
         $connection = Yii::app()->cache->get($this->key);
 
-        $class =  ucfirst($this->getId()) . '_' . ucfirst($connection['name']) . '_' . ucfirst($entity);
+        $class = ucfirst($this->getId()) . '_' . ucfirst($connection['name']) . '_' . ucfirst($entity);
         if (@class_exists($class) !== true) {
             throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
         }
-          
+
         return $class;
     }
-    
+
 }
