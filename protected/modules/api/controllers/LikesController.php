@@ -15,9 +15,9 @@ class LikesController extends ApiController {
      */
     public function actionGetEntityList($entity){
         $model = $this->_getModelName($entity);
-        $id = $_GET['id'];
+        array_map('intval', $_GET['id']);
         $criteria = new EMongoCriteria();
-        $criteria->entity_id('in', implode(',', $id));
+        $criteria->entity_id('in', $_GET['id']);
         
         /* @var $res Likes*/
         $res = $model::model()->findAll($criteria);
