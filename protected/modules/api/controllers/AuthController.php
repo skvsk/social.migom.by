@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Cross-server authentication
  * @package api
  */
-class AuthController extends ApiController {
+class AuthController extends ApiController
+{
 
     private $salt = 'al&hhGFFDYbeHappy';
 
@@ -19,7 +21,8 @@ class AuthController extends ApiController {
      * @example json {'method':'GET','status':'OK','code':200,'content':{'suid':'3da7b280eda538c15f2bff38afd11dcd'},'format':'json','timestamp':1348645528,'version':'1.0'};
      * @expectedExceptionMessage Not auth
      */
-    public function actionGetLogin($key, $type = Render::TYPE_JSON) {
+    public function actionGetLogin($key, $type = Render::TYPE_JSON)
+    {
         $keys = $this->module->keys;
         $render = $this->render();
         $type = strtolower($type);
@@ -30,7 +33,7 @@ class AuthController extends ApiController {
         $ip = CHttpRequest::getUserHostAddress();
         if (array_key_exists($key, $keys)) {
             $ips = $keys[$key];
-            if((is_array($ips) && in_array($ip, $ips)) || $ips == $ip){
+            if ((is_array($ips) && in_array($ip, $ips)) || $ips == $ip) {
                 $suid = md5($key . $this->salt . $keys[$key] . $type);
                 Yii::app()->cache->set($suid, array('type' => $type, 'name' => $key));
                 $render->sendResponse(array('suid' => $suid));
@@ -39,6 +42,6 @@ class AuthController extends ApiController {
         } else {
             $render->setStatus(render::STATUS_BAD_REQUEST)->sendResponse(array('message' => Yii::t('Api', 'Not auth')));
         }
-        
     }
+
 }
