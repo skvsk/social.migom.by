@@ -47,7 +47,7 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        dd(Yii::app()->cache->get('test'));
+//        dd(Yii::app()->cache->get('test'));
 //        phpinfo();
 //        die;
 //        
@@ -95,6 +95,10 @@ class SiteController extends Controller {
 //        //$likes->save();
 //        
 //        die;
+        $session=new CHttpSession;
+  $session->open();
+  var_dump($session);
+  die;
         $sss = (isset($_GET['sid']))?$_GET['sid']:'';
         dd(Yii::app()->session->readSession($sss));
         dd($_SESSION);
