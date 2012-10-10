@@ -56,10 +56,14 @@ function read($id)
 function write($id, $sess_data)
 {
     global $sess_save_path, $sess_session_name, $memcache;
+    if(empty($sess_data)){
+        return true;
+    }
     if(!$memcache){
         $memcache = new Memcache;
         $memcache->connect('178.172.181.139', 11211) or die("Could not connect");
     }
+    
     return memcache_set($memcache, $id, $sess_data, 0, 30);
     
 //    $sess_file = "$sess_save_path/sess_$id";
