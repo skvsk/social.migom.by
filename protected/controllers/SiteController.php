@@ -39,14 +39,16 @@ class SiteController extends Controller {
         );
     }
 
-    
+    public function actionInfo() {
+        phpinfo();
+    }
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        phpinfo();
-        die;
+//        phpinfo();
+//        die;
 //        
 //        die('ok');
 //        
