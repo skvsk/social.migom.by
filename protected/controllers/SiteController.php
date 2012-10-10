@@ -45,7 +45,8 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        
+        phpinfo();
+        die;
 //        
 //        die('ok');
 //        
