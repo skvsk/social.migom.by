@@ -116,11 +116,12 @@ return array(
             'useCursor' => false
         ),
         'session' => array(
+            'sessionName' => 'migom.by',
             'class' => 'CCacheHttpSession',
             'cacheID' => 'cache',
-//                    'useCustomStorage' => true,
-//                    'keyPrefix' => 'miasdnb45'
-//                    'useCustomStorage' => true,
+            'autoStart' => 'false',
+            'cookieMode' => 'only',
+            'timeout' => 300,
             'cookieParams' => array('domain' => '.migom.by'),
         ),
         'cache' => array(
