@@ -1,5 +1,6 @@
 <?php
-
+//phpinfo();
+//die;
 $currentCookieParams = session_get_cookie_params(); 
 
 $rootDomain = '.migom.by'; 
@@ -14,8 +15,11 @@ session_set_cookie_params(
 
 session_name('mysessionname'); 
 session_start(); 
-
-setcookie($cookieName, $cookieValue, time() + 3600, '/', $rootDomain); 
-
-$_SESSION['fff'] = 'test';
+$cookieName = 'sss';
+setcookie($cookieName, '1', time() + 3600, '/', $rootDomain); 
+echo "<pre>";
+var_dump($_SESSION);
+//$_SESSION['test3'] = 'test3';
+var_dump($_SESSION);
+echo "</pre>";
 ?>
