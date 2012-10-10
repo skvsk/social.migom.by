@@ -30,7 +30,7 @@ class SiteController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow readers only access to the view file
-                'actions' => array('index', 'error', 'login', 'test', 'logout', 'registration'),
+                'actions' => array('index', 'error', 'login', 'test', 'logout', 'registration', 'info'),
                 'users' => array('*')
             ),
             array('deny', // deny everybody else
