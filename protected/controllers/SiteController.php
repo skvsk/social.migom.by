@@ -95,9 +95,9 @@ class SiteController extends Controller {
 //        //$likes->save();
 //        
 //        die;
-        $session=new CHttpSession;
+        $session=new CCacheHttpSession;
   $session->open();
-  var_dump($session);
+  dd($session);
   die;
         $sss = (isset($_GET['sid']))?$_GET['sid']:'';
         dd(Yii::app()->session->readSession($sss));
