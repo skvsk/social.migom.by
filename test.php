@@ -13,13 +13,10 @@ session_set_cookie_params(
     $currentCookieParams["httponly"] 
 ); 
 
-session_name('mysessionname'); 
 session_start(); 
-$cookieName = 'sss';
-setcookie($cookieName, '1', time() + 3600, '/', $rootDomain); 
 echo "<pre>";
 var_dump($_SESSION);
-//$_SESSION['test3'] = 'test3';
+//$_SESSION['test3'] = 'test32';
 var_dump($_SESSION);
 echo "</pre>";
 ?>
