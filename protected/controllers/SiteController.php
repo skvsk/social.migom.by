@@ -91,9 +91,9 @@ class SiteController extends Controller {
 //        //$likes->save();
 //        
 //        die;
-////        $sss =$_GET['sss'];
-////        dd(Yii::app()->session->readSession($sss));
-//        dd($_SESSION);
+        $sss = (isset($_GET['sid']))?$_GET['sid']:'';
+        dd(Yii::app()->session->readSession($sss));
+        dd($_SESSION);
 //        phpinfo();
 //        d(yii::app()->cache);
 //        dd(Yii::app()->user);
