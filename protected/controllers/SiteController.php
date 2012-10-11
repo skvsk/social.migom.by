@@ -47,60 +47,8 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-//        dd(Yii::app()->cache->get('test'));
-//        phpinfo();
-//        die;
-//        
-//        die('ok');
-//        
-//        $weight = 1;
-//        $id = 111145667;
-//        $entity = 'news';
-//        $userId = 1234567;
-//        
-//        $model = 'LikesMigomComments';
-//        
-////        $users = new LikesUsers();
-////        $users->id = $userId;
-////        $users->weight = $weight;
-//        
-//        
-//        $c = new EMongoCriteria;
-//        $c->entity_id('==', $id);
-//        
-//        
-//        /* @var $likes Likes*/
-//        if($likes = $model::model()->find(array('entity_id' => $id ))){
-//           die('ddd');
-//           dd($likes->users);
-//            
-//            
-//            foreach ($likes->users as $user) {
-//                if($user->id == $userId) return;
-//            }
-//        }else{
-//            $likes = new $model();
-//            $likes->entity_id = $id;
-//        }
-//        
-//        $user =  new LikesUsers();
-//        $user->id = $userId;
-//        $user->weight = $weight;
-//
-//        $likes->users[$userId] = $user;
-//        $likes->setWeightInc($weight);
-//        dd($likes);
-//        $likes->save();
-//         
-//        //$likes->save();
-//        
-//        die;
-        $session=new CCacheHttpSession;
-  $session->open();
-  dd($session);
-  die;
-        $sss = (isset($_GET['sid']))?$_GET['sid']:'';
-        dd(Yii::app()->session->readSession($sss));
+//        $sss = (isset($_GET['sid']))?$_GET['sid']:'';
+//        dd(Yii::app()->session->readSession($sss));
         dd($_SESSION);
 //        phpinfo();
 //        d(yii::app()->cache);
