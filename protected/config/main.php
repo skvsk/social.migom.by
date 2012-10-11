@@ -116,7 +116,7 @@ return array(
             'useCursor' => false
         ),
         'session' => array(
-            'sessionName' => 'migom.by',
+//            'sessionName' => 'migom.by',
             'class' => 'CCacheHttpSession',
             'cacheID' => 'cache',
             'cookieParams' => array('domain' => '.migom.by'),
