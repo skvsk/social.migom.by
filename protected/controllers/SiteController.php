@@ -52,7 +52,7 @@ class SiteController extends Controller {
         dd($_SESSION);
         d(session_id());
         dd(Yii::app()->session->readSession(session_id()));
-         dd(Yii::app()->session->id);
+         dd(Yii::app()->session->get('id'));
 //        phpinfo();
 //        d(yii::app()->cache);
 //        dd(Yii::app()->user);
