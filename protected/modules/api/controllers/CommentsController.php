@@ -15,16 +15,33 @@ class CommentsController extends ApiController
         return $this->getId() . '_' . $entity;
     }
 
+    /**
+     * @ignore
+     * @param type $id
+     */
     public function actionGetComment($id)
     {
         
     }
 
+    /**
+     * @ignore
+     * @param type $id
+     * @param type $limit
+     * @param type $start
+     */
     public function actionGetUserList($id, $limit, $start = null)
     {
         
     }
 
+    /**
+     * @ignore
+     * @param type $entity
+     * @param type $id
+     * @param type $limit
+     * @param type $start
+     */
     public function actionGetEntityList($entity, $id, $limit = null, $start = null)
     {
         $res = array();
@@ -41,7 +58,6 @@ class CommentsController extends ApiController
         if ($start) {
             $criteria->offset = $start;
         }
-        dd($class);
         $rawData = $class::model()->with('users')->findAll($criteria);
 
         //TODO Как то не правельно related элименты так получать
