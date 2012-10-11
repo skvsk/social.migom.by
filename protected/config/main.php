@@ -120,6 +120,7 @@ return array(
             'class' => 'CCacheHttpSession',
             'cacheID' => 'cache',
             'cookieParams' => array('domain' => '.migom.by'),
+            'time' => 60*60*8,
         ),
         'cache' => array(
             'class' => 'system.caching.CMemCache',
