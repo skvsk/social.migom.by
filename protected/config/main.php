@@ -121,6 +121,8 @@ return array(
             'cacheID' => 'cache',
             'cookieParams' => array('domain' => '.migom.by'),
             'timeout' => 60*60*8,
+            'autoStart' => 'false',
+            'cookieMode' => 'only',
         ),
         'cache' => array(
             'class' => 'system.caching.CMemCache',
