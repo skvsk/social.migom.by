@@ -49,6 +49,7 @@ class SiteController extends Controller {
     public function actionIndex() {
 //        $sss = (isset($_GET['sid']))?$_GET['sid']:'';
         dd(Yii::app()->session->getSessionID());
+        dd(Yii::app()->session->get('id'));
 //        dd($_SESSION);
         d(session_id());
 //        phpinfo();
