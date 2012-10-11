@@ -119,9 +119,6 @@ return array(
             'sessionName' => 'migom.by',
             'class' => 'CCacheHttpSession',
             'cacheID' => 'cache',
-            'autoStart' => 'false',
-            'cookieMode' => 'only',
-            'timeout' => 300,
             'cookieParams' => array('domain' => '.migom.by'),
         ),
         'cache' => array(
