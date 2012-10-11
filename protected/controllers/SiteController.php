@@ -51,8 +51,10 @@ class SiteController extends Controller {
 //        dd(Yii::app()->session->readSession($sss));
         dd($_SESSION);
         d(session_id());
-        dd(Yii::app()->session->readSession(session_id()));
-         dd(Yii::app()->session->get('id'));
+        $session=new CHttpSession;
+        $session->open();
+        dd($session);
+         dd($session['id']);
 //        phpinfo();
 //        d(yii::app()->cache);
 //        dd(Yii::app()->user);
