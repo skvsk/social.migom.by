@@ -34,8 +34,10 @@ class YiiBaseEx extends YiiBase
                     @include($className . '.php');
                     if (!(class_exists($className, false) || interface_exists($className, false)) && strpos($className, '_') !== false) {
                         // Try namespaced version of class name
-                        $namespacedClassName = str_replace('_', DIRECTORY_SEPARATOR, $className);
-                        include($namespacedClassName . '.php');
+                        $aClassName = explode('_', $className);
+                        $file = array_pop($aClassName);
+                        
+                        include(implode(DIRECTORY_SEPARATOR, $aClassName) . DIRECTORY_SEPARATOR . $file . '.php');
                     }
                 }
             } else {  // class name with namespace in PHP 5.3
