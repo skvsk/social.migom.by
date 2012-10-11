@@ -20,7 +20,7 @@ class Likes extends EMongoDocument {
         array(
           'class'=>'ext.YiiMongoDbSuite.extra.EEmbeddedArraysBehavior',
           'arrayPropertyName'=>'users', // name of property
-          'arrayDocClassName'=>'Likes_Embiddeds_Users' // class name of documents in array
+          'arrayDocClassName'=>'Likes_Embidded_Users' // class name of documents in array
         ),
       );
     }
