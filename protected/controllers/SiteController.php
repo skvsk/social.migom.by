@@ -47,14 +47,6 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-//        $sss = (isset($_GET['sid']))?$_GET['sid']:'';
-        dd(Yii::app()->session->readSession(session_id()));
-        dd($_SESSION);
-        d(session_id());
-//        phpinfo();
-//        d(yii::app()->cache);
-//        dd(Yii::app()->user);
-//        dd(Yii::app()->cache->get('ddddddd'));
         echo 'User Name: <b>' . Yii::app()->user->name . '</b>';
         echo '<br/>------------------------<br/>';
         foreach (get_class_methods(__CLASS__) as $methods) {
