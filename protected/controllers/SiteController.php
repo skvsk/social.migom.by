@@ -50,7 +50,7 @@ class SiteController extends Controller {
 //        $sss = (isset($_GET['sid']))?$_GET['sid']:'';
         dd(Yii::app()->session->getSessionID());
         dd(Yii::app()->session->get('id'));
-//        dd($_SESSION);
+        dd($_SESSION);
         d(session_id());
 //        phpinfo();
 //        d(yii::app()->cache);
