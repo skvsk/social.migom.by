@@ -12,7 +12,7 @@ class CommentsController extends ApiController
 
     private function _getModelName($entity)
     {
-        return ucfirst($this->getId()) . '_' . ucfirst($entity);
+        return $this->getId() . '_' . $entity;
     }
 
     public function actionGetComment($id)
@@ -41,6 +41,7 @@ class CommentsController extends ApiController
         if ($start) {
             $criteria->offset = $start;
         }
+        dd($class);
         $rawData = $class::model()->with('users')->findAll($criteria);
 
         //TODO Как то не правельно related элименты так получать
