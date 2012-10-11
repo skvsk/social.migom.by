@@ -12,7 +12,7 @@ class CommentsController extends ApiController
 
     private function _getModelName($entity)
     {
-        return $this->getId() . '_' . ucfirst($entity);
+        return ucfirst($this->getId()) . '_' . ucfirst($entity);
     }
 
     public function actionGetComment($id)
