@@ -13,7 +13,7 @@ return array(
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
-        'application.models.Api.*',
+//        'application.models.Api.*',
         'application.models.Mongo.*',
         'application.components.*',
         'application.extensions.RESTClient.*',
