@@ -14,7 +14,7 @@ class Profile extends CActiveRecord
 {
     
         public $defaultAvatar = '/images/users/default_avatar.png';
-        public $sexs = array(1 => 'male', 2 => 'female', 3 => 'children', 4 => 'unisex');
+        public static $sexs = array(1 => 'male', 2 => 'female', 3 => 'children', 4 => 'unisex');
     
 	/**
 	 * Returns the static model of the specified AR class.
@@ -123,8 +123,17 @@ class Profile extends CActiveRecord
                 $this->avatar = UserService::uploadAvatarFromService($this->user_id, $this->avatar);
             }
             if(strlen($this->sex) > 1){
-                $this->sex = array_search($this->sex, $this->sexs);
+                $this->sex = array_search($this->sex, self::$sexs);
+            }
+            if($this->birthday){
+                $this->birthday = strtotime($this->birthday);
             }
             return true;
+        }
+        
+        protected function afterFind()
+        {
+            $this->birthday = Yii::app()->dateFormatter->formatDateTime($this->birthday,'short', false);
+            return parent::afterFind();
         }
 }

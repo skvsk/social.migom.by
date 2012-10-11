@@ -55,8 +55,10 @@ class RegistrationForm extends CFormModel
 	}
 
         public function registration($identity = null, $service = null){
+            $pass = substr(md5(time() . 'intwall was heare'), 6, 8); // send to email
             if($service){
                 $user = new Users('regByApi');
+                $user->password = $pass;
                 $user->attributes = $identity->getAttributes();
                 if($user->save()){
                     $identity->setId($user->id);
@@ -84,6 +86,7 @@ class RegistrationForm extends CFormModel
             } else {
                 $user = new Users('simpleRegistration');
                 $user->email = $this->email;
+                $user->password = $pass;
                 if(!$user->save()){
                     return false;
                 }
@@ -97,6 +100,8 @@ class RegistrationForm extends CFormModel
                     $identity->authenticate();
                 }
             }
+            $mail = new Mail();
+            $mail->send($user, 'registration', array('password' => $pass), true);
             return $identity;
         }
 }

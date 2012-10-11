@@ -47,6 +47,7 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
+        
         echo 'User Name: <b>' . Yii::app()->user->name . '</b>';
         echo '<br/>------------------------<br/>';
         foreach (get_class_methods(__CLASS__) as $methods) {
@@ -63,7 +64,7 @@ class SiteController extends Controller {
         $criteria = new CDbCriteria;
         $criteria->compare('soc_id', '105844357378365018543');
         $criteria->limit = 1;
-        $provider = UserProviders::model('google_oauth');
+        $provider = UserProviders::model('g----------------------oogle_oauth');
         d($provider->find($criteria)->user->email);
         
     }
@@ -140,7 +141,7 @@ class SiteController extends Controller {
             // Something went wrong, redirect to login page
             $this->redirect(array('/site/login'));
         }
-        
+
         $model = $this->_preLogin();
         $getErrors = (isset($_GET['mailError'])) ? $_GET['mailError'] : '';
 

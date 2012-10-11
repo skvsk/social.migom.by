@@ -112,6 +112,7 @@ class Users extends CActiveRecord
 		$criteria->compare('login',$this->login,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
+                $criteria->compare('role',$this->role);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('date_add',$this->date_add);
 		$criteria->compare('date_edit',$this->date_edit);
@@ -127,23 +128,24 @@ class Users extends CActiveRecord
                 $this->role = array_search('user', self::$roles);
                 $this->date_add = time();
                 $this->date_edit = $this->date_add;
-                $name = explode('@', $this->email);
-                $pass = substr(md5($name[0] . time() . 'intwall was heare'), 8); // send to email
-                $this->password = md5($pass);
+                $this->password = md5($this->password);
                 if($this->scenario == 'regByApi'){
                     $this->status = array_search('active', self::$statuses);
                 } elseif($this->scenario == 'simpleRegistration'){
                     $this->status = array_search('noactive', self::$statuses);
                 }
                 if(!$this->login && $this->email){
+                    $name = explode('@', $this->email);
                     $this->login = $name[0];
                 }
             } else {
-                if($this->password){
+                if($this->scenario == 'general_update'){
                     $this->password = md5($this->password);
                 }
             }
             $this->email = strtolower($this->email);
+            
+            $this->date_edit = time();
             return true;
         }
 }
