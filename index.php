@@ -2,7 +2,7 @@
 
 // change the following paths if necessary
 $yii    = dirname(__FILE__) . '/../framework/yii.php';
-$yiiEx  = dirname(__FILE__) . '/protected/YiiBaseEx.php';
+$yiiEx  = dirname(__FILE__) . '/protected/yii.php';
 $config = dirname(__FILE__) . '/protected/config/main.php';
 
 ini_set('error_reporting', E_ALL);
