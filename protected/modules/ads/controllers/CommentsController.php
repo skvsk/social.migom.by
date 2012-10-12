@@ -35,9 +35,32 @@ class CommentsController extends Controller
         $model= Comments::model($modelTitle);
         $model = $model->findByPk($id);
         $model->status = Comments::STATUS_PUBLISHED;
-        $model->attributes = $_POST[get_class($model)];
+        if(isset($_POST[get_class($model)])){
+            $model->attributes = $_POST[get_class($model)];
+        }
         $model->moderate_id = Yii::app()->user->id;
-        $model->save();
+        
+        if($model->save()){
+            if($model->parent){
+                News::pushComment(
+                    $model->parent->user_id, 
+                    $model->parent->id, 
+                    'comment',
+                    $model->parent->text, 
+                    $model->parent->created_at,
+                    array(
+                        'user_id' => $model->user_id,
+                        'login' => $model->user->login,
+                        'text' => $model->text,
+                        'created_at' => $model->created_at,
+                        'likes' => array('count' => $model->likes),
+                        'dislikes' => array('count' => $model->dislikes),
+                    ),
+                    array('count' => $model->parent->likes),
+                    array('count' => $model->parent->dislikes)      // TODO вытянуть инфу о том кто ставил лайки на пост!!! Сейчас нет еще коллекции такой в монге
+                );
+            }
+        }
     }
     
     public function actionSave($model, $id){

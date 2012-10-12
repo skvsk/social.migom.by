@@ -2,20 +2,6 @@
 
 class UserController extends Controller
 {
-	/**
-	 * Declares class-based actions.
-	 */
-//	public function actions()
-//	{
-//		return array(
-//			// captcha action renders the CAPTCHA image displayed on the contact page
-//			'captcha'=>array(
-//				'class'=>'CCaptchaAction',
-//				'backColor'=>0xFFFFFF,
-//			),
-//		);
-//	}
-    
         public $layout = 'user';
         public $title = 'User Controller Param(change in action)';
         
@@ -35,7 +21,11 @@ class UserController extends Controller
 	{
 		return array(
                         array('allow', // allow readers only access to the view file
-                            'actions'=>array('index', 'edit'),
+                            'actions'=>array('edit', 'deletenew'),
+                            'roles' => array('user', 'moderator', 'administrator')
+                        ),
+                        array('allow', // allow readers only access to the view file
+                            'actions'=>array('index'),
                             'users' => array('*')
                         ),
                         array('deny',   // deny everybody else
@@ -51,9 +41,48 @@ class UserController extends Controller
 	public function actionIndex()
 	{
             $id = Yii::app()->request->getParam('id', Yii::app()->user->id);
+            if(!$id){
+                $this->redirect('site/login');
+            }
+            
+//            $criterea = new EMongoCriteria();
+//            $criterea->addCond('user_id', '==', Yii::app()->user->id);
+//            
+//            $news = News::model()->find($criterea);
+//            if(!$news){
+//                $news = new News();
+//                $news->user_id = Yii::app()->user->id;
+//            }
+//            for($i = 1; $i < 3; $i++){
+//                $entity = new NewsEntity();
+//                $entity->name = 'notification';
+//                $entity->template = 'notification';
+//                $entity->id = $i;
+//                $entity->params['param1'] = $i;
+//                $entity->params['param2'] = 'Notification: '.$i;
+//                $news->entities[] = $entity;
+//            }
+//            
+//            $news->save();
+
             $model = $this->loadModel($id);
-            $this->render('profile', array('model' => $model));
+            $criterea = new EMongoCriteria();
+            $criterea->addCond('user_id', '==', Yii::app()->user->id);
+            $news = News::model()->find($criterea);
+            $this->render('profile', array('model' => $model, 'news' => $news));
 	}
+        
+        public function actionDeleteNew($entity, $id){
+            $criteria = new EMongoCriteria;
+            $criteria->addCond('user_id', 'equals', Yii::app()->user->id);
+            $news = News::model()->find($criteria);
+            foreach($news->entities as $key => $en){
+                if($en->name == $entity && $en->id == $id){
+                    unset($news->entities[$key]);
+                }
+            }
+            return $news->save();
+        }
         
         public function actionEdit()
 	{
@@ -76,12 +105,15 @@ class UserController extends Controller
             }
             
             if(isset($_POST['Profile'])){
+                if(isset($_FILES['Profile']['tmp_name']) && $_FILES['Profile']['tmp_name']['avatar']){
+                    $model->profile->avatar = UserService::uploadAvatar($id, $_FILES['Profile']['tmp_name']);
+                }
                 $model->profile->setScenario('update');
                 $model->profile->attributes = $_POST['Profile'];
                 if($model->profile->validate() && $model->profile->save())
                     $this->redirect('/user/index');
             }
-            
+
             if(isset($_POST['Users'])){
                 $model->setScenario('general_update');
                 $model->attributes = $_POST['Users'];

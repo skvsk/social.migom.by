@@ -18,7 +18,9 @@ return array(
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
+                'application.models.mongo.*',
 		'application.components.*',
+                'application.widgets.*',
 		'application.extensions.RESTClient.*',
 		'application.extensions.yiidebugtb.*',
 		'application.services.*',
@@ -28,6 +30,9 @@ return array(
 		'ext.lightopenid.*',
 		'ext.eauth.*',
 		'ext.eauth.custom_services.*',
+
+                'ext.YiiMongoDbSuite.*',
+                'ext.YiiMongoDbSuite.extra.*',
 	),
 
 	'modules'=>array(
@@ -51,11 +56,21 @@ return array(
 
 	// application components
 	'components'=>array(
-//                'mailer' => array(
-//                    'class' => 'application.extensions.mailer.EMailer',
-//                    'pathViews' => 'application.views.email',
-//                    'pathLayouts' => 'application.views.email.layouts'
-//                 ),
+                'mongodb' => array(
+                    'class'            => 'EMongoDB',
+                    'connectionString' => 'mongodb://localhost',
+                    'dbName'           => 'smigom',
+                    'fsyncFlag'        => false,
+                    'safeFlag'         => false,
+                    'useCursor'        => false              
+                ),
+                'image'=>array(
+                    'class'=>'application.extensions.image.CImageComponent',
+                      // GD or ImageMagick
+                      'driver'=>'GD',
+                      // ImageMagick setup path
+                      'params'=>array('directory'=>'/opt/local/bin'),
+                 ),
                 'RESTClient' => array(
                     'class' => 'application.extensions.RESTClient.RESTClient',
                     'servers' => array(
@@ -94,6 +109,7 @@ return array(
                                 'ads' => 'ads/default/index',
                                 'user/<id:\d+>'=>'user/index',
                                 'user'=>'user/index',
+                                '' => 'user/index',
                                 '<action:(login|logout)>'=>'site/<action>',
                                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

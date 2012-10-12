@@ -1,15 +1,26 @@
-<?php
-/* @var $this SiteController */
-/* @var $error array */
-
-$this->pageTitle=Yii::app()->name . ' - Error';
-$this->breadcrumbs=array(
-	'Error',
-);
+<?php 
+    Yii::app()->clientScript->registerCss(
+                'error',
+                '
+                    .fatalError{
+                        background-image: url(\'/images/error.jpg\');
+                        background-repeat: no-repeat;
+                        width: 150px;
+                        height: 76px;
+                        font-size: 36px;
+                        font-weight: 600;
+                        color: white;
+                        padding-left: 41px;
+                        padding-top: 5px;
+                        left: 50%;
+                        position: absolute;
+                        overflow: auto;
+                        top: 50%;
+                        margin-left: -75px;
+                        margin-top: -120px;
+                    }
+                '
+            );
+        
 ?>
-
-<h2>Error <?php echo $code; ?></h2>
-
-<div class="error">
-<?php echo CHtml::encode($message); ?>
-</div>
+<div class="fatalError"><?php echo $code; ?></div>

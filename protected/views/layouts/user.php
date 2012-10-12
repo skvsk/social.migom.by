@@ -7,6 +7,7 @@
 	
 		<title><?php echo $this->title; ?></title>
                 <?php Yii::app()->getClientScript()->registerCssFile('/css/default.css');?>
+                <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
                 <!--
                     FOR EXAMPLE
                 
@@ -19,9 +20,6 @@
                 
                 
                 <link rel="SHORTCUT ICON" href="/favicon.ico">
-
-                <link rel="stylesheet" type="text/css" media="all" href="css/chosen.css" />
-                <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
 	</head>
 
 	<body>		

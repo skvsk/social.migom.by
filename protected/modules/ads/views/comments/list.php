@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
                 array(
                     'name' => 'userLogin',
                     'type' => 'html',
-                    'value' => 'CHtml::link($data->user->login, array("/user/index", "id" => $data->user->id))'
+                    'value' => '($data->user) ? CHtml::link($data->user->login, array("/user/index", "id" => $data->user->id)) : ""'
                 ),
                 array(
                     'name' => 'text',

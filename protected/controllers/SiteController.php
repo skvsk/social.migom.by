@@ -45,14 +45,24 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         
-        echo 'User Name: <b>' . Yii::app()->user->name . '</b>';
-        echo '<br/>------------------------<br/>';
-        foreach (get_class_methods(__CLASS__) as $methods) {
-            if (strpos($methods, 'action') === 0 && $methods !== 'actions') {
-                echo CHtml::link(substr($methods, 6), array('site/' . substr($methods, 6)));
-                echo '<br/>';
-            }
-        }
+//        $queue = new Queue();
+//        $queue->what = 'mail send';
+//        $queue->user_id = 14;
+//        $queue->priority = 100;
+//        $queue->param = array('template' => 'registration', 'password' => 'd616as6df1');
+//        if(!$queue->validate()){
+//            d($queue->getErrors());
+//        }
+//        $queue->save();
+//        die('<br/>__________________________________');
+//        echo 'User Name: <b>' . Yii::app()->user->name . '</b>';
+//        echo '<br/>------------------------<br/>';
+//        foreach (get_class_methods(__CLASS__) as $methods) {
+//            if (strpos($methods, 'action') === 0 && $methods !== 'actions') {
+//                echo CHtml::link(substr($methods, 6), array('site/' . substr($methods, 6)));
+//                echo '<br/>';
+//            }
+//        }
 //            d(get_class_methods(__CLASS__));
     }
 
@@ -162,7 +172,7 @@ class SiteController extends Controller {
             if ($model->validate() && $model->login() && $redirect)
 //                            $this->redirect(Yii::app()->user->returnUrl);
                 $this->redirect('/user/index');
-                
+
         }
         return $model;
     }

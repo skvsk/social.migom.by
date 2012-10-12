@@ -12,7 +12,6 @@
  */
 class Profile extends CActiveRecord
 {
-    
         public $defaultAvatar = '/images/users/default_avatar.png';
         public static $sexs = array(1 => 'male', 2 => 'female', 3 => 'children', 4 => 'unisex');
     
@@ -43,9 +42,10 @@ class Profile extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, full_name', 'required'),
-			array('user_id, city_id, birthday', 'numerical', 'integerOnly'=>true),
+			array('user_id, city_id', 'numerical', 'integerOnly'=>true),
+                        array('birthday', 'match', 'pattern' => '/[\d.]+/'),
 			array('full_name', 'length', 'max'=>255),
-                        array('avatar', 'file', 'types'=>'jpg, gif, png', 'allowEmpty' => true),
+                        array('avatar', 'file', 'types'=>'jpg', 'allowEmpty' => true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('user_id, full_name, city_id, sex, birthday, avatar', 'safe', 'on'=>'search'),
@@ -133,7 +133,7 @@ class Profile extends CActiveRecord
         
         protected function afterFind()
         {
-            $this->birthday = Yii::app()->dateFormatter->formatDateTime($this->birthday,'short', false);
+            $this->birthday = Yii::app()->dateFormatter->formatDateTime($this->birthday,'medium', false);
             return parent::afterFind();
         }
 }
