@@ -40,7 +40,7 @@ class YiiBaseEx extends YiiBase
                         @include($classFile);
                     }
                     if (!(class_exists($className, false) || interface_exists($className, false))) {
-                        throw new Exception(Yii::t('Site', "Entity is not exist"));
+                        throw new Exception("Entity is not exist", 400);
                     }
                     
                 }
