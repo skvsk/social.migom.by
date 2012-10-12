@@ -17,6 +17,9 @@ class LikesController extends ApiController
     public function actionGetEntityList($entity)
     {
         $model = $this->_getModelName($entity);
+        if(!is_array($_GET['id'])){
+            throw new ApiException(Yii::t('Likes', "Param '{param}' is not array", array('{param}' => 'id')));
+        }
         array_map('intval', $_GET['id']);
         $criteria = new EMongoCriteria();
         $criteria->entity_id('in', $_GET['id']);
