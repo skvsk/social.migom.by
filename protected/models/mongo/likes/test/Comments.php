@@ -1,6 +1,6 @@
 <?php
 
-class Likes_Devel_Comments extends Likes
+class Likes_Test_Comments extends Likes
 {
 
     /**
