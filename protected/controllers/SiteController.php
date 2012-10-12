@@ -107,7 +107,7 @@ class SiteController extends Controller {
             $authIdentity = Yii::app()->eauth->getIdentity($service);
             $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
 //            $authIdentity->redirectUrl = $this->createUrl('/user/index');
-            $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/login');
+            $authIdentity->cancelUrl = $this->createAbsoluteUrl('/site/login');
 
             if ($authIdentity->authenticate()) {
                 $identity = new EAuthUserIdentity($authIdentity);
