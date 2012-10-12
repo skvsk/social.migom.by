@@ -20,6 +20,10 @@ class WebUser extends CWebUser {
         // return role name
         $this->setState('name', $user->login);
         $this->setState('role', Users::$roles[$user->role]);
+        
+        
+        d($this->id);
+        d($user->role);
         parent::login($identity, $duration);
     }
 }
