@@ -36,9 +36,13 @@ class YiiBaseEx extends YiiBase
                         // Try namespaced version of class name
                         $aClassName = explode('_', $className);
                         $file = array_pop($aClassName);
-                        
-                        include(strtolower(implode(DIRECTORY_SEPARATOR, $aClassName)) . DIRECTORY_SEPARATOR . ucfirst($file) . '.php');
+                        $classFile = strtolower(implode(DIRECTORY_SEPARATOR, $aClassName)) . DIRECTORY_SEPARATOR . ucfirst($file) . '.php';
+                        @include($classFile);
                     }
+                    if (!(class_exists($className, false) || interface_exists($className, false))) {
+                        throw new CException(Yii::t('Site', "Entity is not exist"));
+                    }
+                    
                 }
             } else {  // class name with namespace in PHP 5.3
                 $namespace = str_replace(array('\\', '_'), '.', ltrim($className, '\\'));
