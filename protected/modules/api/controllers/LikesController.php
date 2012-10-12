@@ -23,8 +23,14 @@ class LikesController extends ApiController
         $criteria = new EMongoCriteria();
         $criteria->entity_id('in', $_GET['id']);
 
-        /* @var $res Likes */
-        $res = Likes::model($this->_getModelName($entity))->findAll($criteria);
+        try {
+            /* @var $res Likes */
+            $res = Likes::model($this->_getModelName($entity))->findAll($criteria);
+        } catch (Exception $exc) {
+            throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
+        }
+
+        
 
         $content = array(ApiComponent::CONTENT_ITEMS => $res, ApiComponent::CONTENT_COUNT => count($res));
         $this->render()->sendResponse($content);
