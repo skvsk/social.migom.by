@@ -104,12 +104,12 @@ class UserController extends Controller
                 Yii::app()->end();
             }
             
-            if(isset($_POST['Profile'])){
-                if(isset($_FILES['Profile']['tmp_name']) && $_FILES['Profile']['tmp_name']['avatar']){
-                    $model->profile->avatar = UserService::uploadAvatar($id, $_FILES['Profile']['tmp_name']);
+            if(isset($_POST['Users_Profile'])){
+                if(isset($_FILES['Users_Profile']['tmp_name']) && $_FILES['Users_Profile']['tmp_name']['avatar']){
+                    $model->profile->avatar = UserService::uploadAvatar($id, $_FILES['Users_Profile']['tmp_name']);
                 }
                 $model->profile->setScenario('update');
-                $model->profile->attributes = $_POST['Profile'];
+                $model->profile->attributes = $_POST['Users_Profile'];
                 if($model->profile->validate() && $model->profile->save())
                     $this->redirect('/user/index');
             }

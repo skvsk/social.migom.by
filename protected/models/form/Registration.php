@@ -5,7 +5,7 @@
  * LoginForm is the data structure for keeping
  * user login form data. It is used by the 'login' action of 'SiteController'.
  */
-class RegistrationForm extends CFormModel
+class Form_Registration extends CFormModel
 {
 	public $email;
 	public $agree;
@@ -62,7 +62,7 @@ class RegistrationForm extends CFormModel
                 $user->attributes = $identity->getAttributes();
                 if($user->save()){
                     $identity->setId($user->id);
-                    $profile = new Profile();
+                    $profile = new Users_Profile();
                     $profile->attributes = $identity->getAttributes();
                     if($identity->getAttribute('avatar')){
                         // upload avatar to self server
@@ -90,7 +90,7 @@ class RegistrationForm extends CFormModel
                 if(!$user->save()){
                     return false;
                 }
-                $profile = new Profile();
+                $profile = new Users_Profile();
                 $profile->user_id = $user->id;
                 $profile->full_name = $user->login;
                 $profile->avatar = UserService::uploadAvatarFromEmail($user->id, $user->email);

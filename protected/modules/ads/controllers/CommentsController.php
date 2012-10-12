@@ -10,8 +10,9 @@ class CommentsController extends Controller
         $modelTitle = $model;
         $model= Comments::model($modelTitle);
 		$model->unsetAttributes();
-        if(isset($_GET['NewsComments'])){
-            $model->attributes = $_GET['NewsComments'];
+        $model->scenario = 'search';
+        if(isset($_GET['Comments_News'])){
+            $model->attributes = $_GET['Comments_News'];
         }
         
         $this->render('list', array('model' => $model, 'modelTitle' => $modelTitle));

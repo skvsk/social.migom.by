@@ -21,10 +21,10 @@ class UsersController extends Controller
 			$model->attributes=$_POST['Users'];
 			if($model->save()){$save = true;}
 		}
-                if(isset($_POST['Profile']))
+                if(isset($_POST['Users_Profile']))
 		{
-			$model->profile->attributes=$_POST['Profile'];
-                        if(isset($_POST['Profile']['delImage'])){
+			$model->profile->attributes=$_POST['Users_Profile'];
+                        if(isset($_POST['Users_Profile']['delImage'])){
                             $path = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . '..';
                             $destination = $path . Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $model->id . DIRECTORY_SEPARATOR . 'avatar.jpg';
                             @unlink($destination);

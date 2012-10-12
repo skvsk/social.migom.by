@@ -9,10 +9,10 @@
  * @property integer $provider_id
  * @property integer $soc_id
  */
-class UserProviders extends CActiveRecord
+class Users_Providers extends CActiveRecord
 {
         public static $providers = array(1 => 'google_oauth', 2 => 'vkontakte', 3 => 'facebook');
-        private static $providersModel = array('google_oauth' => 'UserProvidersGoogleOauth', 'vkontakte' => 'UserProvidersVkontakte', 'facebook' => 'UserProvidersFacebook');
+        private static $providersModel = array('google_oauth' => 'Users_Providers_Google', 'vkontakte' => 'Users_Providers_Vkontakte', 'facebook' => 'Users_Providers_Facebook');
         public $provider_id;
         
         public function tableName()

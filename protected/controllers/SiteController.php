@@ -124,14 +124,14 @@ class SiteController extends Controller {
                         $this->render('login/new_user_ask', array('service' => $service));
                         Yii::app()->end();
                     } elseif(Yii::app()->request->getParam('user') == 'new'){
-                        $reg = new RegistrationForm();
+                        $reg = new Form_Registration();
                         $identity = $reg->registration($identity, $service);
                         if($identity instanceof Users){
                             throw new CHttpException('400', Yii::t('Site', 'This email was taken'));
                         }
                         Yii::app()->user->login($identity, 3600*24*30);
                     } elseif(Yii::app()->request->getParam('user') == 'haveALogin'){
-                        if(!isset($_POST['LoginForm'])){
+                        if(!isset($_POST['Form_Login'])){
                             $this->layout = 'popup';
                             $this->render('login/popup');
                             Yii::app()->end();
@@ -155,12 +155,12 @@ class SiteController extends Controller {
         $model = $this->_preLogin();
         $getErrors = (isset($_GET['mailError'])) ? $_GET['mailError'] : '';
 
-        $regModel = new RegistrationForm();
+        $regModel = new Form_Registration();
         $this->render('login', array('model' => $model, 'regModel' => $regModel, 'getErrors' => $getErrors));
     }
     
     protected function _preLogin($redirect = true){
-        $model = new LoginForm;
+        $model = new Form_Login;
 
         // if it is ajax validation request
         if (Yii::app()->getRequest()->isAjaxRequest && Yii::app()->getRequest()->getParam('ajax') == 'formLogin') {
@@ -169,8 +169,8 @@ class SiteController extends Controller {
         }
 
         // collect user input data
-        if (isset($_POST['LoginForm'])) {
-            $model->attributes = $_POST['LoginForm'];
+        if (isset($_POST['Form_Login'])) {
+            $model->attributes = $_POST['Form_Login'];
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login() && $redirect)
 //                            $this->redirect(Yii::app()->user->returnUrl);
@@ -189,7 +189,7 @@ class SiteController extends Controller {
     }
 
     public function actionRegistration() {
-        $model = new RegistrationForm;
+        $model = new Form_Registration;
 
         // if it is ajax validation request
         if (Yii::app()->getRequest()->isAjaxRequest && Yii::app()->getRequest()->getParam('ajax') == 'formReg') {
@@ -198,8 +198,8 @@ class SiteController extends Controller {
         }
 
         // collect user input data
-        if (isset($_POST['RegistrationForm'])) {
-            $model->attributes = $_POST['RegistrationForm'];
+        if (isset($_POST['Form_Registration'])) {
+            $model->attributes = $_POST['Form_Registration'];
             // validate user input and redirect to the previous page if valid
             if ($model->validate()){
                 $identity = $model->registration();

@@ -10,7 +10,7 @@
  * @property integer $sex
  * @property integer $birthday
  */
-class Profile extends CActiveRecord
+class Users_Profile extends CActiveRecord
 {
         public $defaultAvatar = '/images/users/default_avatar.png';
         public static $sexs = array(1 => 'male', 2 => 'female', 3 => 'children', 4 => 'unisex');

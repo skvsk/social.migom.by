@@ -9,7 +9,7 @@
  * @property integer $provider_id
  * @property integer $soc_id
  */
-class UserProvidersFacebook extends UserProviders
+class Users_Providers_Facebook extends Users_Providers
 {
 	public function tableName()
 	{

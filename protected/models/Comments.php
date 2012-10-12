@@ -36,7 +36,7 @@ class Comments extends CActiveRecord
     {
         return array(
             'users' => array(self::BELONGS_TO, 'Users', 'user_id'),
-            'profile' => array(self::HAS_ONE, 'Profile', array('id' => 'user_id'), 'through' => 'users'),
+            'profile' => array(self::HAS_ONE, 'Users_Profile', array('id' => 'user_id'), 'through' => 'users'),
         );
     }
 
@@ -68,7 +68,7 @@ class Comments extends CActiveRecord
             array('moderate_id', 'numerical'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, parent_id, entity_id, user_id, text, likes, dislikes, status, level, created_at, updated_at, userLogin, moderate_id', 'safe', 'on' => 'search'),
+            array('id, userLogin, parent_id, entity_id, user_id, text, likes, dislikes, status, level, created_at, updated_at, moderate_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -120,11 +120,11 @@ class Comments extends CActiveRecord
         $criteria->order = 'created_at DESC';
 
         return new CActiveDataProvider($this, array(
-                    'criteria' => $criteria,
-                    'pagination' => array(
-                        'pageSize' => 40
-                    )
-                ));
+            'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 40
+            )
+        ));
     }
 
 }

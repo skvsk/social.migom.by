@@ -2,7 +2,7 @@
 
 class UserService {
     
-    public static $images_mime = array('image/jpeg' => 'jpg');
+    public static $images_mime = array('image/jpeg' => 'jpg', 'image/png' => 'png');
     
     public static function uploadAvatarFromService($user_id, $file_url){
         $imageSize = getimagesize($file_url);
@@ -10,11 +10,23 @@ class UserService {
             $path = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . '..';
             $destination = $path . Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $user_id;
             @mkdir($destination, 0777, true);
-            if(copy($file_url, $destination . DIRECTORY_SEPARATOR . 'avatar.' . UserService::$images_mime[$imageSize['mime']])){
-                return Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $user_id . DIRECTORY_SEPARATOR . 'avatar.' . UserService::$images_mime[$imageSize['mime']];
+            if(UserService::$images_mime[$imageSize['mime']] == 'png'){
+                if(UserService::png2jpg($file_url, $destination . DIRECTORY_SEPARATOR . 'avatar.jpg', 75)){
+                    return Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $user_id . DIRECTORY_SEPARATOR . 'avatar.jpg';
+                }
+            } else {
+                if(copy($file_url, $destination . DIRECTORY_SEPARATOR . 'avatar.jpg')){
+                    return Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $user_id . DIRECTORY_SEPARATOR . 'avatar.jpg';
+                }
             }
             return false;
         }
+    }
+    
+    public static function png2jpg($originalFile, $outputFile, $quality) {
+        $image = imagecreatefrompng($originalFile);
+        imagejpeg($image, $outputFile, $quality);
+        imagedestroy($image);
     }
     
     public static function uploadAvatar($user_id, $file){
@@ -32,5 +44,13 @@ class UserService {
             ($id != Yii::app()->user->id) ? array('/user/index', 'id' => $id) : array('/user/index')
             
         );
+    }
+    
+    public static function uploadAvatarFromEmail($user_id, $email = null){
+        $gravatarHash = (!empty($email))? $email:  rand(0, 99999999);
+        $gravatarHash = md5( strtolower( trim( $gravatarHash ) ) );
+
+        return UserService::uploadAvatarFromService($user_id, 
+                                'http://www.gravatar.com/avatar/'. $gravatarHash .'.jpg?d=identicon');
     }
 }

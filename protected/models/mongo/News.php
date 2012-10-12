@@ -19,7 +19,7 @@ class News extends EMongoDocument {
         array(
           'class'=>'ext.YiiMongoDbSuite.extra.EEmbeddedArraysBehavior',
           'arrayPropertyName'=>'entities', // name of property
-          'arrayDocClassName'=>'NewsEntity' // class name of documents in array
+          'arrayDocClassName'=>'News_Entity' // class name of documents in array
         ),
       );
     }
@@ -82,7 +82,7 @@ class News extends EMongoDocument {
         list($news, $entity) = News::push($user_id, $entity_id, $name);
         
         if(!$entity){       // если новая запись на стене
-            $entity = new NewsEntity();
+            $entity = new News_Entity();
             $entity->id = $entity_id;
             $entity->name = $name;
             $entity->create_at = $create_at;

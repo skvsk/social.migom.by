@@ -34,7 +34,7 @@
 
 <div class="row">
     <?php echo $form->label($model->profile,'sex', array(), true, true); ?>
-    <?php echo $form->dropDownList($model->profile,'sex', Profile::$sexs, array('empty' => '')); ?>
+    <?php echo $form->dropDownList($model->profile,'sex', Users_Profile::$sexs, array('empty' => '')); ?>
     <?php echo $form->error($model->profile,'sex', array(), true, true); ?>
 </div>
 

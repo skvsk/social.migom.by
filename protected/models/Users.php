@@ -73,10 +73,10 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'profile' => array(self::HAS_ONE, 'Profile', 'user_id'),
-                    'google_oauth' => array(self::HAS_ONE, 'UserProvidersGoogleOauth', 'user_id'),
-                    'vkontakte' => array(self::HAS_ONE, 'UserProvidersVkontakte', 'user_id'),
-                    'facebook' => array(self::HAS_ONE, 'UserProvidersFacebook', 'user_id'),
+                    'profile' => array(self::HAS_ONE, 'Users_Profile', 'user_id'),
+                    'google_oauth' => array(self::HAS_ONE, 'Users_Providers_Google', 'user_id'),
+                    'vkontakte' => array(self::HAS_ONE, 'Users_Providers_Vkontakte', 'user_id'),
+                    'facebook' => array(self::HAS_ONE, 'Users_Providers_Facebook', 'user_id'),
 		);
 	}
 

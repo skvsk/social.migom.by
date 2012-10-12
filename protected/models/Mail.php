@@ -28,7 +28,7 @@ class Mail extends CModel{
         }
         $queue->what = self::WORKER;
         $params = array_merge($params, array('template' => $template));
-        $queue->user_id = Yii::app()->user->id;
+        $queue->user_id = $user->id;
         $queue->param = $params;
         return $queue->save();
     }

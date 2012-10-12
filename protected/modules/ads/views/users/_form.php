@@ -38,7 +38,7 @@
         
         <div class="row">
 		<?php echo $form->labelEx($model->profile,'sex'); ?>
-                <?php echo $form->dropDownList($model->profile,'sex', Profile::$sexs); ?>
+                <?php echo $form->dropDownList($model->profile,'sex', Users_Profile::$sexs); ?>
 		<?php echo $form->error($model->profile,'sex'); ?>
 	</div>
         
@@ -53,8 +53,8 @@
                             'showAnim'=>'fold',
                             'showButtonPanel'=>true,
                             'autoSize'=>true,
-                            'dateFormat'=>'dd.mm.y',
-//                            'defaultDate'=>$model->profile->birthday,
+                            'dateFormat'=>'dd.mm.yy',
+            //                            'defaultDate'=>$model->profile->birthday,
                          ),
                     ));
                 ?>

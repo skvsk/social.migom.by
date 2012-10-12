@@ -9,7 +9,7 @@
  * @property integer $provider_id
  * @property integer $soc_id
  */
-class UserProvidersVkontakte extends UserProviders
+class Users_Providers_Vkontakte extends Users_Providers
 {
 	public function tableName()
 	{

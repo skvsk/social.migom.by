@@ -1,5 +1,5 @@
 <?php
-class NewsEntityComment extends EMongoEmbeddedDocument
+class News_Entity_Comment extends EMongoEmbeddedDocument
 {
     
     public $user_id;
@@ -10,8 +10,8 @@ class NewsEntityComment extends EMongoEmbeddedDocument
     public function embeddedDocuments() {  // встроенные, суб массивы!
         return array(
             // property name => embedded document class name
-            'likes' => 'NewsEntityLikes',
-            'dislikes' => 'NewsEntityLikes'
+            'likes' => 'News_Entity_Likes',
+            'dislikes' => 'News_Entity_Likes'
         );
     }
     

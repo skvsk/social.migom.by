@@ -9,7 +9,7 @@
  * @property integer $provider_id
  * @property integer $soc_id
  */
-class UserProvidersGoogleOauth extends UserProviders
+class Users_Providers_Google extends Users_Providers
 {
 	public function tableName()
 	{

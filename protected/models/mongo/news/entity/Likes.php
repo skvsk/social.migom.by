@@ -1,5 +1,5 @@
 <?php
-class NewsEntityLikes extends EMongoEmbeddedDocument
+class News_Entity_Likes extends EMongoEmbeddedDocument
 {
     
     public $count;
