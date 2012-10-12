@@ -12,7 +12,7 @@ class CommentsController extends ApiController
 
     private function _getModelName($entity)
     {
-        return $this->getId() . '_' . $entity;
+        return $entity;
     }
 
     /**
@@ -45,8 +45,6 @@ class CommentsController extends ApiController
     public function actionGetEntityList($entity, $id, $limit = null, $start = null)
     {
         $res = array();
-        $class = $this->_getModelName($entity);
-
         $criteria = new CDbCriteria;
         $criteria->condition = '`t`.`entity_id` = :entity_id and `t`.`status` = :status';
         $criteria->params = array(':entity_id' => $id,
@@ -58,7 +56,7 @@ class CommentsController extends ApiController
         if ($start) {
             $criteria->offset = $start;
         }
-        $rawData = $class::model()->with('users')->findAll($criteria);
+        $rawData = Comments::model($entity)->with('users')->findAll($criteria);
 
         //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
@@ -82,8 +80,7 @@ class CommentsController extends ApiController
 
     public function actionPostEntity($entity)
     {
-        $class = $this->_getModelName($entity);
-        $comment = new $class();
+        $comment = Comments::model($entity);
         $comment->attributes = $_POST;
         $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0) ? $_POST['parent_id'] : 0;
         $comment->save();
@@ -92,11 +89,23 @@ class CommentsController extends ApiController
         $this->render()->sendResponse($content);
     }
 
+    /**
+     * @ignore
+     * @param type $id
+     * @param type $entity
+     * @param type $recursive
+     */
     public function actionDeliteComment($id, $entity, $recursive = true)
     {
         
     }
 
+    /**
+     * @ignore
+     * @param type $id
+     * @param type $entity
+     * @param type $params
+     */
     public function actionPutComment($id, $entity, $params = array())
     {
         
