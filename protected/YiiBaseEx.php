@@ -36,9 +36,9 @@ class YiiBaseEx extends YiiBase
                     @include($className . '.php');
                     if (!(class_exists($className, false) || interface_exists($className, false)) && strpos($className, '_') !== false) {
                         // Try namespaced version of class name
-                        $aClassName = explode('_', $className);
+                        $aClassName = explode('_', strtolower($className));
                         $file = array_pop($aClassName);
-                        $classFile = strtolower(implode(DIRECTORY_SEPARATOR, $aClassName)) . DIRECTORY_SEPARATOR . ucfirst($file) . '.php';
+                        $classFile = implode(DIRECTORY_SEPARATOR, $aClassName) . DIRECTORY_SEPARATOR . ucfirst($file) . '.php';
                         @include($classFile);
                     }
                     if (!(class_exists($className, false) || interface_exists($className, false))) {
