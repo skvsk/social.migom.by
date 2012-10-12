@@ -48,7 +48,7 @@ class Comments extends CActiveRecord
     public static function model($className = __CLASS__)
     {
         if ($className != __CLASS__) {
-            $className = $className . 'Comments';
+            $className = 'Comments_' . $className;
         }
         return parent::model($className);
     }
