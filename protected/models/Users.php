@@ -14,7 +14,7 @@
  */
 class Users extends CActiveRecord
 {
-        const AVATAR_PATH = '/images/users/avatar';
+        const AVATAR_PATH = '/images/users';
     
         public static $roles = array(1 => 'user', 2 => 'moderator', 3 => 'administrator');
         public static $statuses = array(1 => 'active', 2 => 'noactive', 3 => 'ban');

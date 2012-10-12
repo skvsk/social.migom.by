@@ -35,7 +35,7 @@ class RegistrationForm extends CFormModel
 	{
 		return array(
                         'email' => Yii::t('Site', 'E-mail'),
-			'agree'=>Yii::t('Site', 'I agree with the rules'),
+			'agree' => Yii::t('Site', 'I agree with the rules'),
 		);
 	}
 
@@ -97,6 +97,7 @@ class RegistrationForm extends CFormModel
                 $profile->save();
                 if(!$identity){
                     $identity = new UserIdentity($user->email, $user->password);
+                    $identity->setFirstTime();
                     $identity->authenticate();
                 }
             }

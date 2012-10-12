@@ -1,6 +1,6 @@
 <div class="darker png_scale" style="display: none;"></div>
 
-<?php $this->widget('UserMainWidget', array('model' => $model)); ?>
+<?php $this->widget('UserMain', array('model' => $model)); ?>
 
 <div style="float: left;">
     

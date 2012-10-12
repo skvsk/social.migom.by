@@ -21,7 +21,7 @@
     <?php echo $form->label($model->profile,'avatar', array(), true, true); ?>
     <?php echo $form->fileField($model->profile,'avatar', array(), true, true); ?>
     <?php if($model->profile->avatar): ?>
-        <?php echo CHtml::image($model->profile->avatar); ?>
+        <?php echo CHtml::image(Yii::app()->getBaseUrl().'/images/users/'.$model->id.'/avatar.jpg'); ?>
     <?php endif; ?>
     <?php echo $form->error($model->profile,'avatar', array(), true, true); ?>
 </div>
@@ -34,13 +34,26 @@
 
 <div class="row">
     <?php echo $form->label($model->profile,'sex', array(), true, true); ?>
-    <?php echo $form->textField($model->profile,'sex', array(), true, true); ?>
+    <?php echo $form->dropDownList($model->profile,'sex', Profile::$sexs, array('empty' => '')); ?>
     <?php echo $form->error($model->profile,'sex', array(), true, true); ?>
 </div>
 
 <div class="row">
     <?php echo $form->label($model->profile,'birthday', array(), true, true); ?>
-    <?php echo $form->textField($model->profile,'birthday', array(), true, true); ?>
+    <?php 
+        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+            'model'=>$model->profile,
+            'attribute'=>'birthday',
+            // additional javascript options for the date picker plugin
+            'options'=>array(
+                'showAnim'=>'fold',
+                'showButtonPanel'=>true,
+                'autoSize'=>true,
+                'dateFormat'=>'dd.mm.yy',
+//                            'defaultDate'=>$model->profile->birthday,
+             ),
+        ));
+    ?>
     <?php echo $form->error($model->profile,'birthday', array(), true, true); ?>
 </div>
 

@@ -3,22 +3,32 @@
 class Mail extends CModel{
     
     const MAX_PRIORITY = 100;
+    const MEDIUM_PRIORITY = 50;
     const MIN_PRIORITY = 1;
+    const WORKER = 'mail send';
     
     public function attributeNames(){
         return array('template', 'params');
     }
     
     public function send(Users $user, $template, $params = array(), $fast = false){
-        $queue = new Queue();
+        $criteria = new EMongoCriteria();
+        $criteria->addCond('what', '==', self::WORKER);
+        $criteria->addCond('user_id', '==', Yii::app()->user->id);
+        
+        $queue = Queue::model()->find($criteria);
+        if(!$queue){
+            $queue = new Queue();
+        }
         
         if($fast){
            $queue->priority = self::MAX_PRIORITY;
         } else {
-            $queue->priority = self::MIN_PRIORITY;
+            $queue->priority = self::MEDIUM_PRIORITY;
         }
-        $queue->what = 'yiic mail send';
-        $params = array_merge($params, array('user_id' => $user->id, 'template' => $template));
+        $queue->what = self::WORKER;
+        $params = array_merge($params, array('template' => $template));
+        $queue->user_id = Yii::app()->user->id;
         $queue->param = $params;
         return $queue->save();
     }

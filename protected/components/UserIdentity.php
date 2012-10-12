@@ -9,6 +9,7 @@ class UserIdentity extends CUserIdentity
 {
         const ERROR_USER_BLOCKED = 3;
 	protected $id;
+        protected $firstTime = false;
         
 	/**
 	 * Authenticates a user.
@@ -25,17 +26,18 @@ class UserIdentity extends CUserIdentity
             {
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
             }
-            elseif($this->password!==$user->password) {
+            elseif(trim($this->password)!==$user->password) {
                 $this->errorCode = self::ERROR_PASSWORD_INVALID;
             } elseif(Users::$statuses[$user->status] == 'ban') {
                 $this->errorCode = self::ERROR_USER_BLOCKED;
             } else {
                 $this->id = $user->id;
+                if(!$this->firstTime && Users::$statuses[$user->status] == 'noactive'){
+                    $user->status = array_search('active', Users::$statuses);
+                    $user->save();
+                }
+                
 
-                // Далее логин нам не понадобится, зато имя может пригодится
-                // в самом приложении. Используется как Yii::app()->user->name.
-                // realName есть в нашей модели. У вас это может быть name, firstName
-                // или что-либо ещё.
                 $this->username = $user->login;
 
                 $this->errorCode = self::ERROR_NONE;
@@ -45,5 +47,9 @@ class UserIdentity extends CUserIdentity
         
         public function getId(){
             return $this->id;
+        }
+        
+        public function setFirstTime(){
+            $this->firstTime = true;
         }
 }

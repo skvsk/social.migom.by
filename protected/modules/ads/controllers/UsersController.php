@@ -25,7 +25,9 @@ class UsersController extends Controller
 		{
 			$model->profile->attributes=$_POST['Profile'];
                         if(isset($_POST['Profile']['delImage'])){
-                            @unlink(Yii::app()->basePath.'/..'.$model->profile->avatar);
+                            $path = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . '..';
+                            $destination = $path . Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $model->id . DIRECTORY_SEPARATOR . 'avatar.jpg';
+                            @unlink($destination);
                             $model->profile->avatar = '';
                         }
 			if($model->profile->save()){$save = true;}
