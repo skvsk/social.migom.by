@@ -42,7 +42,7 @@ class UserController extends Controller
 	{
             $id = Yii::app()->request->getParam('id', Yii::app()->user->id);
             if(!$id){
-                $this->redirect('site/login');
+                $this->redirect('/site/login');
             }
             
 //            $criterea = new EMongoCriteria();
