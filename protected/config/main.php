@@ -14,7 +14,7 @@ return array(
     'import' => array(
         'application.models.*',
 //        'application.models.Api.*',
-        'application.models.Mongo.*',
+        'application.models.mongo.*',
         'application.components.*',
         'application.extensions.RESTClient.*',
         'application.extensions.yiidebugtb.*',
