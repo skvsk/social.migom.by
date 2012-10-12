@@ -42,7 +42,6 @@ class YiiBaseEx extends YiiBase
                         @include($classFile);
                     }
                     if (!(class_exists($className, false) || interface_exists($className, false))) {
-                        echo $className . "<br/>";
                         throw new CException("Entity is not exist");
                     }
                     
