@@ -16,7 +16,6 @@ class LikesController extends ApiController
      */
     public function actionGetEntityList($entity)
     {
-        $model = $this->_getModelName($entity);
         if(!is_array($_GET['id'])){
             throw new ApiException(Yii::t('Likes', "Param '{param}' is not array", array('{param}' => 'id')));
         }
@@ -25,7 +24,7 @@ class LikesController extends ApiController
         $criteria->entity_id('in', $_GET['id']);
 
         /* @var $res Likes */
-        $res = $model::model()->findAll($criteria);
+        $res = Likes::model($this->_getModelName($entity))->findAll($criteria);
 
         $content = array(ApiComponent::CONTENT_ITEMS => $res, ApiComponent::CONTENT_COUNT => count($res));
         $this->render()->sendResponse($content);
@@ -33,10 +32,8 @@ class LikesController extends ApiController
 
     public function actionGetEntity($entity, $id)
     {
-        $model = $this->_getModelName($entity);
-
         /* @var $res Likes */
-        $res = $model::model()->findAll(array('entity_id' => $id));
+        $res = Likes::model($this->_getModelName($entity))->findAll(array('entity_id' => $id));
 
         $content = array(ApiComponent::CONTENT_ITEM => $res);
         $this->render()->sendResponse($content);
