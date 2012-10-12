@@ -75,16 +75,20 @@ class LikesController extends ApiController
         $criteria = new EMongoCriteria();
         $criteria->entity_id('==', $entity_id);
 
-        /* @var $likes Likes */
-        if ($likes = $model::model()->find($criteria)) {
-            foreach ($likes->users as $user) {
-                if ($user->id == $userId) {
-                    return false;
+        try {
+             /* @var $likes Likes */
+            if ($likes = Likes::model($model)->find($criteria)) {
+                foreach ($likes->users as $user) {
+                    if ($user->id == $userId) {
+                        return false;
+                    }
                 }
+            } else {
+                $likes = Likes::model($model);
+                $likes->entity_id = $entity_id;
             }
-        } else {
-            $likes = new $model();
-            $likes->entity_id = $entity_id;
+        } catch (Exception $exc) {
+            throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
         }
 
         $user = new LikesUsers();
@@ -105,13 +109,7 @@ class LikesController extends ApiController
     private function _getModelName($entity)
     {
         $connection = Yii::app()->cache->get($this->key);
-
-        $class = ucfirst($this->getId()) . '_' . ucfirst($connection['name']) . '_' . ucfirst($entity);
-        if (@class_exists($class) !== true) {
-            throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
-        }
-
-        return $class;
+        return $connection['name'] . '_' . $entity;
     }
 
 }
