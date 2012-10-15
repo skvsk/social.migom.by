@@ -17,7 +17,7 @@ class CustomGoogleAuthService extends GoogleOAuthService {
     
 	protected function fetchAttributes() {
 		$info = (array)$this->makeSignedRequest('https://www.googleapis.com/oauth2/v1/userinfo');
-				
+
 		$this->attributes['soc_id'] = $info['id'];
 		$this->attributes['full_name'] = $info['name'];
                 $this->attributes['email'] = $info['email'];
