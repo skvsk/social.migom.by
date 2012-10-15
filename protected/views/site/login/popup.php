@@ -5,7 +5,7 @@
 			<div></div>
 			<a href="javascript:void(0);" onclick='$("#popupLogin .contentLogin .response").hide();$("#formLogin").show();'>Попробовать еще раз</a>
 		</div>
-                    <?php $this->renderPartial('frm/_login', array('model' => new LoginForm)) ?>
+                    <?php $this->renderPartial('frm/_login', array('model' => new Form_Login())) ?>
 		<div class="social">
 		</div>
 			
