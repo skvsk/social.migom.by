@@ -104,9 +104,10 @@ class Comments extends CActiveRecord
                 $this->updated_at = time();
             }
         }
+dd($this->getIsNewRecord());
     $a = parent::beforeSave();
     dd($a);
-dd($this->getIsNewRecord());
+
         return $a;
     }
 
