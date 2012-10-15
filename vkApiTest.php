@@ -4,6 +4,7 @@ $curl = curl_init();
 
 $params = $_GET;
 $string = '';
+asort($params);
 foreach($params as $key => $value){
     $string .= $key . '=' . $value;
 }
