@@ -6,9 +6,11 @@ $secret_key = '9b1FoGkG8u2Rtyi9mFC6'; // Insert here secret key of your applicat
 
 $VK = new vkapi($api_id, $secret_key);
 
-$resp = $VK->api('getUserSettings', array('uid'=>'7314718'));
+//$resp = $VK->api('getProfiles', array('uids'=>'7314718'));
 
-//$resp = $VK->api('wall.post', array('owner_id'=>'7314718', 'message' => 'Тестовый пост с сайта social.migom.by'));
+//$resp = $VK->api('getUserSettings', array('uid'=>'7314718'));
+
+$resp = $VK->api('users.get', array('uids'=>'7314718'));
 
 
 print_r($resp);
