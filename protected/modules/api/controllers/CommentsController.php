@@ -129,6 +129,7 @@ class CommentsController extends ApiController
         $criteria->group='`t`.`entity_id`';
         $rawData = Comments::model($entity)->findAll($criteria);
         foreach ($rawData as $value) {
+dd($value);
             $res['id'] = $value->entity_id;
             $res['count'] = $value->cnt;
         }
