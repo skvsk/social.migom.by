@@ -29,6 +29,7 @@ class Comments extends CActiveRecord
     public $owner_id = 0;
     public $level = 0;
     public $cnt = 0;
+    public $entity_id;
 
     /**
      * @return array relational rules.
