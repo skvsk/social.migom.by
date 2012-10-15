@@ -10,7 +10,7 @@ $VK = new vkapi($api_id, $secret_key);
 
 //$resp = $VK->api('getUserSettings', array('uid'=>'7314718'));
 
-$resp = $VK->api('users.get', array('uids'=>'7314718'));
+$resp = $VK->api('wall.get', array('uids'=>'7314718'));
 
 
 print_r($resp);
