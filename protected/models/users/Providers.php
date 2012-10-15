@@ -109,7 +109,7 @@ class Users_Providers extends CActiveRecord
             $userProviders->provider_id = array_search($identity->getProviderName(), Users_Providers::$providers);
             if($userProviders->validate()){
                 $userProviders->save();
-                Profile::updateByProvider($userProviders->user, $identity);
+                Users_Profile::updateByProvider($userProviders->user, $identity);
             }
         }
 }
