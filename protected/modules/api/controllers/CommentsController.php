@@ -86,7 +86,7 @@ class CommentsController extends ApiController
      */
     public function actionGetEntityUserList($entity, $id)
     {
-        $userId = (int)Yii::app()->request->get('user_id');
+        $userId = (int)Yii::app()->request->getParam('user_id');
         $res = array();
         $criteria = new CDbCriteria;
         $criteria->condition = '`t`.`user_id` = :user_id and `t`.`entity_id` = :entity_id and `t`.`status` != :status';
