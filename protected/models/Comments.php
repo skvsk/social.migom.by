@@ -94,8 +94,6 @@ class Comments extends CActiveRecord
     }
 
     protected function beforeSave() {
-var_dump($this->getIsNewRecord());
-die('111');
         if ($this->getIsNewRecord()) {
             if ($this->hasAttribute('created_at')) {
                 $this->created_at = time();
@@ -106,11 +104,7 @@ die('111');
                 $this->updated_at = time();
             }
         }
-dd($this->getIsNewRecord());
-    $a = parent::beforeSave();
-    dd($a);
-
-        return $a;
+        return parent::beforeSave();
     }
 
     /**
