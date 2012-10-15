@@ -130,8 +130,8 @@ class CommentsController extends ApiController
         $rawData = Comments::model($entity)->findAll($criteria);
         foreach ($rawData as $value) {
 
-            $res['id'] = $value->entity_id;
-            $res['count'] = $value->cnt;
+            $res[] = array('id' => $value->entity_id,
+                           'count' => $value->cnt);
         }
 
         $content = array(self::CONTENT_COMMENTS => $res);
