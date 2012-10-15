@@ -94,6 +94,7 @@ class Comments extends CActiveRecord
     }
 
     protected function beforeSave() {
+var_dump($this->getIsNewRecord());
 die('111');
         if ($this->getIsNewRecord()) {
             if ($this->hasAttribute('created_at')) {
