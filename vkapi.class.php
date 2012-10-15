@@ -26,9 +26,9 @@ class vkapi {
 		$params['api_id'] = $this->app_id;
 		$params['v'] = '3.0';
 		$params['method'] = $method;
-		$params['timestamp'] = time();
+//		$params['timestamp'] = time();
 		$params['format'] = 'json';
-		$params['random'] = rand(0,10000);
+//		$params['random'] = rand(0,10000);
 		ksort($params);
 		$sig = '';
 		foreach($params as $k=>$v) {
