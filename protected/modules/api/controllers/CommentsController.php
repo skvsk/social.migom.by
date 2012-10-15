@@ -77,6 +77,39 @@ class CommentsController extends ApiController
         $content = array(self::CONTENT_COMMENTS => $res, ApiComponent::CONTENT_COUNT => count($res));
         $this->render()->sendResponse($content);
     }
+    
+    /**
+     * @ignore
+     * @param string $entity
+     * @param int $id
+     * @param int $iser_id
+     */
+    public function actionGetEntityUsesList($entity, $id)
+    {
+        $userId = (int)Yii::app()->request->get('user_id');
+        $res = array();
+        $criteria = new CDbCriteria;
+        $criteria->condition = '`t`.`user_id` = :user_id and `t`.`entity_id` = :entity_id and `t`.`status` != :status';
+        $criteria->params = array(':entity_id' => $id,
+                                  ':status' => Comments::STATUS_DELETED,
+                                  ':user_id' => $userId);
+        $rawData = Comments::model($entity)->with('user')->findAll($criteria);
+
+        //TODO Как то не правельно related элименты так получать
+        foreach ($rawData as $value) {
+            $row = array();
+            foreach ($value as $key => $attr) {
+                $row[$key] = $attr;
+            }
+            foreach ($value->user as $key => $attr) {
+                $row['user'][$key] = $attr;
+            }
+            $res[] = $row;
+        }
+
+        $content = array(self::CONTENT_COMMENTS => $res, ApiComponent::CONTENT_COUNT => count($res));
+        $this->render()->sendResponse($content);
+    }
 
     public function actionPostEntity($entity)
     {
