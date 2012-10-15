@@ -93,6 +93,20 @@ class Comments extends CActiveRecord
         );
     }
 
+    protected function beforeSave() {
+        if ($this->getIsNewRecord()) {
+            if ($this->hasAttribute('created_at')) {
+                $this->created_at = time();
+            }
+
+        } else {
+            if ($this->hasAttribute('updated_at')) {
+                $this->updated_at = time();
+            }
+        }
+        return parent::beforeSave();
+    }
+
     /**
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
