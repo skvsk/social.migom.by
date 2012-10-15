@@ -14,6 +14,6 @@ unset($_GET['method']);
 
 $resp = $VK->api($method, $_GET);
 
-
+echo '<pre>';
 print_r($resp);
 ?>
