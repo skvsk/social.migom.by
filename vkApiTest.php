@@ -1,6 +1,5 @@
 <?php
 
-http://api.vk.com/api.php?v=3.0&api_id=3142907&method=getProfiles&format=json&rnd=343&uids=100172&fields=photo%2Csex&sid=10180116c4fd93480439bca47d636d6dd75fac30b851d4312e82ec3523&sig=5be698cf7fa09d30f58b941a4aea0e9b; 
 $curl = curl_init();
 
 $params = $_GET;
