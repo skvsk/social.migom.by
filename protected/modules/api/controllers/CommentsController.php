@@ -112,24 +112,35 @@ class CommentsController extends ApiController
         $this->render()->sendResponse($content);
     }
 
+    /**
+     * @ignore
+     * @param string $entity
+     * @param int $id
+     * @param int $iser_id
+     */
+    public function actionGetEntityCount($entity)
+    {
+        $res = array();
+        $criteria = new CDbCriteria;
+        $criteria->select = 'id, count(*)';
+        $criteria->addInCondition('entity_id',$_GET['id']);
+        $criteria->condition = '`t`.`status` != :status';
+        $criteria->params = array(':status' => Comments::STATUS_DELETED,);
+        $criteria->group='`t`.`entity_id`';
+        $res = Comments::model($entity)->findAll($criteria);
+
+        $content = array(self::CONTENT_COMMENTS => $res, ApiComponent::CONTENT_COUNT => count($res));
+        $this->render()->sendResponse($content);
+    }
+
     public function actionPostEntity($entity)
     {
         $class = 'Comments_' . $entity;
         $comment = new $class(); //Comments::model($entity);//
         $comment->attributes = $_POST;
         $comment->parent_id = (isset($_POST['parent_id']) && $_POST['parent_id'] > 0) ? $_POST['parent_id'] : 0;
-     
 
-if($comment->save())
-{
-    $errors = '';
-}
-else
-{
-    $errors = $comment->getErrors();
-}
-
-        $content = array(self::CONTENT_COMMENT => $comment->attributes, 'errors' => $errors);
+        $content = array(self::CONTENT_COMMENT => $comment->attributes);
         $this->render()->sendResponse($content);
     }
 
