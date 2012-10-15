@@ -8,11 +8,11 @@ class MailCommand extends ConsoleCommand {
             throw new Exception(Yii::t('Console', 'User not found or empty email'), 404);
         }
         $mailer = Yii::app()->mailer;
-        if($mailer->Host){
-            $mailer->IsSMTP();
-        } else {
+//        if($mailer->Host){
+//            $mailer->IsSMTP();
+//        } else {
             $mailer->IsMail();
-        }
+//        }
         $mailer->AddAddress($user->email);
         $mailer->FromName = 'Social.Migom.By';
         $mailer->CharSet = 'UTF-8';
