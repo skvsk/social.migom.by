@@ -61,7 +61,6 @@ class CommentsController extends ApiController
         //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
             $row = array();
-            d($value);
             foreach ($value as $key => $attr) {
                 $row[$key] = $attr;
             }
