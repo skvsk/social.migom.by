@@ -127,7 +127,11 @@ class CommentsController extends ApiController
         $criteria->condition = '`t`.`status` != :status';
         $criteria->params = array(':status' => Comments::STATUS_DELETED,);
         $criteria->group='`t`.`entity_id`';
-        $res = Comments::model($entity)->findAll($criteria);
+        $rawData = Comments::model($entity)->findAll($criteria);
+        foreach ($rawData as $value) {
+            $res['id'] = $value->entity_id;
+            $res['count'] = $value->cnt;
+        }
 
         $content = array(self::CONTENT_COMMENTS => $res, ApiComponent::CONTENT_COUNT => count($res));
         $this->render()->sendResponse($content);
