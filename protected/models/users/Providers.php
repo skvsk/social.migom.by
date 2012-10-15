@@ -103,10 +103,10 @@ class Users_Providers extends CActiveRecord
         }
         
         public function addSocialToUser($identity, $user_id){
-            $userProviders = new UserProviders();
+            $userProviders = new Users_Providers();
             $userProviders->soc_id          = $identity->getAttribute('soc_id');
             $userProviders->user_id         = $user_id;
-            $userProviders->provider_id = array_search($identity->getProviderName(), UserProviders::$providers);
+            $userProviders->provider_id = array_search($identity->getProviderName(), Users_Providers::$providers);
             if($userProviders->validate()){
                 $userProviders->save();
                 Profile::updateByProvider($userProviders->user, $identity);
