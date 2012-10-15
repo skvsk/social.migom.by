@@ -84,7 +84,7 @@ class CommentsController extends ApiController
      * @param int $id
      * @param int $iser_id
      */
-    public function actionGetEntityUsesList($entity, $id)
+    public function actionGetEntityUserList($entity, $id)
     {
         $userId = (int)Yii::app()->request->get('user_id');
         $res = array();
