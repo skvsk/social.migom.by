@@ -42,6 +42,10 @@ class AjaxController extends Controller
             $criteria = new EMongoCriteria();
             $criteria->addCond('user_id', 'equals', Yii::app()->user->id); 
             $news = News::model()->find($criteria);
+            if(!$news){
+                $news = new News();
+                $news->user_id = Yii::app()->user->id;
+            }
             if(isset($news->disable_entities[Yii::app()->request->getParam('filter')])){
                 unset($news->disable_entities[Yii::app()->request->getParam('filter')]);
             } else {
