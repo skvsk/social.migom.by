@@ -60,6 +60,7 @@ class CommentsController extends ApiController
 
         //TODO Как то не правельно related элименты так получать
         foreach ($rawData as $value) {
+d($value);
             $row = array();
             foreach ($value as $key => $attr) {
                 $row[$key] = $attr;
@@ -84,9 +85,9 @@ class CommentsController extends ApiController
      * @param int $id
      * @param int $iser_id
      */
-    public function actionGetEntityUsesList($entity, $id)
+    public function actionGetEntityUserList($entity, $id)
     {
-        $userId = (int)Yii::app()->request->get('user_id');
+        $userId = (int)Yii::app()->request->getParam('user_id');
         $res = array();
         $criteria = new CDbCriteria;
         $criteria->condition = '`t`.`user_id` = :user_id and `t`.`entity_id` = :entity_id and `t`.`status` != :status';
