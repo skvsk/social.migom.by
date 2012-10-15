@@ -6,7 +6,7 @@ class UserNews extends CWidget {
 
     public function run()
     {
-        if($this->news){
+        if($this->news && is_array($this->news->entities)){
             krsort($this->news->entities);
             foreach ($this->news->entities as $key => $en){
                 if(in_array($en->name, $this->news->disable_entities)){
