@@ -74,7 +74,7 @@ class SiteController extends Controller {
         $criteria = new CDbCriteria;
         $criteria->compare('soc_id', '105844357378365018543');
         $criteria->limit = 1;
-        $provider = UserProviders::model('g----------------------oogle_oauth');
+        $provider = Users_Providers::model('g----------------------oogle_oauth');
         d($provider->find($criteria)->user->email);
         
     }
@@ -137,7 +137,7 @@ class SiteController extends Controller {
                             Yii::app()->end();
                         }
                         $user = $this->_preLogin(false);
-                        UserProviders::addSocialToUser($identity, Yii::app()->user->getId());
+                        Users_Providers::addSocialToUser($identity, Yii::app()->user->getId());
                     }
 
                     // special redirect with closing popup window
