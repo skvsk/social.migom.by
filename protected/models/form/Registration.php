@@ -73,10 +73,10 @@ class Form_Registration extends CFormModel
                     }
                     $profile->sex = $identity->getAttribute('sex');
                     $profile->user_id = $user->id;
-                    $userProviders = new UserProviders();
+                    $userProviders = new Users_Providers();
                     $userProviders->attributes = $identity->getAttributes();
                     $userProviders->user_id = $profile->user_id;
-                    $userProviders->provider_id = array_search($service, UserProviders::$providers);
+                    $userProviders->provider_id = array_search($service, Users_Providers::$providers);
 
                     $profile->save();
                     $userProviders->save();
