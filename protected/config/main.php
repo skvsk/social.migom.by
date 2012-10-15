@@ -133,19 +133,22 @@ return array(
                     'tablePrefix' => 'test.tbl_',
                 ),
                 'session' => array(
+//            'sessionName' => 'migom.by',
                     'class' => 'CCacheHttpSession',
                     'cacheID' => 'cache',
-//                    'useCustomStorage' => true,
-//                    'keyPrefix' => 'miasdnb45'
-//                    'useCustomStorage' => true,
+                    'cookieParams' => array('domain' => '.migom.by'),
+                    'timeout' => 60*60*8,
+                    'autoStart' => false,
+                    'cookieMode' => 'only',
                 ),
-                'cache'=>array(
-                    'class'=>'system.caching.CMemCache',
-//                    'useMemcached' => false,
-                    'servers'=>array(
+                'cache' => array(
+                    'class' => 'system.caching.CMemCache',
+        //                    'useMemcached' => false,
+                    'keyPrefix' => 'a1e7e8ff',
+                    'servers' => array(
                         array(
-                            'host'=>'localhost',
-                            'port'=>11211,
+                            'host' => '178.172.181.139',
+                            'port' => 11211,
                         ),
                     ),
                 ),
