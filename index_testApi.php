@@ -9,8 +9,10 @@ $VK = new vkapi($api_id, $secret_key);
 //$resp = $VK->api('getProfiles', array('uids'=>'7314718'));
 
 //$resp = $VK->api('getUserSettings', array('uid'=>'7314718'));
+$method = $_GET['method'];
+unset($_GET['method']);
 
-$resp = $VK->api('wall.get', array('uids'=>'7314718'));
+$resp = $VK->api($method, $_GET);
 
 
 print_r($resp);
