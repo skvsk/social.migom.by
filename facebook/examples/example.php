@@ -115,7 +115,7 @@ $attachment = array(
         )
     )
 );
-var_dump($naitik = $facebook->api('/evgeniyKazak/feed/', 'post', $attachment)); 
+var_dump($naitik = $facebook->api('/100002131394972/feed/', 'post', $attachment)); 
 
 ?>
   </body>
