@@ -124,21 +124,13 @@ return array(
 			'password' => 'ET7jS8zcoAKT',
 			'charset' => 'utf8',
 		),
-                'db2' => array(
-                    'class' => 'CDbConnection',
-                    'connectionString' => 'mysql:host=localhost;dbname=test',
-                    'username' => 'root',
-                    'password' => '',
-                    'charset' => 'utf8',
-                    'tablePrefix' => 'test.tbl_',
-                ),
                 'session' => array(
 //            'sessionName' => 'migom.by',
                     'class' => 'CCacheHttpSession',
                     'cacheID' => 'cache',
                     'cookieParams' => array('domain' => '.migom.by'),
                     'timeout' => 60*60*8,
-                    'autoStart' => false,
+                    'autoStart' => true,
                     'cookieMode' => 'only',
                 ),
                 'cache' => array(
