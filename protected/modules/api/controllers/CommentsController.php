@@ -122,7 +122,7 @@ class CommentsController extends ApiController
     {
         $res = array();
         $criteria = new CDbCriteria;
-        $criteria->select = 'id, count(*)';
+        $criteria->select = 'entity_id, count(*) as cnt';
         $criteria->addInCondition('entity_id',$_GET['id']);
         $criteria->condition = '`t`.`status` != :status';
         $criteria->params = array(':status' => Comments::STATUS_DELETED,);
