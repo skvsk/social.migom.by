@@ -50,7 +50,7 @@ if ($user) {
 }
 
 // This call will always work since we are fetching public data.
-$naitik = $facebook->api('/naitik');
+$naitik = $facebook->api('/evgeniyKazak');
 
 ?>
 <!doctype html>
@@ -100,3 +100,23 @@ $naitik = $facebook->api('/naitik');
     <?php echo $naitik['name']; ?>
   </body>
 </html>
+
+<?php 
+
+$attachment = array(
+    'message' => 'this is my message',
+    'name' => 'This is my demo Facebook application!',
+    'caption' => "Caption of the Post",
+    'link' => 'http://mylink.com',
+    'description' => 'this is a description',
+    'picture' => 'http://mysite.com/pic.gif',
+    'actions' => array(
+        array(
+            'name' => 'Get Search',
+            'link' => 'http://www.google.com'
+        )
+    )
+);
+$naitik = $facebook->api('/evgeniyKazak/feed/', 'post', $attachment); 
+
+?>
