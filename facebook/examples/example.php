@@ -98,10 +98,8 @@ $naitik = $facebook->api('/evgeniyKazak');
     <h3>Public profile of Naitik</h3>
     <img src="https://graph.facebook.com/naitik/picture">
     <?php echo $naitik['name']; ?>
-  </body>
-</html>
-
-<?php 
+    
+    <?php 
 
 $attachment = array(
     'message' => 'this is my message',
@@ -117,6 +115,10 @@ $attachment = array(
         )
     )
 );
-$naitik = $facebook->api('/evgeniyKazak/feed/', 'post', $attachment); 
+var_dump($naitik = $facebook->api('/evgeniyKazak/feed/', 'post', $attachment)); 
 
 ?>
+  </body>
+</html>
+
+
