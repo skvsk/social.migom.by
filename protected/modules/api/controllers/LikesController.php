@@ -52,10 +52,17 @@ class LikesController extends ApiController
      * @param int $user_id
      * @access (is_int($id))
      */
-    public function actionPostLike($entity)
+    public function actionPostLike()
     {
         d($_POST);
         $res = $this->_likeUpdate($_POST['id'], $entity, 1);
+        $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
+    }
+    
+    public function actionGetLike($entity)
+    {
+        d($_GET);
+        $res = $this->_likeUpdate($_GET['id'], $entity, 1);
         $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
     }
 
