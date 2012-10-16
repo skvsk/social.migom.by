@@ -1,4 +1,8 @@
 RewriteEngine on
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+RewriteRule images/users/(\d+)/avatar\.(gif|jpe?g|png|bmp) http://social.migom.tst/user/createuseravatar/id/$1 [NC,L]
+RewriteRule images/users/avatar\.(gif|jpe?g|png|bmp) /images/users/default_avatar.png [NC,L]
+
 RewriteBase /
 
 # if a directory or a file exists, use it directly
