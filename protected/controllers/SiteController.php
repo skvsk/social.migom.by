@@ -98,7 +98,7 @@ class SiteController extends Controller {
         if (!Yii::app()->user->getIsGuest()) {
             $this->redirect(array('/user/index'));
         }
-
+        
         $this->layout = 'login';
 
         $service = Yii::app()->request->getQuery('service');

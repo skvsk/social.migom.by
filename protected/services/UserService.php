@@ -27,15 +27,23 @@ class UserService {
         $image = imagecreatefrompng($originalFile);
         imagejpeg($image, $outputFile, $quality);
         imagedestroy($image);
+        return true;
     }
     
     public static function uploadAvatar($user_id, $file){
-        $image = Yii::app()->image->load($file['avatar']);
-        $image->resize(50, 50, Image::NONE)->quality(75);
-        $path = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . '..';
-        $destination = $path . Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $user_id;
-        @mkdir($destination, 0777, true);
-        return $image->save($destination . DIRECTORY_SEPARATOR. 'avatar.jpg');
+        $result = array('success' => false, 'error' => 'undefined');
+        try {
+            $image = Yii::app()->image->load($file['avatar']);
+            $image->resize(50, 50, Image::NONE)->quality(75);
+            $path = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . '..';
+            $destination = $path . Users::AVATAR_PATH . DIRECTORY_SEPARATOR . $user_id;
+            @mkdir($destination, 0777, true);
+            $image->save($destination . DIRECTORY_SEPARATOR. 'avatar.jpg');
+            $result = array('success' => true, 'error' => 'undefined');
+        } catch (Exception $exc) {
+            $result = array('success' => false, 'error' => $exc->getMessage());
+        }
+        return $result;
     }
     
     public static function printAvatar($id, $login){
@@ -50,7 +58,8 @@ class UserService {
         $gravatarHash = (!empty($email))? $email:  rand(0, 99999999);
         $gravatarHash = md5( strtolower( trim( $gravatarHash ) ) );
 
-        return UserService::uploadAvatarFromService($user_id, 
+        $result = UserService::uploadAvatarFromService($user_id, 
                                 'http://www.gravatar.com/avatar/'. $gravatarHash .'.jpg?d=identicon');
+        return $result;
     }
 }

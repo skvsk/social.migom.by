@@ -25,7 +25,7 @@ class UserController extends Controller
                             'roles' => array('user', 'moderator', 'administrator')
                         ),
                         array('allow', // allow readers only access to the view file
-                            'actions'=>array('index'),
+                            'actions'=>array('index', 'createUserAvatar'),
                             'users' => array('*')
                         ),
                         array('deny',   // deny everybody else
@@ -64,7 +64,7 @@ class UserController extends Controller
 //            }
 //            
 //            $news->save();
-
+            
             $model = $this->loadModel($id);
             $criterea = new EMongoCriteria();
             $criterea->addCond('user_id', '==', Yii::app()->user->id);
@@ -104,21 +104,39 @@ class UserController extends Controller
                 Yii::app()->end();
             }
             
+            $redirect = false;
+            $success = true;
+            
             if(isset($_POST['Users_Profile'])){
                 if(isset($_FILES['Users_Profile']['tmp_name']) && $_FILES['Users_Profile']['tmp_name']['avatar']){
-                    $model->profile->avatar = UserService::uploadAvatar($id, $_FILES['Users_Profile']['tmp_name']);
+                    $upRes = UserService::uploadAvatar($id, $_FILES['Users_Profile']['tmp_name']);
+                    $model->profile->avatar = $upRes['success'];
+                    if(!$model->profile->avatar){
+                        $model->profile->addError('avatar', $upRes['error']);
+                    }
                 }
                 $model->profile->setScenario('update');
                 $model->profile->attributes = $_POST['Users_Profile'];
-                if($model->profile->validate() && $model->profile->save())
-                    $this->redirect('/user/index');
+                if($model->profile->validate() && $model->profile->save()){
+                    $redirect = true;
+                } else {
+                    $redirect = false;
+                    $success = false;
+                }
             }
 
             if(isset($_POST['Users'])){
                 $model->setScenario('general_update');
                 $model->attributes = $_POST['Users'];
-                if($model->validate() && $model->save())
-                    $this->redirect('/user/index');
+                if($model->validate() && $model->save() && $success){
+                    $redirect = true;
+                } else {
+                    $redirect = false;
+                }
+            }
+            
+            if($redirect){
+                $this->redirect('/user/index');
             }
             
             $this->render('edit', array('model' => $model));
@@ -131,4 +149,17 @@ class UserController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+        
+        public function actionCreateUserAvatar($id){
+            $user = Users::model()->findByPk($id);
+            $file = Yii::app()->basePath.'/../images/users/'.$id.'/avatar.jpg';
+            if(!file_exists($file) && $user){
+                $srcImage = UserService::uploadAvatarFromEmail($user->id, $user->email);
+                $file = Yii::app()->basePath.'/..'.$srcImage;
+                $image = Yii::app()->image->load($file);
+                $image->render();
+            } else {
+                return false;
+            }
+        }
 }
