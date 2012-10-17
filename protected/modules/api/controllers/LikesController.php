@@ -52,20 +52,12 @@ class LikesController extends ApiController
      * @param int $user_id
      * @access (is_int($id))
      */
-    public function actionPostLike()
+    public function actionPostLike($entity)
     {
-        d($_POST);
-        $res = $this->_likeUpdate($_POST['id'], $entity, 1);
+        $res = $this->_likeUpdate($_REQUEST['id'], $entity, 1);
         $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
     }
     
-    public function actionGetLike($entity)
-    {
-        d($_GET);
-        $res = $this->_likeUpdate($_GET['id'], $entity, 1);
-        $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
-    }
-
     /**
      * Like disentity
      * @param string $entity
@@ -73,39 +65,38 @@ class LikesController extends ApiController
      * @param int $user_id
      * @access (is_int($id))
      */
-    public function actionPostDislike($entity, $id)
+    public function actionPostDislike($entity)
     {
-        $res = $this->_likeUpdate($id, $entity, -1);
+        $res = $this->_likeUpdate($_REQUEST['id'], $entity, -1);
         $this->render()->sendResponse(array(self::CONTENT_IS_UPDATE => $res));
     }
 
     private function _likeUpdate($entity_id, $entity, $weight)
     {
-        assert(is_int($entity_id));
+        //assert(is_int($entity_id));
 
-        $userId = (int) $_POST['user_id'];
+        $userId = (int) $_REQUEST['user_id'];
         $model = $this->_getModelName($entity);
-
         $criteria = new EMongoCriteria();
         $criteria->entity_id('==', $entity_id);
 
-        try {
+        try { 
              /* @var $likes Likes */
-            if ($likes = Likes::model($model)->find($criteria)) {
+            if ($likes = $model::model()->find($criteria)) {
                 foreach ($likes->users as $user) {
                     if ($user->id == $userId) {
                         return false;
                     }
                 }
             } else {
-                $likes = Likes::model($model);
+                $likes = new $model();
                 $likes->entity_id = $entity_id;
             }
         } catch (Exception $exc) {
-            throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $entity)));
+            throw new ApiException(Yii::t('Likes', "Entity '{entity}' is not exist", array('{entity}' => $model)));
         }
 
-        $user = new LikesUsers();
+        $user = new Likes_Embidded_Users();
         $user->id = $userId;
         $user->weight = $weight;
 
@@ -123,7 +114,7 @@ class LikesController extends ApiController
     private function _getModelName($entity)
     {
         $connection = Yii::app()->cache->get($this->key);
-        return $connection['name'] . '_' . $entity;
+        return 'Likes_' . $connection['name'] . '_' . $entity;
     }
 
 }
