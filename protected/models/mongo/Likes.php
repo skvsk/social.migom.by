@@ -7,10 +7,11 @@ class Likes extends EMongoDocument
     public $likes = 0;
     public $dislikes = 0;
     public $users;
+    public $refresh;
 
     public function primaryKey()
     {
-        return 'id';
+        return 'entity_id';
     }
 
     public function embeddedDocuments()
@@ -73,4 +74,11 @@ class Likes extends EMongoDocument
         }
     }
 
+    public function beforeSave() {
+        if($this->getScenario() != 'console'){
+            $this->refresh = 1;
+        }
+        return parent::beforeSave();
+    }
+    
 }
