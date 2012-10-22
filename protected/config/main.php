@@ -131,7 +131,7 @@ return array(
                     'class' => 'CCacheHttpSession',
                     'cacheID' => 'cache',
                     'cookieParams' => array('domain' => '.migom.by'),
-                    'timeout' => 60*60*8,
+                    'timeout' => 3600*24*30,
                     'autoStart' => true,
                     'cookieMode' => 'only',
                 ),
