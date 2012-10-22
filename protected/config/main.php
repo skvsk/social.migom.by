@@ -94,6 +94,7 @@ return array(
                     'allowAutoLogin'=>true,
                     'class' => 'WebUser',
                     'loginUrl'=>array('site/login'),
+                    'defaultRole'=>'guest',
 		),
                 'authManager' => array(
                     // Будем использовать свой менеджер авторизации
