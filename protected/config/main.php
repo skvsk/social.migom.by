@@ -13,7 +13,7 @@ return array(
 	'preload'=>array('log'),
         'defaultController' => 'site',
         'sourceLanguage'    =>'ru_RU',
-        'language'          =>'ru_RU',
+        'language'          =>'ru',
 
 	// autoloading model and component classes
 	'import'=>array(
