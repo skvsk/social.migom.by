@@ -22,4 +22,5 @@ require_once($yiiEx);
 $yii = Yii::createWebApplication($config);
 spl_autoload_unregister(array('YiiBase', 'autoload'));
 spl_autoload_register(array('YiiBaseEx', 'autoload'));
+Yii::getLogger()->autoDump = true;
 $yii->run();
