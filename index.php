@@ -18,9 +18,9 @@ if (YII_DEBUG === true) {
 }
 require_once($yii);
 require_once($yiiEx);
-
+Yii::getLogger()->autoDump = true;
+Yii::getLogger()->autoFlush=1;
 $yii = Yii::createWebApplication($config);
 spl_autoload_unregister(array('YiiBase', 'autoload'));
 spl_autoload_register(array('YiiBaseEx', 'autoload'));
-Yii::getLogger()->autoDump = true;
 $yii->run();
