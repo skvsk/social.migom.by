@@ -80,13 +80,13 @@ abstract class Api extends CModel
         return $responce;
     }
 
-    public function getErrors(){
-        $param = ApiComponent::CONTENT_MESSAGE;
-        if(isset($this->_responce->content->$param)){
-            return $this->_responce->content->$param;
-        }
-        return false;
-    }
+//    public function getErrors(){
+//        $param = ApiComponent::CONTENT_MESSAGE;
+//        if(isset($this->_responce->content->$param)){
+//            return $this->_responce->content->$param;
+//        }
+//        return false;
+//    }
 
     private function _getSuid($server)
     {
