@@ -120,6 +120,7 @@ class SiteController extends Controller {
                     if($identity->addNewSocial){
                         Users_Providers::addSocialToUser($identity, Yii::app()->user->getId());
                     }
+                   
                     // special redirect with closing popup window
                     $authIdentity->redirect();
                 } elseif ($identity->errorCode == EAuthUserIdentity::ERROR_USER_NOT_REGISTERED) {
